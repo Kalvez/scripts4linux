@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Onglet d'aide.
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+	echo "Langue : FR-fr"
+	echo "Nom du script : Disks"
+	echo "Créateur : Kalvez"
+	echo "Emplacement : /usr/bin/"
+	echo "Date de la dernière version : 05 mars 2018"
+	echo "Version : 1.1.2.20180305"
+	echo ""
+	echo ""
+	echo "..::Détails::.."
+	echo ""
+	echo "Vous devez exécuter ce script en tant qu'utilisateur root."
+	echo "Ce script permet d'afficher tous les disques (internes, externes et partitions) et"
+	echo "les périphériques amovibles connectés sur l'ordinateur ainsi que l'espace disque"
+	echo "total et restant."
+	echo ""
+	exit 0
+fi
+
+# Vérification des privilèges root de l'utilisateur.
+if [ "$(id -u)" != "0" ]
+	then
+   	echo "Vous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root." 1>&2
+   	echo ""
+   	exit 1
+fi
+
+fdisk -l
