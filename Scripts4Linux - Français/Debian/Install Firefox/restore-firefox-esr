@@ -8,8 +8,8 @@ then
         echo "Commande : restore-firefox-esr"
         echo "Créateur : Kalvez"
         echo "Emplacement : /usr/bin/"
-        echo "Date de la dernière version : 09 mars 2018"
-        echo "Version : 1.1.0.20180309"
+        echo "Date de la dernière version : 22 mars 2018"
+        echo "Version : 1.2.0.20180322"
         echo ""
         echo ""
         echo "..::Détails::.."
@@ -64,3 +64,7 @@ else
         echo ""
         restore-firefox-esr
 fi
+
+# Changement des noms de Firefox Quantum vers Firefox ESR.
+rm /usr/share/applications/firefox-esr.desktop
+mv /usr/share/applications/firefox-esr.desktop.old /usr/share/applications/firefox-esr.desktop

@@ -8,8 +8,8 @@ then
         echo "Commande : get-firefox"
         echo "Créateur : Kalvez"
         echo "Emplacement : /usr/bin/"
-        echo "Date de la dernière version : 07 mars 2018"
-        echo "Version : 1.7.0.20180307"
+        echo "Date de la dernière version : 22 mars 2018"
+        echo "Version : 1.8.0.20180322"
         echo ""
         echo ""
         echo "..::Détails::.."
@@ -47,6 +47,10 @@ cp /home/"$name"/Images/.firefox_quantum_icons/firefox-esr-32.png /usr/share/ico
 cp /home/"$name"/Images/.firefox_quantum_icons/firefox-esr-48.png /usr/share/icons/hicolor/48x48/apps/firefox-esr.png
 cp /home/"$name"/Images/.firefox_quantum_icons/firefox-esr-64.png /usr/share/icons/hicolor/64x64/apps/firefox-esr.png
 cp /home/"$name"/Images/.firefox_quantum_icons/firefox-esr-128.png /usr/share/icons/hicolor/128x128/apps/firefox-esr.png
+
+# Changement des noms de Firefox ESR vers Firefox Quantum.
+mv /usr/share/applications/firefox-esr.desktop /usr/share/applications/firefox-esr.desktop.old
+cp /home/"$name"/Documents/.firefox_name_files/firefox-esr.desktop /usr/share/applications/
 
 # Suppression du paquet d'installation de Firefox Quantum.
 remove-firefox-install-package
