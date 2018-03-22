@@ -8,8 +8,8 @@ then
 	echo "Commande : install-scripts"
 	echo "Créateur : Kalvez"
 	echo "Emplacement : /usr/bin/"
-	echo "Date de la dernière version : 09 mars 2018"
-	echo "Version : 1.5.0.20180309"
+	echo "Date de la dernière version : 22 mars 2018"
+	echo "Version : 1.6.0.20180322"
 	echo ""
 	echo ""
 	echo "..::Détails::.."
@@ -46,8 +46,11 @@ then
 	echo ""
 
 	cd Debian/
+	
 	cp archive backup disks lat speed update upgrade version /usr/bin/
+	
 	cd Install\ Firefox/
+	
 	if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
 	then
 		echo "Le dossier d'icônes de firefox existe déjà."
@@ -63,6 +66,7 @@ then
 			echo ""
 		fi
 	fi      
+    
     cp Icon\ Pack/firefox-esr-16.png /home/"$name"/Images/.firefox_quantum_icons/
     cp Icon\ Pack/firefox-esr-symbolic.svg /home/"$name"/Images/.firefox_quantum_icons/
     cp Icon\ Pack/firefox-esr-32.png /home/"$name"/Images/.firefox_quantum_icons/
@@ -70,7 +74,25 @@ then
     cp Icon\ Pack/firefox-esr-64.png /home/"$name"/Images/.firefox_quantum_icons/
     cp Icon\ Pack/firefox-esr-128.png /home/"$name"/Images/.firefox_quantum_icons/
     cp get-firefox remove-firefox-install-package restore-firefox-esr update-firefox /usr/bin/
+    
     cd .. && cd ..
+    
+    if [ -d /home/"$name"/Documents/.firefox_name_files ]
+    then
+    	echo "OK"
+    	echo ""
+    else
+    	mkdir /home/"$name"/Documents/.firefox_name_files/
+
+    	if [ -d /home/"$name"/Documents/.firefox_name_files ]
+    	then
+    		echo "OK"
+    		echo ""
+    	fi
+    fi
+    
+    cp Debian/Install\ Firefox/Name\ File/firefox-esr.desktop /home/"$name"/Documents/.firefox_name_files/
+
     echo "L'installation des scripts est terminée."
     echo ""
     exit 0
@@ -222,6 +244,25 @@ then
     	cp Icon\ Pack/firefox-esr-64.png /home/"$name"/Images/.firefox_quantum_icons/
     	cp Icon\ Pack/firefox-esr-128.png /home/"$name"/Images/.firefox_quantum_icons/
     	cp get-firefox remove-firefox-install-package restore-firefox-esr update-firefox /usr/bin/
+
+    	cd .. && cd ..
+
+    	if [ -d /home/"$name"/Documents/.firefox_name_files ]
+    	then
+    		echo "OK"
+    		echo ""
+    	else
+    		mkdir /home/"$name"/Documents/.firefox_name_files/
+
+    		if [ -d /home/"$name"/Documents/.firefox_name_files ]
+    		then
+    			echo "OK"
+    			echo ""
+    		fi
+    	fi
+    
+	    cp Debian/Install\ Firefox/Name\ File/firefox-esr.desktop /home/"$name"/Documents/.firefox_name_files/
+
 		echo "Installé."
 		echo ""
 	else [ $answer8 = "n" ]
