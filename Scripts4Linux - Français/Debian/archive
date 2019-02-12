@@ -19,7 +19,7 @@ then
 	echo "Ce script, qui ne demande aucun privilèges particulier, permet"
 	echo "d'archiver dans des fichiers '.zip' ce que vous souhaitez, que"
 	echo "ça soit des dossiers ou des fichiers. Il vous demandera alors "
-	echo "un nom d'archuve, alors il enregistrera l'archive au format"
+	echo "un nom d'archive, alors il enregistrera l'archive au format"
 	echo "suivant : 'archive_nom_année-mois-jour.zip'."
 	echo ""
 	exit 0
@@ -34,7 +34,7 @@ read -p "Nom de l'archive: " name
 echo ""
 
 # Script permettant d'archiver les fichiers et les dossiers dans une archive '.zip'.
-while [ ${args} != ${files} ]
+for args in $*
 do
 	FICDOC=$1
 	echo "Fichiers ou dossiers en cours de traitement : ${FICDOC}"
