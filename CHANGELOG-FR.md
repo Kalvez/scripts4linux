@@ -1,3 +1,11 @@
+..::CHANGELOG - FEB. 14 2018::..
+
+-Le script d'installation des autres scripts a été mis à jour. Maintenant il est possible d'installer automatiquement les scripts avec leurs dépendances, un disclaimer a donc été rajouté avant l'installation des paquets nécéssaires au bon fonctionnement des scripts.
+-Le script "get-firefox" a été mis à jour. Un disclaimer apparaît maintenant avant l'installation de Firefox Quantum.
+-"arcive" est toujours une beta, mais il est désormais possible d'archiver plus de trois éléments.
+-Ajout d'un  "README" en bonne et due forme.
+-Joyeuse Saint-Valentin.
+
 ..::CHANGELOG - MAR. 22 2018::..
 
 -Le script d'installation des autres scripts à été mis à jour.
