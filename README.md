@@ -1,13 +1,14 @@
 # Scripts4Linux
 
-..::Téléchargement & Installation::..
-
+### ..::TELECHARGEMENT & INSTALLATION::..
+```
 git clone https://github.com/Kalvez/scripts4linux.git
 cd scripts4linux/Scripts4Linux\ -\ Français/
 ./install-scripts
+```
 
-Ce pack contient : 
-
+### ..::CE PACK CONTIENT::..
+```
 -archive (bêta) : Permet d'archiver des données.
 -backup : Permet de sauvegarder des données des dossiers 'Documents', 'Images' et 'Téléchargements'.
 -disks : Affiche les disques connectés à l'ordinateur.
@@ -16,10 +17,12 @@ Ce pack contient :
 -update : Met à jour les paquets et logiciels installés sur Debian.
 -upgrade : Met à jour la distribution de debian.
 -version : Affiche la version de la distribution et du noyeau Linux.
+```
 
-Firefox:
-
+### ..::FIREFOX::..
+```
 -get-firefox : Permet d'installer Firefox Quantum à la place de Firefox-ESR.
 -remove-firefox-install-package : Supprime le paquet d'installation de Firefox.
 -restore-firefox-esr : Restaure Firefox-ESR et supprime Firefox Quantum.
 -update-firefox : Met à jour Firefox-Quantum.
+```
