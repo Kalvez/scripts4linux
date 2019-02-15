@@ -8,8 +8,8 @@ then
         echo "Commande : restore-firefox-esr"
         echo "Créateur : Kalvez"
         echo "Emplacement : /usr/bin/"
-        echo "Date de la dernière version : 22 mars 2018"
-        echo "Version : 1.2.0.20180322"
+        echo "Date de la dernière version : 15 février 2019"
+        echo "Version : 1.2.1.20190215"
         echo ""
         echo ""
         echo "..::Détails::.."
@@ -49,7 +49,6 @@ then
         rm /usr/bin/update-firefox
         rm /usr/bin/remove-firefox-install-package
         rm -rf /home/"$name"/Images/.firefox_quantum_icons
-        rm restore-firefox-esr
         echo ""
         echo "Firefox ESR a été restauré avec succès, veuillez exécuter un 'apt-get update' (ou 'apt update')."
         echo "Pour réinstaller Firefox Quantum, veuillez passer par le script 'install-scripts'."
