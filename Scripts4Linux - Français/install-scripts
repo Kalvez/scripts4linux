@@ -29,9 +29,9 @@ fi
 # Vérification des privilèges root de l'utilisateur.
 if [ "$(id -u)" != "0" ]
 	then
-   	echo "Vous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root." 1>&2
-   	echo ""
-   	exit 1
+	echo "Vous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root." 1>&2
+	echo ""
+	exit 1
 fi
 
 # Lancement du script en lui-même.
@@ -95,8 +95,8 @@ then
 			echo "Le dossier d'icônes de firefox n'existe pas et va être créé."
 			echo ""
 			mkdir /home/"$name"/Images/.firefox_quantum_icons/
-		    
-		    if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
+			
+			if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
 			then
 				echo "Le dossier à bien été créé."
 				echo ""
@@ -104,37 +104,37 @@ then
 		fi
 
 		chmod +x get-firefox remove-firefox-install-package restore-firefox-esr update-firefox      
-    	
-    	cp Icon\ Pack/firefox-esr-16.png /home/"$name"/Images/.firefox_quantum_icons/
-    	cp Icon\ Pack/firefox-esr-symbolic.svg /home/"$name"/Images/.firefox_quantum_icons/
-    	cp Icon\ Pack/firefox-esr-32.png /home/"$name"/Images/.firefox_quantum_icons/
-    	cp Icon\ Pack/firefox-esr-48.png /home/"$name"/Images/.firefox_quantum_icons/
-    	cp Icon\ Pack/firefox-esr-64.png /home/"$name"/Images/.firefox_quantum_icons/
-    	cp Icon\ Pack/firefox-esr-128.png /home/"$name"/Images/.firefox_quantum_icons/
-    	cp get-firefox remove-firefox-install-package restore-firefox-esr update-firefox /usr/bin/
-    	
-    	cd .. && cd ..
-    	
-    	if [ -d /home/"$name"/Documents/.firefox_name_files ]
-    	then
-    		echo "OK"
-    		echo ""
-    	else
-    		mkdir /home/"$name"/Documents/.firefox_name_files/
+		
+		cp Icon\ Pack/firefox-esr-16.png /home/"$name"/Images/.firefox_quantum_icons/
+		cp Icon\ Pack/firefox-esr-symbolic.svg /home/"$name"/Images/.firefox_quantum_icons/
+		cp Icon\ Pack/firefox-esr-32.png /home/"$name"/Images/.firefox_quantum_icons/
+		cp Icon\ Pack/firefox-esr-48.png /home/"$name"/Images/.firefox_quantum_icons/
+		cp Icon\ Pack/firefox-esr-64.png /home/"$name"/Images/.firefox_quantum_icons/
+		cp Icon\ Pack/firefox-esr-128.png /home/"$name"/Images/.firefox_quantum_icons/
+		cp get-firefox remove-firefox-install-package restore-firefox-esr update-firefox /usr/bin/
+		
+		cd .. && cd ..
+		
+		if [ -d /home/"$name"/Documents/.firefox_name_files ]
+		then
+			echo "OK"
+			echo ""
+		else
+			mkdir /home/"$name"/Documents/.firefox_name_files/
 	
-	    		if [ -d /home/"$name"/Documents/.firefox_name_files ]
-	    		then
-	    			echo "OK"
-	    			echo ""
-	    		fi
-	    	fi
-	    	
-	    	cp Debian/Install\ Firefox/Name\ File/firefox-esr.desktop /home/"$name"/Documents/.firefox_name_files/
+			if [ -d /home/"$name"/Documents/.firefox_name_files ]
+			then
+				echo "OK"
+				echo ""
+			fi
+		fi
+		
+		cp Debian/Install\ Firefox/Name\ File/firefox-esr.desktop /home/"$name"/Documents/.firefox_name_files/
 	
-	    	echo "L'installation des scripts est terminée."
-	    	echo ""
-    	exit 0
-    fi
+		echo "L'installation des scripts est terminée."
+		echo ""
+		exit 0
+	fi
 
 elif [	$answer = "n" ]
 then
@@ -290,7 +290,7 @@ then
 	fi
 
 	read -p "Voulez-vous installer 'get-firefox' et toutes ses dépendances (Vous devez être sous Debian) ? (y ou n) : " answer8
-	echo
+	echo ""
 
 	if [ $answer8 = "y" ]
 	then
@@ -315,8 +315,8 @@ then
 				echo "Le dossier d'icônes de firefox n'existe pas et va être créé."
 				echo ""
 				mkdir /home/"$name"/Images/.firefox_quantum_icons/
-			    
-			    if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
+				
+				if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
 				then
 					echo "Le dossier à bien été créé."
 					echo ""
@@ -325,31 +325,31 @@ then
 
 			chmod +x get-firefox remove-firefox-install-package restore-firefox-esr update-firefox 
 
-    		cp Icon\ Pack/firefox-esr-16.png /home/"$name"/Images/.firefox_quantum_icons/
-    		cp Icon\ Pack/firefox-esr-symbolic.svg /home/"$name"/Images/.firefox_quantum_icons/
-    		cp Icon\ Pack/firefox-esr-32.png /home/"$name"/Images/.firefox_quantum_icons/
-    		cp Icon\ Pack/firefox-esr-48.png /home/"$name"/Images/.firefox_quantum_icons/
-    		cp Icon\ Pack/firefox-esr-64.png /home/"$name"/Images/.firefox_quantum_icons/
-    		cp Icon\ Pack/firefox-esr-128.png /home/"$name"/Images/.firefox_quantum_icons/
-    		cp get-firefox remove-firefox-install-package restore-firefox-esr update-firefox /usr/bin/
+			cp Icon\ Pack/firefox-esr-16.png /home/"$name"/Images/.firefox_quantum_icons/
+			cp Icon\ Pack/firefox-esr-symbolic.svg /home/"$name"/Images/.firefox_quantum_icons/
+			cp Icon\ Pack/firefox-esr-32.png /home/"$name"/Images/.firefox_quantum_icons/
+			cp Icon\ Pack/firefox-esr-48.png /home/"$name"/Images/.firefox_quantum_icons/
+			cp Icon\ Pack/firefox-esr-64.png /home/"$name"/Images/.firefox_quantum_icons/
+			cp Icon\ Pack/firefox-esr-128.png /home/"$name"/Images/.firefox_quantum_icons/
+			cp get-firefox remove-firefox-install-package restore-firefox-esr update-firefox /usr/bin/
 
-    		cd .. && cd ..
+			cd .. && cd ..
 
-    		if [ -d /home/"$name"/Documents/.firefox_name_files ]
-    		then
-    			echo "OK"
-    			echo ""
-    		else
-	    		mkdir /home/"$name"/Documents/.firefox_name_files/
+			if [ -d /home/"$name"/Documents/.firefox_name_files ]
+			then
+				echo "OK"
+				echo ""
+			else
+		   		mkdir /home/"$name"/Documents/.firefox_name_files/
 	
-	    		if [ -d /home/"$name"/Documents/.firefox_name_files ]
-	    		then
-	    			echo "OK"
-	    			echo ""
-	    		fi
-	    	fi
-	    
-		    cp Debian/Install\ Firefox/Name\ File/firefox-esr.desktop /home/"$name"/Documents/.firefox_name_files/
+		   		if [ -d /home/"$name"/Documents/.firefox_name_files ]
+		  		then
+					echo "OK"
+					echo ""
+				fi
+			fi
+		
+			cp Debian/Install\ Firefox/Name\ File/firefox-esr.desktop /home/"$name"/Documents/.firefox_name_files/
 	
 			echo "Installé."
 			echo ""
