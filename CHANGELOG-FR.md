@@ -2,7 +2,7 @@
 
 -Mise à jour mineure et amélioration du script "restore-firefox-esr".
 -Ajout sur 'get-firefox' d'un script vérifiant qu'il est bien exécuté sur Debian.
--Ajout sur 'install-scripts' d'un script vérifiant qu'il est bien exécuté sur Debian au moment de l'installation des scripts nécessaires à l'installation de Firefox Quantum. Ajout d'une commande pour ajouter la permission d'exécution de chaque script avant l'installation de ceux-ci dans '/usr/bin'.
+-Ajout sur 'install-scripts' d'un script vérifiant qu'il est bien exécuté sur Debian au moment de l'installation des scripts nécessaires à l'installation de Firefox Quantum. Ajout de commandes pour ajouter la permission d'exécution de chaque script avant l'installation de ceux-ci dans '/usr/bin'.
 
 ..::CHANGELOG - FEB. 14 2018::..
 
