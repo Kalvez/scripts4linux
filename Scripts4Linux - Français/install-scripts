@@ -9,7 +9,7 @@ then
 	echo "Créateur : Kalvez"
 	echo "Emplacement : /usr/bin/"
 	echo "Date de la dernière version : 15 février 2018"
-	echo "Version : 2.0.1.20190215"
+	echo "Version : 2.1.0.20190215"
 	echo ""
 	echo ""
 	echo "..::Détails::.."
