@@ -1,6 +1,12 @@
+..::CHANGELOG - FEB. 15 2018::..
+
+-Mise à jour mineure et amélioration du script "restore-firefox-esr".
+-Ajout sur 'get-firefox' d'un script vérifiant qu'il est bien exécuté sur Debian.
+-Ajout sur 'install-scripts' d'un script vérifiant qu'il est bien exécuté sur Debian au moment de l'installation des scripts nécessaires à l'installation de Firefox Quantum. Ajout d'une commande pour ajouter la permission d'exécution de chaque script avant l'installation de ceux-ci dans '/usr/bin'.
+
 ..::CHANGELOG - FEB. 14 2018::..
 
--Le script d'installation des autres scripts a été mis à jour. Maintenant il est possible d'installer automatiquement les scripts avec leurs dépendances, un disclaimer a donc été rajouté avant l'installation des paquets nécéssaires au bon fonctionnement des scripts. Amélioration générale su script.
+-Le script d'installation des autres scripts a été mis à jour. Maintenant il est possible d'installer automatiquement les scripts avec leurs dépendances, un disclaimer a donc été rajouté avant l'installation des paquets nécéssaires au bon fonctionnement des scripts.
 -Le script "get-firefox" a été mis à jour. Un disclaimer apparaît maintenant avant l'installation de Firefox Quantum.
 -"arcive" est toujours une beta, mais il est désormais possible d'archiver plus de trois éléments.
 -Ajout d'un  "README" en bonne et due forme.
