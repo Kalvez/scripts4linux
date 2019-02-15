@@ -82,7 +82,8 @@ then
 	# Vérification de la version de Linux.
 	if [ -z "$(lsb_release -a 2>/dev/null | grep Debian)" ]
 	then
-		echo "Abandon de l'installation."
+		echo "L'installation des scripts est terminée."
+		echo ""
 		exit 1
 	else
 		cd Install\ Firefox/
@@ -299,6 +300,8 @@ then
 		then
 			echo "Ce script doit être exécuté sur un environnement Debian."
 			echo "Abandon de l'installation."
+			echo "Le(s) autre(s) script(s) a/ont été installé(s)."
+			echo ""
 			exit 1
 		else
 			# Demande du nom d'utilisateur.
