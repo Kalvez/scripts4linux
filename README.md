@@ -1,11 +1,12 @@
-# scripts4linux
+# Scripts4Linux
 
-..::Instructions d'installation::..
+..::Téléchargement & Installation::..
 
-Pour installer les scripts sur votre machine Linux, veuillez exécuter le script 'install-scripts' de la manière suivante, et suivez les instructions : ./install-scripts
-Attention, vous allez avoir besoin de le lancer en tant que superutilisateur (sudo ou su (root)).
+git clone https://github.com/Kalvez/scripts4linux.git
+cd scripts4linux/Scripts4Linux\ -\ Français/
+./install-scripts
 
-Ce pack de script contient : 
+Ce pack contient : 
 
 -archive (bêta) : Permet d'archiver des données.
 -backup : Permet de sauvegarder des données des dossiers 'Documents', 'Images' et 'Téléchargements'.
