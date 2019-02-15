@@ -5,7 +5,7 @@
 git clone https://github.com/Kalvez/scripts4linux.git
 cd scripts4linux/Scripts4Linux\ -\ Français/
 chmod +x install-scripts
-./install-scripts
+sudo ./install-scripts
 ```
 
 ### ..::CE PACK CONTIENT::..
