@@ -14,7 +14,7 @@
 -Le script "get-firefox" a été mis à jour. Un disclaimer apparaît maintenant avant l'installation de Firefox Quantum.
 -"arcive" est toujours une beta, mais il est désormais possible d'archiver plus de trois éléments.
 -Ajout d'un  "README" en bonne et due forme.
-*** -Joyeuse Saint-Valentin.
+-Joyeuse Saint-Valentin.
 ```
 ### ..::CHANGELOG - MAR. 22 2018::..
 ```
