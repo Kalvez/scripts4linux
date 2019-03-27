@@ -1,6 +1,7 @@
 ### ..::CHANGELOG - MAR. 27 2019::..
 ```
 -Des erreurs ont été corrigées quant au datage des changelogs de "Scripts4Linux".
+-La mise en page est désormais de mise dans le changelog.
 ```
 ### ..::CHANGELOG - FEB. 15 2019::..
 ```
