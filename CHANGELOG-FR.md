@@ -1,10 +1,14 @@
-..::CHANGELOG - FEB. 15 2018::..
+..::CHANGELOG - MAR. 27 2019::..
+
+-Des erreurs ont été corrigées quant au datage des changelogs de "Scripts4Linux".
+
+..::CHANGELOG - FEB. 15 2019::..
 
 -Mise à jour mineure et amélioration du script "restore-firefox-esr".
 -Ajout sur 'get-firefox' d'un script vérifiant qu'il est bien exécuté sur Debian.
 -Ajout sur 'install-scripts' d'un script vérifiant qu'il est bien exécuté sur Debian au moment de l'installation des scripts nécessaires à l'installation de Firefox Quantum. Ajout de commandes pour ajouter la permission d'exécution de chaque script avant l'installation de ceux-ci dans '/usr/bin'.
 
-..::CHANGELOG - FEB. 14 2018::..
+..::CHANGELOG - FEB. 14 2019::..
 
 -Le script d'installation des autres scripts a été mis à jour. Maintenant il est possible d'installer automatiquement les scripts avec leurs dépendances, un disclaimer a donc été rajouté avant l'installation des paquets nécéssaires au bon fonctionnement des scripts.
 -Le script "get-firefox" a été mis à jour. Un disclaimer apparaît maintenant avant l'installation de Firefox Quantum.
