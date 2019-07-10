@@ -15,6 +15,7 @@ sudo ./install-scripts
 -disks : Affiche les disques connectés à l'ordinateur.
 -lat : Affiche la latence entre la machine et le site www.google.fr
 -speed : Teste la vitesse de la connexion internet.
+-unlocker : Déverrouille un lecteur verrouillé avec Bitlocker et donne un accès en lecture seule.
 -update : Met à jour les paquets et logiciels installés sur Debian.
 -upgrade : Met à jour la distribution de debian.
 -version : Affiche la version de la distribution et du noyeau Linux.
