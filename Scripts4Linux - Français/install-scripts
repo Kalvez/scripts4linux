@@ -8,8 +8,8 @@ then
 	echo "Commande : install-scripts"
 	echo "Créateur : Kalvez"
 	echo "Emplacement : /usr/bin/"
-	echo "Date de la dernière version : 15 février 2018"
-	echo "Version : 2.1.0.20190215"
+	echo "Date de la dernière version : 10 juillet 2019"
+	echo "Version : 2.2.0.20190710"
 	echo ""
 	echo ""
 	echo "..::Détails::.."
@@ -18,9 +18,9 @@ then
 	echo ""
 	echo "Ce script permet d'installer les scripts suivant dans le dossier '/usr/bin/',"
 	echo "ainsi que leurs dépendances (à savoir 'speedtest-cli' et 'zip'. Ces scripts sont :"
-	echo "'archive', 'backup', 'disks', 'lat', 'speed', 'update', 'upgrade', 'version'"
-	echo "et toute la suite de scripts nécéssaires à l'installation de Firefox Quantum"
-	echo "tels que 'get-firefox', 'update-firefox', 'remove-firefox-install-package'"
+	echo "'archive', 'backup', 'disks', 'lat', 'speed', 'unlocker', 'update', 'upgrade',"
+	echo "'version' et toute la suite de scripts nécéssaires à l'installation de Firefox"
+	echo "Quantum tels que 'get-firefox', 'update-firefox', 'remove-firefox-install-package'"
 	echo "et 'restore-firefox'."
 	echo ""
 	exit 0
@@ -71,13 +71,24 @@ then
 	else
 		echo "Le paquet 'zip' est déjà installé."
 		echo ""
-	fi	
+	fi
+
+	if [ -z "$(dpkg -s dislocker 2>/dev/null | grep Status)" ]
+	then
+		echo "Le paquet 'dislocker' n'est pas présent sur le disque et va être installé."
+		echo ""
+		apt install -y dislocker
+		echo ""
+	else
+		echo "Le paquet 'dislocker' est déjà installé."
+		echo ""
+	fi
 
 	cd Debian/
 
-	chmod +x archive backup disks lat speed update upgrade version
-	
-	cp archive backup disks lat speed update upgrade version /usr/bin/
+	chmod +x archive backup disks lat speed unlocker update upgrade version
+
+	cp archive backup disks lat speed unlocker update upgrade version /usr/bin/
 
 	# Vérification de la version de Linux.
 	if [ -z "$(lsb_release -a 2>/dev/null | grep Debian)" ]
@@ -87,7 +98,7 @@ then
 		exit 1
 	else
 		cd Install\ Firefox/
-		
+
 		if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
 		then
 			echo "Le dossier d'icônes de firefox existe déjà."
@@ -96,7 +107,7 @@ then
 			echo "Le dossier d'icônes de firefox n'existe pas et va être créé."
 			echo ""
 			mkdir /home/"$name"/Images/.firefox_quantum_icons/
-			
+
 			if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
 			then
 				echo "Le dossier à bien été créé."
@@ -104,8 +115,8 @@ then
 			fi
 		fi
 
-		chmod +x get-firefox remove-firefox-install-package restore-firefox-esr update-firefox      
-		
+		chmod +x get-firefox remove-firefox-install-package restore-firefox-esr update-firefox
+
 		cp Icon\ Pack/firefox-esr-16.png /home/"$name"/Images/.firefox_quantum_icons/
 		cp Icon\ Pack/firefox-esr-symbolic.svg /home/"$name"/Images/.firefox_quantum_icons/
 		cp Icon\ Pack/firefox-esr-32.png /home/"$name"/Images/.firefox_quantum_icons/
@@ -113,25 +124,25 @@ then
 		cp Icon\ Pack/firefox-esr-64.png /home/"$name"/Images/.firefox_quantum_icons/
 		cp Icon\ Pack/firefox-esr-128.png /home/"$name"/Images/.firefox_quantum_icons/
 		cp get-firefox remove-firefox-install-package restore-firefox-esr update-firefox /usr/bin/
-		
+
 		cd .. && cd ..
-		
+
 		if [ -d /home/"$name"/Documents/.firefox_name_files ]
 		then
 			echo "OK"
 			echo ""
 		else
 			mkdir /home/"$name"/Documents/.firefox_name_files/
-	
+
 			if [ -d /home/"$name"/Documents/.firefox_name_files ]
 			then
 				echo "OK"
 				echo ""
 			fi
 		fi
-		
+
 		cp Debian/Install\ Firefox/Name\ File/firefox-esr.desktop /home/"$name"/Documents/.firefox_name_files/
-	
+
 		echo "L'installation des scripts est terminée."
 		echo ""
 		exit 0
@@ -141,7 +152,7 @@ elif [	$answer = "n" ]
 then
 
 	read -p "Voulez-vous installer 'archive' (le paquet 'zip' va être installé s'il ne l'est pas déjà) ? (y ou n) : " answer0
-	
+
 	if [ $answer0 = "y" ]
 	then
 		if [ -z "$(dpkg -s zip 2>/dev/null | grep Status)" ]
@@ -153,7 +164,7 @@ then
 		else
 			echo "Le paquet 'zip' est déjà installé."
 			echo ""
-		fi		
+		fi
 		cd Debian/
 		chmod +x archive
 		cp archive /usr/bin/
@@ -166,7 +177,7 @@ then
 	fi
 
 	read -p "Voulez-vous installer 'backup' (le paquet 'zip' va être installé s'il ne l'est pas déjà) ? (y ou n) : " answer1
-	
+
 	if [ $answer1 = "y" ]
 	then
 		if [ -z "$(dpkg -s zip 2>/dev/null | grep Status)" ]
@@ -178,7 +189,7 @@ then
 		else
 			echo "Le paquet 'zip' est déjà installé."
 			echo ""
-		fi	
+		fi
 		cd Debian/
 		chmod +x backup
 		cp backup /usr/bin/
@@ -233,7 +244,7 @@ then
 		else
 			echo "Le paquet speedtest-cli est déjà installé."
 			echo ""
-		fi	
+		fi
 		cd Debian/
 		chmod +x speed
 		cp speed /usr/bin/
@@ -245,28 +256,37 @@ then
 		echo ""
 	fi
 
-	read -p "Voulez-vous installer 'update' ? (y ou n) : " answer5
+	read -p "Voulez-vous installer 'unlocker' (le paquet 'dislocker' va être installé s'il ne l'est pas déjà) ? (y ou n) : " answer5
 
 	if [ $answer5 = "y" ]
 	then
+		if [ -z "$(dpkg -s dislocker 2>/dev/null | grep Status)" ]
+		then
+			echo "Le paquet 'dislocker' n'est pas présent sur le disque et va être installé."
+			echo ""
+			apt install -y dislocker
+			echo ""
+		else
+			echo "Le paquet 'dislocker' est déjà installé."
+			echo ""
+		fi
 		cd Debian/
-		chmod +x update
-		cp update /usr/bin/
+		chmod +x unlocker
+		cp unlocker /usr/bin/
 		echo "Installé."
 		echo ""
-		cd ..
 	else [ $answer5 = "n" ]
 		echo "Non-installé."
 		echo ""
 	fi
 
-	read -p "Voulez-vous installer 'upgrade' ? (y ou n) : " answer6
+	read -p "Voulez-vous installer 'update' ? (y ou n) : " answer6
 
 	if [ $answer6 = "y" ]
 	then
 		cd Debian/
-		chmod +x upgrade
-		cp upgrade /usr/bin/
+		chmod +x update
+		cp update /usr/bin/
 		echo "Installé."
 		echo ""
 		cd ..
@@ -275,13 +295,13 @@ then
 		echo ""
 	fi
 
-	read -p "Voulez-vous installer 'version' ? (y ou n) : " answer7
+	read -p "Voulez-vous installer 'upgrade' ? (y ou n) : " answer7
 
 	if [ $answer7 = "y" ]
 	then
 		cd Debian/
-		chmod +x version
-		cp version /usr/bin/
+		chmod +x upgrade
+		cp upgrade /usr/bin/
 		echo "Installé."
 		echo ""
 		cd ..
@@ -290,10 +310,25 @@ then
 		echo ""
 	fi
 
-	read -p "Voulez-vous installer 'get-firefox' et toutes ses dépendances (Vous devez être sous Debian) ? (y ou n) : " answer8
-	echo ""
+	read -p "Voulez-vous installer 'version' ? (y ou n) : " answer8
 
 	if [ $answer8 = "y" ]
+	then
+		cd Debian/
+		chmod +x version
+		cp version /usr/bin/
+		echo "Installé."
+		echo ""
+		cd ..
+	else [ $answer8 = "n" ]
+		echo "Non-installé."
+		echo ""
+	fi
+
+	read -p "Voulez-vous installer 'get-firefox' et toutes ses dépendances (Vous devez être sous Debian) ? (y ou n) : " answer9
+	echo ""
+
+	if [ $answer9 = "y" ]
 	then
 		# Vérification de la version de Debian.
 		if [ -z "$(lsb_release -a 2>/dev/null | grep Debian)" ]
@@ -307,7 +342,7 @@ then
 			# Demande du nom d'utilisateur.
 			read -p "Pour le bon déroulement de l'installation des scripts, veuillez taper votre nom d'utilisateur : " name
 			echo ""
-			
+
 			cd Debian/Install\ Firefox/
 
 			if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
@@ -318,7 +353,7 @@ then
 				echo "Le dossier d'icônes de firefox n'existe pas et va être créé."
 				echo ""
 				mkdir /home/"$name"/Images/.firefox_quantum_icons/
-				
+
 				if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
 				then
 					echo "Le dossier à bien été créé."
@@ -326,7 +361,7 @@ then
 				fi
 			fi
 
-			chmod +x get-firefox remove-firefox-install-package restore-firefox-esr update-firefox 
+			chmod +x get-firefox remove-firefox-install-package restore-firefox-esr update-firefox
 
 			cp Icon\ Pack/firefox-esr-16.png /home/"$name"/Images/.firefox_quantum_icons/
 			cp Icon\ Pack/firefox-esr-symbolic.svg /home/"$name"/Images/.firefox_quantum_icons/
@@ -344,20 +379,20 @@ then
 				echo ""
 			else
 		   		mkdir /home/"$name"/Documents/.firefox_name_files/
-	
+
 		   		if [ -d /home/"$name"/Documents/.firefox_name_files ]
 		  		then
 					echo "OK"
 					echo ""
 				fi
 			fi
-		
+
 			cp Debian/Install\ Firefox/Name\ File/firefox-esr.desktop /home/"$name"/Documents/.firefox_name_files/
-	
+
 			echo "Installé."
 			echo ""
 		fi
-	else [ $answer8 = "n" ]
+	else [ $answer9 = "n" ]
 		echo "Non-installé."
 		echo ""
 	fi
