@@ -1,3 +1,9 @@
+### ..::CHANGELOG - JUL. 10 2019::..
+```
+-Le script 'unlocker' a été ajouté à la suite de scripts déjà disponibles. Celui-ci permet de garantir un accès en lecture seule à un lecteur verrouillé via Bitlocker.
+-Le script 'backup' a été mis à jour pour maintenant aussi sauvegarder le dossier '/etc/'.
+-Le script 'install-script' a été mis à jour en conséquence de l'arrivée de 'unlocker' parmi la suite de scripts déjà disponible.
+```
 ### ..::CHANGELOG - MAR. 27 2019::..
 ```
 -Des erreurs ont été corrigées quant au datage des changelogs de "Scripts4Linux".
