@@ -8,8 +8,8 @@ then
         echo "Commande : upgrade"
         echo "Créateur : Kalvez"
         echo "Emplacement : /usr/bin/"
-        echo "Date de la dernière version : 05 mars 2018"
-        echo "Version : 1.1.1.20180305"
+        echo "Date de la dernière version : 08 août 2019"
+        echo "Version : 1.1.2.20190822"
         echo ""
         echo ""
         echo "..::Détails::.."
@@ -31,8 +31,8 @@ fi
 # MàJ de la distribution.
 apt dist-upgrade
 
-# Nettoyage des paquets non-utilisés.
-apt clean
+# Nettoyage des paquets inutilisés.
+apt autoremove
 echo ""
 echo "Mise à jour de la distribution Linux réussie."
 echo ""
