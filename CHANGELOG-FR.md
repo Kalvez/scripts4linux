@@ -1,3 +1,7 @@
+### ..::CHANGELOG - AOU. 22 2019::..
+```
+-Les lignes servant à nettoyer les paquets non-utilisés dans les scripts 'update' et 'upgrade' ont été changées de "apt clean" à "apt autoremove".
+```
 ### ..::CHANGELOG - JUL. 10 2019::..
 ```
 -Le script 'unlocker' a été ajouté à la suite de scripts déjà disponibles. Celui-ci permet de garantir un accès en lecture seule à un lecteur verrouillé via Bitlocker.
