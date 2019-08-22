@@ -8,8 +8,8 @@ then
         echo "Commande : update"
         echo "Créateur : Kalvez"
         echo "Emplacement : /usr/bin/"
-        echo "Date de la dernière version : 09 mars 2018"
-        echo "Version : 1.5.1.20180309"
+        echo "Date de la dernière version : 22 août 2019"
+        echo "Version : 1.5.2.20190822"
         echo ""
         echo ""
         echo "..::Détails::.."
@@ -37,7 +37,7 @@ apt -y update
 apt -y full-upgrade
 
 # Nettoyage des paquets inutilisés.
-apt clean
+apt autoremove
 echo ""
 echo "Mise à jour réussie."
 echo ""
