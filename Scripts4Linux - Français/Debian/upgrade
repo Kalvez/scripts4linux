@@ -15,7 +15,8 @@ then
         echo "..::Détails::.."
         echo ""
         echo "Vous devez exécuter ce script en tant qu'utilisateur root."
-        echo "Ce script permet de mettre à jour la distribution linux actuelle. Il nettoie le cache de mise à jour."
+        echo "Ce script permet de mettre à jour la distribution linux actuelle. Il nettoie le cache de mise à jour"
+        echo "et supprime les paquets inutilisés."
         echo ""
         exit 0
 fi
