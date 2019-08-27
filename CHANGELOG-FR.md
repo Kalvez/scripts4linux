@@ -1,3 +1,9 @@
+### ..::CHANGELOG - AOU. 27 2019::..
+```
+-Le script "version" est devenu "infos", il affiche désormais plus d'informations de manière mieux ordonnée.
+-Le script "install-scripts" a été mis à jour pour migrer le script "version" vers "infos".
+-La commande "apt clean" est revenue au sein des scripts "update" et "upgrade". L'approbation pour "apt autoremove" est désormais automatique sur ces deux scripts.
+```
 ### ..::CHANGELOG - AOU. 22 2019::..
 ```
 -Les lignes servant à nettoyer les paquets non-utilisés dans les scripts 'update' et 'upgrade' ont été changées de "apt clean" à "apt autoremove".
