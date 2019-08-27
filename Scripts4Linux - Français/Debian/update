@@ -16,8 +16,7 @@ then
         echo ""
         echo "Vous devez exécuter ce script en tant qu'utilisateur root."
         echo "Ce script permet de mettre à jour les dépôts et les paquets des logiciels installés. Il nettoie aussi le"
-	echo "cache des mises à jour. Il fait appel au script 'update-firefox' qui met à jour le navigateur Firefox"
-	echo "Quantum."
+	echo "cache des mises à jour."
         echo ""
         exit 0
 fi
