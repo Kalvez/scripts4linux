@@ -16,7 +16,7 @@ then
         echo ""
         echo "Vous devez exécuter ce script en tant qu'utilisateur root."
         echo "Ce script permet de mettre à jour les dépôts et les paquets des logiciels installés. Il nettoie aussi le"
-	echo "cache des mises à jour."
+	echo "cache des mises à jour et les paquets inutilisés."
         echo ""
         exit 0
 fi
@@ -36,6 +36,7 @@ apt -y update
 apt -y full-upgrade
 
 # Nettoyage des paquets inutilisés.
+apt clean
 apt -y autoremove
 echo ""
 echo "Mise à jour réussie."
