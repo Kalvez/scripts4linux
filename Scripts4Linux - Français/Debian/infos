@@ -1,0 +1,59 @@
+#!/bin/sh
+
+# Onglet d'aide.
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+	echo "Langue : FR-fr"
+	echo "Nom du script : Infos"
+	echo "Commande : Infos"
+	echo "Créateur : Kalvez"
+	echo "Emplacement : /usr/bin/"
+	echo "Date de la dernière version : 27 août 2019"
+	echo "Version : 2.0.0.20190827"
+	echo ""
+	echo ""
+	echo "..::Détails::.."
+	echo ""
+	echo "Ce script affiche la version actuelle de la distribution linux, le type d'OS et son architecture,"
+  	echo "le nom de l'appareil et son numéro de série, le/les utilisateur(s) présents sur l'appareil, le"
+  	echo "temps de fonctionnement du système et la version du kernel."
+	echo ""
+	exit 0
+fi
+
+# Vérification des privilèges root de l'utilisateur.
+if [ "$(id -u)" != "0" ]
+then
+	echo "Vous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root." 1>&2
+	echo ""
+	exit 1
+fi
+
+# Mise à zéro des arguments.
+os_type=0
+architecture=0
+device_name=0
+users=0
+serial=0
+uptime=0
+kernel_info=0
+
+  # Déclaration des arguments.
+os_type=$(uname -o)
+architecture=$(uname -i)
+device_name=$(uname -n)
+users=$(users)
+serial=$(dmidecode -s system-serial-number)
+uptime=$(uptime)
+kernel_info=$(uname -srv)
+
+# Affichage des infos.
+lsb_release -a
+echo "OS Type:        $os_type"
+echo "Architecture:   $architecture"
+echo "Device Name:    $device_name"
+echo "User(s):        $users"
+echo "Serial:         $serial"
+echo "Uptime:        $uptime"
+echo "Kernel Info:    $kernel_info"
+echo ""
