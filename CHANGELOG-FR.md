@@ -1,3 +1,8 @@
+### ..::CHANGELOG - AOU. 31 2019
+```
+-Le script "infos' passe à sa version 3.0 et devient encore plus complet qu'avant. Les données sont en plus grand nombre et sont organisées de manière plus lisible. 
+```
+
 ### ..::CHANGELOG - AOU. 27 2019::..
 ```
 -Le script "version" est devenu "infos", il affiche désormais plus d'informations de manière mieux ordonnée.
