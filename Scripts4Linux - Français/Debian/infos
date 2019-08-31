@@ -8,15 +8,14 @@ then
 	echo "Commande : Infos"
 	echo "Créateur : Kalvez"
 	echo "Emplacement : /usr/bin/"
-	echo "Date de la dernière version : 27 août 2019"
-	echo "Version : 2.0.0.20190827"
+	echo "Date de la dernière version : 31 août 2019"
+	echo "Version : 3.0.0.20190831"
 	echo ""
 	echo ""
 	echo "..::Détails::.."
 	echo ""
-	echo "Ce script affiche la version actuelle de la distribution linux, le type d'OS et son architecture,"
-  	echo "le nom de l'appareil et son numéro de série, le/les utilisateur(s) présents sur l'appareil, le"
-  	echo "temps de fonctionnement du système et la version du kernel."
+	echo "Ce script affiche tout un tas d'informations en relation avec le système d'exploitation, mais"
+	echo "aussi les spécifications générales de la machine utilisée et quelques autres données pratiques."
 	echo ""
 	exit 0
 fi
@@ -29,31 +28,89 @@ then
 	exit 1
 fi
 
+# Fonction conversion de la RAM en MiB
+converterMiB()
+{
+	mib=1048.576
+	memory=0
+	memory=$1
+	memory=$(echo "$memory/$mib" |bc)
+	echo "$memory"
+}
+
 # Mise à zéro des arguments.
 os_type=0
 architecture=0
 device_name=0
 users=0
-serial=0
 uptime=0
 kernel_info=0
+system_manufacturer=0
+system_model=0
+device_type=0
+cpu_model=0
+total_ram=0
+root_part_available=0
+root_part_total=0
+home_part_available=0
+home_part_total=0
+baseboard=0
+baseboard_version=0
+baseboard_serial=0
+bios_version=0
+bios_date=0
+serial=0
 
-  # Déclaration des arguments.
+# Déclaration des arguments.
 os_type=$(uname -o)
 architecture=$(uname -i)
 device_name=$(uname -n)
 users=$(users)
-serial=$(dmidecode -s system-serial-number)
 uptime=$(uptime)
 kernel_info=$(uname -srv)
+system_manufacturer=$(dmidecode -s system-manufacturer)
+system_model=$(dmidecode -s system-product-name)
+device_type=$(dmidecode -s chassis-type)
+cpu_model=$(dmidecode -s processor-version)
+total_ram=$(grep -Eom1 '[0-9]{1,9}' /proc/meminfo)
+total_ram=$(converterMiB $total_ram)
+root_part_available=$(df -Ph / | tail -1 | awk '{print $4}')
+root_part_total=$(df -Ph / | tail -1 | awk '{print $2}')
+home_part_available=$(df -Ph . | tail -1 | awk '{print $4}')
+home_part_total=$(df -Ph . | tail -1 | awk '{print $2}')
+baseboard=$(dmidecode -s baseboard-product-name)
+baseboard_version=$(dmidecode -s baseboard-version)
+baseboard_serial=$(dmidecode -s baseboard-serial-number)
+bios_version=$(dmidecode -s bios-version)
+bios_date=$(dmidecode -s bios-release-date)
+serial=$(dmidecode -s system-serial-number)
 
 # Affichage des infos.
+echo "****************************"
+echo "..::SOFTWARE INFORMATION::.."
+echo "****************************"
 lsb_release -a
 echo "OS Type:        $os_type"
 echo "Architecture:   $architecture"
 echo "Device Name:    $device_name"
 echo "User(s):        $users"
-echo "Serial:         $serial"
 echo "Uptime:        $uptime"
-echo "Kernel Info:    $kernel_info"
+echo "Kernel Version:	$kernel_info"
+echo ""
+echo "**************************"
+echo "..::DEVICE INFORMATION::.."
+echo "**************************"
+echo "Manufacturer:	$system_manufacturer"
+echo "Model:		$system_model"
+echo "Device Type:	$device_type"
+echo "Processor:	$cpu_model"
+echo "Total Memory:	$total_ram MiB"
+echo "Root Partition:	$root_part_available"b" / $root_part_total"b" Available"
+echo "Home Partition:	$home_part_available"b" / $home_part_total"b" Available"
+echo "Baseboard:	$baseboard | $baseboard_version"
+echo "Baseboard S/N:	$baseboard_serial"
+echo "BIOS Version:	$bios_version"
+echo "BIOS Date:	$bios_date"
+echo "Device S/N: 	$serial"
+echo ""
 echo ""
