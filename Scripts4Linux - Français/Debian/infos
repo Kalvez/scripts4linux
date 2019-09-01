@@ -8,8 +8,8 @@ then
 	echo "Commande : Infos"
 	echo "Créateur : Kalvez"
 	echo "Emplacement : /usr/bin/"
-	echo "Date de la dernière version : 31 août 2019"
-	echo "Version : 3.0.0.20190831"
+	echo "Date de la dernière version : 1 septembre 2019"
+	echo "Version : 3.0.1.20190901"
 	echo ""
 	echo ""
 	echo "..::Détails::.."
@@ -71,7 +71,7 @@ kernel_info=$(uname -srv)
 system_manufacturer=$(dmidecode -s system-manufacturer)
 system_model=$(dmidecode -s system-product-name)
 device_type=$(dmidecode -s chassis-type)
-cpu_model=$(dmidecode -s processor-version)
+cpu_model=$(dmidecode -s processor-version | uniq)
 total_ram=$(grep -Eom1 '[0-9]{1,9}' /proc/meminfo)
 total_ram=$(converterMiB $total_ram)
 root_part_available=$(df -Ph / | tail -1 | awk '{print $4}')
