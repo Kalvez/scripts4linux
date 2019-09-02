@@ -1,4 +1,4 @@
-### ..::CHANGELOG - SEP. 01 2019
+### ..::CHANGELOG - SEP. 02 2019
 ```
 -Correction mineure sur le script "infos".
 ```
