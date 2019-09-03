@@ -1,12 +1,12 @@
-###..::CHANGELOG - SEP. 03 2019
+### ..::CHANGELOG - SEP. 02 2019::..
 ```
 -Le script calcule maintenant la quantité de RAM restante et la quantité de données mise en cache dans la partition swap.
 ```
-### ..::CHANGELOG - SEP. 02 2019
+### ..::CHANGELOG - SEP. 02 2019::..
 ```
 -Correction mineure sur le script "infos".
 ```
-### ..::CHANGELOG - AOU. 31 2019
+### ..::CHANGELOG - AOU. 31 2019::..
 ```
 -Le script "infos' passe à sa version 3.0 et devient encore plus complet qu'avant. Les données sont en plus grand nombre et sont organisées de manière plus lisible. 
 ```
