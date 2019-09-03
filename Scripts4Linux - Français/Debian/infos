@@ -8,8 +8,8 @@ then
 	echo "Commande : Infos"
 	echo "Créateur : Kalvez"
 	echo "Emplacement : /usr/bin/"
-	echo "Date de la dernière version : 2 septembre 2019"
-	echo "Version : 3.0.1.20190902"
+	echo "Date de la dernière version : 03 sept. 2019"
+	echo "Version : 3.0.1.20190903"
 	echo ""
 	echo ""
 	echo "..::Détails::.."
@@ -50,6 +50,9 @@ system_model=0
 device_type=0
 cpu_model=0
 total_ram=0
+available_ram=0
+total_swap=0
+cached_swap=0
 root_part_available=0
 root_part_total=0
 home_part_available=0
@@ -72,8 +75,14 @@ system_manufacturer=$(dmidecode -s system-manufacturer)
 system_model=$(dmidecode -s system-product-name)
 device_type=$(dmidecode -s chassis-type)
 cpu_model=$(dmidecode -s processor-version | uniq)
-total_ram=$(grep -Eom1 '[0-9]{1,9}' /proc/meminfo)
+total_ram=$(grep -Eom1 '[0-9]{1,9}' /proc/meminfo | tail -1	)
 total_ram=$(converterMiB $total_ram)
+available_ram=$(grep -Eom3 '[0-9]{1,9}' /proc/meminfo | tail -1)
+available_ram=$(converterMiB $available_ram)
+total_swap=$(grep -Eom15 '[0-9]{1,9}' /proc/meminfo | tail -1)
+total_swap=$(converterMiB $total_swap)
+cached_swap=$(grep -Eom6 '[0-9]{1,9}' /proc/meminfo | tail -1)
+cached_swap=$(converterMiB $cached_swap)
 root_part_available=$(df -Ph / | tail -1 | awk '{print $4}')
 root_part_total=$(df -Ph / | tail -1 | awk '{print $2}')
 home_part_available=$(df -Ph . | tail -1 | awk '{print $4}')
@@ -104,7 +113,8 @@ echo "Manufacturer:	$system_manufacturer"
 echo "Model:		$system_model"
 echo "Device Type:	$device_type"
 echo "Processor:	$cpu_model"
-echo "Total Memory:	$total_ram MiB"
+echo "Free Memory:	$available_ram MiB / $total_ram MiB"
+echo "Cached Swap:	$cached_swap MiB / $total_swap MiB"
 echo "Root Partition:	$root_part_available"b" / $root_part_total"b" Available"
 echo "Home Partition:	$home_part_available"b" / $home_part_total"b" Available"
 echo "Baseboard:	$baseboard | $baseboard_version"
