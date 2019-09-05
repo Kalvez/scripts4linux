@@ -1,4 +1,4 @@
-        #!/bin/sh
+#!/bin/sh
 
 # Onglet d'aide.
 if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
@@ -120,8 +120,8 @@ echo "Type de PC:     $device_type"
 echo "Processeur:     $cpu_model"
 echo "Mémoire Libre:  $available_ram MiB / $total_ram MiB"
 echo "Données Swap:   $cached_swap MiB / $total_swap MiB"
-echo "Partition Root: $root_part_available"B" / $root_part_total"B" Available"
-echo "Partition Home: $home_part_available"B" / $home_part_total"B" Available"
+echo "Partition Root: $root_part_available"B" / $root_part_total"B" Disponible"
+echo "Partition Home: $home_part_available"B" / $home_part_total"B" Disponible"
 echo "Baseboard:      $baseboard | $baseboard_version"
 echo "Baseboard N/S:  $baseboard_serial"
 echo "Ver. du BIOS:   $bios_version | $bios_date"
