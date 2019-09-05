@@ -51,7 +51,7 @@ then
 					echo "Veuillez utiliser une distribution appropriée."
 				else
 					cd Linux\ Mint/
-					chmod +x
+					chmod +x installer
 					./installer
 					exit 0
 				fi

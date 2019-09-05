@@ -51,7 +51,7 @@ then
 					echo "Please choose an appropriate Linux distro."
 				else
 					cd Linux\ Mint/
-					chmod +x
+					chmod +x installer
 					./installer
 					exit 0
 				fi
