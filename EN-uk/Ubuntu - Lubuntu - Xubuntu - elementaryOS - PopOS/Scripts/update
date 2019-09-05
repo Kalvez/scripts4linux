@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# Onglet d'aide.
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+  echo "*******************"
+  echo "..::INFORMATION::.."
+  echo "*******************"
+  echo ""
+  echo "Language:    EN-uk"
+  echo "Script name: Update"
+  echo "Command:     update"
+  echo "Author:      Kalvez"
+  echo "Location:    /usr/bin/"
+  echo "Version:     1.5.4.20190904"
+  echo ""
+  echo "**************"
+  echo "..::DETAIL::.."
+  echo "**************"
+  echo ""
+  echo "You must execute the script with root permissions."
+  echo ""
+  echo "This script update the repositories and the installed softwares' packages.\nIt also cleans the update cache and remove the unused packages."
+  echo ""
+  exit 0
+fi
+
+# Vérification des privilèges root de l'utilisateur.
+if [ "$(id -u)" != "0" ]
+        then
+        echo "This script must be executed with root privileges." 1>&2
+        echo ""
+        exit 1
+fi
+
+# Mise à jour et confirmation automatique.
+apt -y update
+
+# Mise à jour des autres paquets et confirmation automatique.
+apt -y full-upgrade
+
+# Nettoyage des paquets inutilisés.
+apt clean
+apt -y autoremove
+echo ""
+echo "Update successful."
+echo ""

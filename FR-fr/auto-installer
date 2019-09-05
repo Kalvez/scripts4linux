@@ -1,0 +1,81 @@
+#!/bin/sh
+
+# Onglet d'aide.
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+	echo "********************"
+	echo "..::INFORMATIONS::.."
+	echo "********************"
+	echo ""
+	echo "Langue:        FR-fr"
+	echo "Nom du script: Installeur automatique de scripts pour Debian / Kali Linux."
+	echo "Commande:      auto-installer"
+	echo "Créateur:      Kalvez"
+	echo "Emplacement:   scripts4linux/FR-fr/"
+	echo "Version:       2.5.1.20190904"
+	echo ""
+	echo "***************"
+	echo "..::DÉTAILS::.."
+	echo "***************"
+	echo ""
+	echo "/!\ Ce script doit être exécuté en tant qu'utilisateur root. /!\ "
+	echo ""
+	echo "Ce script permet de détecter la distribution de linux sur laquelle il est lancé et donc de choisir en conséquence le bon pack de scripts à installer."
+	echo ""
+	exit 0
+fi
+
+# Vérification des privilèges root de l'utilisateur.
+if [ "$(id -u)" != "0" ]
+	then
+	echo "Vous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root." 1>&2
+	echo ""
+	exit 1
+fi
+
+echo "**************"
+echo "AUTO-INSTALLER"
+echo "**************"
+
+# Vérification de la version de Linux.
+if [ -z "$(lsb_release -a 2>/dev/null | grep Debian)" ]
+then
+	if [ -z "$(lsb_release -a 2>/dev/null | grep Kali)" ]
+	then
+		if [ -z "$(lsb_release -a 2>/dev/null | grep Ubuntu)" ]
+		then
+			if [ -z "$(lsb_release -a 2>/dev/null | grep elementary)" ]
+			then
+				if [ -z "$(lsb_release -a 2>/dev/null | grep LinuxMint)" ]
+				then
+					echo "Veuillez utiliser une distribution appropriée."
+				else
+					cd Linux\ Mint/
+					chmod +x
+					./installer
+					exit 0
+				fi
+			else
+				cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS/
+				chmod +x installer
+				./installer
+				exit 0
+			fi
+		else
+			cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS/
+			chmod +x installer
+			./installer
+			exit 0
+		fi
+	else
+		cd Debian\ -\ Kali\ Linux/
+		chmod +x installer
+		./installer
+		exit 0
+	fi
+else
+  cd Debian\ -\ Kali\ Linux/
+  chmod +x installer
+  ./installer
+  exit 0
+fi

@@ -1,0 +1,131 @@
+#!/bin/sh
+
+# Onglet d'aide.
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+	echo "*******************"
+	echo "..::INFORMATION::.."
+	echo "*******************"
+	echo ""
+	echo "Language:    EN-uk"
+	echo "Script name: Unlocker"
+	echo "Command:     unlocker"
+	echo "Author:      Kalvez"
+	echo "Location:    /usr/bin/"
+	echo "Version:     1.1.1.20190904"
+	echo ""
+	echo "**************"
+	echo "..::DETAIL::.."
+	echo "**************"
+	echo ""
+	echo "You must execute the script with root permissions."
+	echo ""
+	echo "This script permits to unlock drives that are encrypted with Bitlocker using the 'dislocker' package.\nIt gives a R/O access to the unlocked drive."
+	echo ""
+	exit 0
+fi
+
+# Déclaration de la variable 'answer' à zéro.
+answer="0"
+
+# Déclaration de la fonction 'CONFIRMATION'.
+CONFIRMATION()
+{
+	if [ $answer = "y" ] || [ $answer = "Y" ]
+		then
+            echo "/!\ The decrypted drive will be unmounted. Any unsaved activity on the drive will be lost. /!\ "
+						read -p "Press any key to continue..." push1
+            echo ""
+            umount /media/"$name"/mount && umount /media/"$name"/bitlocker
+            echo "The folder and the drive has been unmounted."
+            exit
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+		then
+            echo "The folder and the drive are still mounted."
+            echo "To unmount them, please type the following commands : 'sudo umount /media/"$name"/mount && sudo umount /media/"$name"/bitlocker'"
+            echo ""
+            exit
+	else
+			echo "Please type 'y' or 'n'."
+			echo ""
+	fi
+}
+
+# Vérification des privilèges root de l'utilisateur.
+if [ "$(id -u)" != "0" ]
+	then
+   	echo "This script must be executed with root privileges." 1>&2
+   	echo ""
+   	exit 1
+fi
+
+# Saisie et lecture du nom d'utilisateur.
+echo ""
+read -p "Please type your username : " name
+echo ""
+
+# Vérification de l'existence des dossier 'bitlocker' et 'mount'. S'ils n'existent pas, les créer.
+if [ -d /media/"$name"/bitlocker ]
+then
+	echo "The 'Bitlocker' folder already exists."
+	echo ""
+else
+	echo "The 'Bitlocker' folder does not exists and will be created."
+	echo ""
+	mkdir /media/"$name"/bitlocker
+
+	if [ -d /media/"$name"/bitlocker ]
+	then
+		echo "The 'Bitlocker' folder has bee created."
+		echo ""
+	fi
+fi
+
+if [ -d /media/"$name"/mount ]
+then
+	echo "The 'mount' folder already exists."
+	echo ""
+else
+	echo "The 'mount' folder does not exists and will be created."
+	echo ""
+	mkdir /media/"$name"/mount
+
+	if [ -d /media/"$name"/mount ]
+	then
+		echo "The 'mount' folder has bee created."
+		echo ""
+	fi
+fi
+
+# Déclaration du chemin du disque à débloquer.
+read -p "Enter the path of the drive to unlock : " path
+
+# Utilisation de Dislocker pour déverrouiller le disque.
+dislocker -r -V "$path" -u -- /media/"$name"/bitlocker
+
+# Montage du disque dans le dossier mount.
+mount -r -o loop /media/"$name"/bitlocker/dislocker-file /media/"$name"/mount
+
+# Pause.
+echo ""
+read -p "Press any key to continue..." push0
+echo ""
+
+# Demande de confirmation pour démonter le lecteur et le dossier bitlocker.
+while [ $answer != "y" ] || [ $answer != "Y" ] || [ $answer != "n" ] || [ $answer != "N" ] || [ -z $answer ]
+do
+	read -p "The script will now unmount the drive and the 'Bitlocker' folder, do you want to continue ? (y or n) : " answer
+	echo ""
+	if [ $answer = 'y' ] || [ $answer = 'n' ]
+	then
+		break
+	fi
+done
+
+# Si oui, exécution de CONFIRMATION.
+if [ $answer = "y" ] || [ $answer = "Y" ] || [ $answer = "n" ] || [ $answer = "N" ]
+then
+	CONFIRMATION
+else
+	echo "An unsuspected error occured."
+fi

@@ -1,0 +1,131 @@
+      #!/bin/sh
+
+# Onglet d'aide.
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+	echo "********************"
+	echo "..::INFORMATIONS::.."
+	echo "********************"
+	echo ""
+	echo "Langue:        FR-fr"
+	echo "Nom du script: Unlocker"
+	echo "Commande:      unlocker"
+	echo "Créateur:      Kalvez"
+	echo "Emplacement:   /usr/bin/"
+	echo "Version:       1.1.1.20190904"
+	echo ""
+	echo "***************"
+	echo "..::DÉTAILS::.."
+	echo "***************"
+	echo ""
+	echo "Vous devez exécuter ce script en tant qu'utilisateur root."
+	echo ""
+	echo "Ce script permet de déverrouiller des lecteurs chiffrés avec Bitlocker en utilisant le paquet 'Disclocker'.\nCe script donnera un accès en lecture seule au lecteur déverrouillé."
+	echo ""
+	exit 0
+fi
+
+# Déclaration de la variable 'answer' à zéro.
+answer="0"
+
+# Déclaration de la fonction 'CONFIRMATION'.
+CONFIRMATION()
+{
+	if [ $answer = "y" ] || [ $answer = "Y" ]
+		then
+            echo "/!\ Le lecteur déchiffré va être démonté. Veuillez sauvegarder vos activités et fermer vos fichiers ouverts sur ce dernier. /!\ "
+						read -p "Appuyez sur une touche pour continuer..." push1
+            echo ""
+            umount /media/"$name"/mount && umount /media/"$name"/bitlocker
+            echo "Le dossier et le lecteur ont été démontés."
+            exit
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+		then
+            echo "Le lecteur et le dossier restent montés."
+            echo "Pour les démonter veuillez taper le groupe de commandes suivant : 'sudo umount /media/"$name"/mount && sudo umount /media/"$name"/bitlocker'"
+            echo ""
+            exit
+	else
+			echo "Veuillez appuyer sur 'y' ou 'n'."
+			echo ""
+	fi
+}
+
+# Vérification des privilèges root de l'utilisateur.
+if [ "$(id -u)" != "0" ]
+	then
+   	echo "Vous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root." 1>&2
+   	echo ""
+   	exit 1
+fi
+
+# Saisie et lecture du nom d'utilisateur.
+echo ""
+read -p "Saisissez votre nom d'utilisateur : " name
+echo ""
+
+# Vérification de l'existence des dossier 'bitlocker' et 'mount'. S'ils n'existent pas, les créer.
+if [ -d /media/"$name"/bitlocker ]
+then
+	echo "Le dossier 'dislocker' existe déjà."
+	echo ""
+else
+	echo "Le dossier 'dislocker' n'existe pas et va être créé."
+	echo ""
+	mkdir /media/"$name"/bitlocker
+
+	if [ -d /media/"$name"/bitlocker ]
+	then
+		echo "Le dossier 'Bitlocker' a été créé."
+		echo ""
+	fi
+fi
+
+if [ -d /media/"$name"/mount ]
+then
+	echo "Le dossier 'mount' existe déjà."
+	echo ""
+else
+	echo "Le dossier 'mount' n'existe pas et va être créé."
+	echo ""
+	mkdir /media/"$name"/mount
+
+	if [ -d /media/"$name"/mount ]
+	then
+		echo "Le dossier 'mount' a bien été créé."
+		echo ""
+	fi
+fi
+
+# Déclaration du chemin du disque à débloquer.
+read -p "Entrez le chemin du disque à débloquer : " path
+
+# Utilisation de Dislocker pour déverrouiller le disque.
+dislocker -r -V "$path" -u -- /media/"$name"/bitlocker
+
+# Montage du disque dans le dossier mount.
+mount -r -o loop /media/"$name"/bitlocker/dislocker-file /media/"$name"/mount
+
+# Pause.
+echo ""
+read -p "Appuyez sur une touche pour continuer..." push0
+echo ""
+
+# Demande de confirmation pour démonter le lecteur et le dossier bitlocker.
+while [ $answer != "y" ] || [ $answer != "Y" ] || [ $answer != "n" ] || [ $answer != "N" ] || [ -z $answer ]
+do
+	read -p "La suite de ce script va démonter le lecteur et le dossier 'bitlocker', voulez-vous continuer ? (y ou n) : " answer
+	echo ""
+	if [ $answer = 'y' ] || [ $answer = 'n' ]
+	then
+		break
+	fi
+done
+
+# Si oui, exécution de CONFIRMATION.
+if [ $answer = "y" ] || [ $answer = "Y" ] || [ $answer = "n" ] || [ $answer = "N" ]
+then
+	CONFIRMATION
+else
+	echo "Une erreur est survenue pendant l'exécution du script."
+fi

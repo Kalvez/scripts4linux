@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# Onglet d'aide.
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+	echo "********************"
+	echo "..::INFORMATIONS::.."
+	echo "********************"
+	echo ""
+	echo "Langue:        FR-fr"
+	echo "Nom du script: Lat (pour 'Latency')"
+	echo "Commande:      lat"
+	echo "Créateur:      Kalvez"
+	echo "Emplacement:   /usr/bin/"
+	echo "Version:       1.0.4.20190904"
+	echo ""
+	echo "***************"
+	echo "..::DÉTAILS::.."
+	echo "***************"
+	echo ""
+	echo "Ce script permet d'afficher le délai de réponse entre la machine et le DNS de Google."
+	echo ""
+	exit 0
+fi
+
+# Commande de ping.
+ping 8.8.8.8

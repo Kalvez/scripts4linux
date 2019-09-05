@@ -1,0 +1,63 @@
+#!/bin/sh
+
+# Onglet d'aide.
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+	echo "*******************"
+	echo "..::INFORMATION::.."
+	echo "*******************"
+	echo ""
+	echo "Language:    FR-fr"
+	echo "Script name: Backup"
+	echo "Command:     backup"
+	echo "Author:      Kalvez"
+	echo "Location:    /usr/bin/"
+	echo "Version:     1.4.5.20190904"
+	echo ""
+	echo "**************"
+	echo "..::DETAIL::.."
+	echo "**************"
+	echo ""
+	echo "You must execute the script with root permissions."
+	echo ""
+	echo "This script permits to backup the following folders : '/etc/', 'Documents', 'Pictures' and 'Download' in a '.zip' archive automatically named 'backup' and dated according to the date of the day.\nOnce the archive is created, it's placed in the 'Backups' folder located in your personnal folder.\nIf it's not present on the disk, it will automatically be created is the user folder. In your case, this will be in the '/home/$USER/' folder.\nThis script is using the '.zip' archive format which is a proprietary format. However, if you want to modify the backupped folder in the archive, you can edit that script at the line 58 and put whatever you want to backup respecting the spaces between each argument."
+	echo ""
+	exit 0
+fi
+
+# Vérification des privilèges root de l'utilisateur.
+if [ "$(id -u)" != "0" ]
+	then
+   	echo "This script must be executed with root privileges." 1>&2
+   	echo ""
+   	exit 1
+fi
+
+# Saisie et lecture du nom d'utilisateur.
+read -p "Please type your username : " name
+echo ""
+
+# Vérification de la présence du dossier 'Backups' sur le disque, et création du dossier s'il n'existe pas.
+if [ -d /home/"$name"/Backups ]
+then
+	echo "The 'Backups' folder already exists."
+	echo ""
+else
+	echo "The 'Backups' does not exists and will be created in the '/home/"$name"/' directory."
+	echo ""
+	mkdir /home/"$name"/Backups/
+
+	if [ -d /home/"$name"/Backups ]
+	then
+		echo "The folder has been created."
+		echo ""
+	fi
+fi
+
+# Création de l'archive
+zip -r backup_$(date +%Y-%m-%d).zip /etc/ /home/"$name"/Documents/ /home/"$name"/Images/ /home/"$name"/Téléchargements/
+mv backup_$(date +%Y-%m-%d).zip /home/"$name"/Backups/
+
+echo ""
+echo "Backup over !"
+echo ""

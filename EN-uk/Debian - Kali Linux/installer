@@ -1,0 +1,400 @@
+#!/bin/sh
+
+# Vérification des privilèges root de l'utilisateur.
+if [ "$(id -u)" != "0" ]
+	then
+	echo "This script must be executed with root permissions." 1>&2
+	echo ""
+	exit 1
+fi
+
+# Mise à zéro des arguments.
+name=0
+answer=0
+answer0=0
+answer1=0
+answer2=0
+answer3=0
+answer4=0
+answer5=0
+answer6=0
+answer7=0
+answer8=0
+answer9=0
+answer10=0
+
+echo "Do you wish to install all the scripts at once ('y'), or to individually choose the scripts to install ('n') ?"
+echo "/!\ WARNING : This ('y') will also install the necessary dependancies ('dislocker', 'speedtest-cli' and 'zip') ! /!\ "
+read -p "Choice (y or n) : " answer
+echo ""
+
+if [ $answer = "y" ]
+then
+	# Demande du nom d'utilisateur.
+	read -p "For the sake of the installation, please type your username : " name
+	echo ""
+
+	# Test pour savoir si le paquet est installé, sinon l'installer.
+	if [ -z "$(dpkg -s speedtest-cli 2>/dev/null | grep Status)" ]
+	then
+		echo "The 'speectest-cli' package is not present of the disk and will be installed."
+		echo ""
+		apt install -y speedtest-cli
+		echo ""
+	else
+		echo "The 'speectest-cli' package is already installed."
+		echo ""
+	fi
+
+	if [ -z "$(dpkg -s zip 2>/dev/null | grep Status)" ]
+	then
+		echo "The 'zip' package is not present on the disk and will be installed."
+		echo ""
+		apt install -y zip
+		echo ""
+	else
+		echo "The 'zip' package is already installed."
+		echo ""
+	fi
+
+	if [ -z "$(dpkg -s dislocker 2>/dev/null | grep Status)" ]
+	then
+		echo "The 'dislocker' package is not present on the disk and will be installed."
+		echo ""
+		apt install -y dislocker
+		echo ""
+	else
+		echo "The 'dislocker' package is already installed."
+		echo ""
+	fi
+
+	cd Scripts/
+
+	chmod +x archive backup disks infos lat speed unlocker update upgrade
+
+	# Vérification et remplacement de 'version' par 'infos' si besoin est.
+	if [ -f /usr/bin/version ]
+	then
+		rm /usr/bin/version
+		cp archive backup disks infos lat speed unlocker update upgrade /usr/bin/
+	else
+		cp archive backup disks infos lat speed unlocker update upgrade /usr/bin/
+	fi
+
+	cd Install\ Firefox/
+
+	if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
+	then
+		echo "The 'Firefox' icon folder already exists."
+		echo ""
+	else
+		echo "The 'Firefox' icon folder does not exists and will be created."
+		echo ""
+		mkdir /home/"$name"/Images/.firefox_quantum_icons/
+
+		if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
+		then
+			echo "The folder has been created."
+			echo ""
+		fi
+	fi
+
+	chmod +x get-firefox remove-firefox-install-package restore-firefox-esr update-firefox
+
+	cp Icon\ Pack/firefox-esr-16.png /home/"$name"/Images/.firefox_quantum_icons/
+	cp Icon\ Pack/firefox-esr-symbolic.svg /home/"$name"/Images/.firefox_quantum_icons/
+	cp Icon\ Pack/firefox-esr-32.png /home/"$name"/Images/.firefox_quantum_icons/
+	cp Icon\ Pack/firefox-esr-48.png /home/"$name"/Images/.firefox_quantum_icons/
+	cp Icon\ Pack/firefox-esr-64.png /home/"$name"/Images/.firefox_quantum_icons/
+	cp Icon\ Pack/firefox-esr-128.png /home/"$name"/Images/.firefox_quantum_icons/
+	cp get-firefox remove-firefox-install-package restore-firefox-esr update-firefox /usr/bin/
+
+	cd .. && cd ..
+
+	if [ -d /home/"$name"/Documents/.firefox_name_files ]
+	then
+		echo "OK"
+		echo ""
+	else
+		mkdir /home/"$name"/Documents/.firefox_name_files/
+
+		if [ -d /home/"$name"/Documents/.firefox_name_files ]
+		then
+			echo "OK"
+			echo ""
+		fi
+	fi
+
+	cp Scripts/Install\ Firefox/Name\ File/firefox-esr.desktop /home/"$name"/Documents/.firefox_name_files/
+
+	echo "The installation is over."
+	echo ""
+	exit 0
+
+elif [ $answer = "n" ]
+then
+
+	read -p "Do you want to install 'archive' (the 'zip' package will be installed if it's not already on the disk.) ? (y or n) : " answer0
+
+	if [ $answer0 = "y" ]
+	then
+		if [ -z "$(dpkg -s zip 2>/dev/null | grep Status)" ]
+		then
+			echo "The 'zip' package is not on the disk and will be installed."
+			echo ""
+			apt install -y zip
+			echo ""
+		else
+			echo "The 'zip' package is already installed."
+			echo ""
+		fi
+		cd Scripts/
+		chmod +x archive
+		cp archive /usr/bin/
+		echo "Installed."
+		echo ""
+		cd ..
+	else [ $answer0 = "n" ]
+		echo "Not-installed."
+		echo ""
+	fi
+
+	read -p "Do you want to installed 'backup' (the 'zip' package will be installed if it's not already on the disk.) ? (y or n) : " answer1
+
+	if [ $answer1 = "y" ]
+	then
+		if [ -z "$(dpkg -s zip 2>/dev/null | grep Status)" ]
+		then
+			echo "The 'zip' package is not on the disk and will be installed."
+			echo ""
+			apt install -y zip
+			echo ""
+		else
+			echo "The 'zip' package is already installed."
+			echo ""
+		fi
+		cd Scripts/
+		chmod +x backup
+		cp backup /usr/bin/
+		echo "Installed."
+		echo ""
+		cd ..
+	else [ $answer1 = "n" ]
+		echo "Not-installed."
+		echo ""
+	fi
+
+	read -p "Do you want to install 'disks' ? (y or n) : " answer2
+
+	if [ $answer2 = "y" ]
+	then
+		cd Scripts/
+		chmod +x disks
+		cp disks /usr/bin/
+		echo "Installed."
+		echo ""
+		cd ..
+	else [ $answer2 = "n" ]
+		echo "Not-installed."
+		echo ""
+	fi
+
+	if [ -f /usr/bin/version ]
+	then
+		read -p "Do you want to replace 'version' with 'infos' ? (y or n) : " answer3
+
+		if [ $answer3 = "y" ]
+		then
+			rm /usr/bin/version
+			cd Scripts/
+			chmod +x infos
+			cp infos /usr/bin/
+			echo "Installed."
+			echo ""
+			cd ..
+		else [ $answer3 = "n" ]
+			echo "Not-installed."
+			echo ""
+		fi
+	else
+		read -p "Do you want to install 'infos' ? (y or n) : " answer4
+
+		if [ $answer4 = "y" ]
+		then
+			cd Scripts/
+			chmod +x infos
+			cp infos /usr/bin/
+			echo "Installed."
+			echo ""
+			cd ..
+		else [ $answer4 = "n" ]
+			echo "Not-installed."
+			echo ""
+		fi
+	fi
+
+	read -p "Do you want to install 'lat' ? (y or n) : " answer5
+
+	if [ $answer5 = "y" ]
+	then
+		cd Scripts/
+		chmod +x lat
+		cp lat /usr/bin/
+		echo "Installed."
+		echo ""
+		cd ..
+	else [ $answer5 = "n" ]
+		echo "Not-installed."
+		echo ""
+	fi
+
+	read -p "Do you want to install 'speed' (the 'speectest-cli' package will be installed if it's not already on the disk.) ? (y or n) : " answer6
+
+	if [ $answer6 = "y" ]
+	then
+		if [ -z "$(dpkg -s speedtest-cli 2>/dev/null | grep Status)" ]
+		then
+			echo "The 'speectest-cli' package is not on the disk and will be installed."
+			echo ""
+			apt install -y speedtest-cli
+			echo ""
+		else
+			echo "The 'speedtest-cli' package is already installed."
+			echo ""
+		fi
+		cd Scripts/
+		chmod +x speed
+		cp speed /usr/bin/
+		echo "Installed."
+		echo ""
+		cd ..
+	else [ $answer6 = "n" ]
+		echo "Not-installed."
+		echo ""
+	fi
+
+	read -p "Do you want to install 'unlocker' (the 'dislocker' package will be installed if it's not already on the disk.) ? (y or n) : " answer7
+
+	if [ $answer7 = "y" ]
+	then
+		if [ -z "$(dpkg -s dislocker 2>/dev/null | grep Status)" ]
+		then
+			echo "The 'dislocker' package is not on the disk and will be installed."
+			echo ""
+			apt install -y dislocker
+			echo ""
+		else
+			echo "The 'speedtest-cli' package is already installed."
+			echo ""
+		fi
+		cd Scripts/
+		chmod +x unlocker
+		cp unlocker /usr/bin/
+		echo "Installed."
+		echo ""
+		cd ..
+	else [ $answer7 = "n" ]
+		echo "Not-installed."
+		echo ""
+	fi
+
+	read -p "Do you want to install 'update' ? (y or n) : " answer8
+
+	if [ $answer8 = "y" ]
+	then
+		cd Scripts/
+		chmod +x update
+		cp update /usr/bin/
+		echo "Installed."
+		echo ""
+		cd ..
+	else [ $answer8 = "n" ]
+		echo "Not-installed."
+		echo ""
+	fi
+
+	read -p "Do you want to install 'upgrade' ? (y or n) : " answer9
+
+	if [ $answer9 = "y" ]
+	then
+		cd Scripts/
+		chmod +x upgrade
+		cp upgrade /usr/bin/
+		echo "Installed."
+		echo ""
+		cd ..
+	else [ $answer9 = "n" ]
+		echo "Not-installed."
+		echo ""
+	fi
+
+	read -p "Do you want to install 'get-firefox' and all of its dependancies ? (y or n) : " answer10
+	echo ""
+
+	if [ $answer10 = "y" ]
+	then
+		# Demande du nom d'utilisateur.
+		read -p "For the sake of the installation, please type your username : " name
+		echo ""
+
+		cd Scripts/Install\ Firefox/
+
+		if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
+		then
+			echo "The 'Firefox' icon folder already exists."
+			echo ""
+		else
+			echo "The 'Firefox' icon folder does not exists and will be created."
+			echo ""
+			mkdir /home/"$name"/Images/.firefox_quantum_icons/
+
+			if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
+			then
+				echo "The folder has been created."
+				echo ""
+			fi
+
+			chmod +x get-firefox remove-firefox-install-package restore-firefox-esr update-firefox
+
+			cp Icon\ Pack/firefox-esr-16.png /home/"$name"/Images/.firefox_quantum_icons/
+			cp Icon\ Pack/firefox-esr-symbolic.svg /home/"$name"/Images/.firefox_quantum_icons/
+			cp Icon\ Pack/firefox-esr-32.png /home/"$name"/Images/.firefox_quantum_icons/
+			cp Icon\ Pack/firefox-esr-48.png /home/"$name"/Images/.firefox_quantum_icons/
+			cp Icon\ Pack/firefox-esr-64.png /home/"$name"/Images/.firefox_quantum_icons/
+			cp Icon\ Pack/firefox-esr-128.png /home/"$name"/Images/.firefox_quantum_icons/
+			cp get-firefox remove-firefox-install-package restore-firefox-esr update-firefox /usr/bin/
+
+			cd .. && cd ..
+
+			if [ -d /home/"$name"/Documents/.firefox_name_files ]
+			then
+				echo "OK"
+				echo ""
+			else
+		  	mkdir /home/"$name"/Documents/.firefox_name_files/
+
+		   	if [ -d /home/"$name"/Documents/.firefox_name_files ]
+		  	then
+					echo "OK"
+					echo ""
+				fi
+			fi
+
+			cp Scripts/Install\ Firefox/Name\ File/firefox-esr.desktop /home/"$name"/Documents/.firefox_name_files/
+
+			echo "Installed."
+			echo ""
+		fi
+	else [ $answer10 = "n" ]
+		echo "Non-installed."
+		echo ""
+	fi
+
+	echo "The installation is over."
+	echo ""
+	exit 0
+else
+	echo "Please type 'y' or 'n'."
+	echo ""
+	./install-scripts
+fi

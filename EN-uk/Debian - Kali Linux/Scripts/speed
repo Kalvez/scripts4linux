@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Onglet d'aide.
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+	echo "*******************"
+	echo "..::INFORMATION::.."
+	echo "*******************"
+	echo ""
+	echo "Language:    EN-uk"
+	echo "Script name: Speed"
+	echo "Command:     speed"
+	echo "Author:      Kalvez"
+	echo "Location:    /usr/bin/"
+	echo "Version:     1.0.5.20190904"
+	echo ""
+	echo "**************"
+	echo "..::DETAIL::.."
+	echo "**************"
+	echo ""
+	echo "Based on the 'speedtest-cli' package, this script tests your network's internet connection.\nIt has a secure connection (--secure) and uses 'MB' instead of 'Mb' (--bytes)."
+	echo ""
+	exit 0
+fi
+
+# Commande appelant speedtest-cli et l'argument remplacant les Bits par des Octets et utilisant une connexion HTTPS.
+speedtest --bytes --secure
+echo ""

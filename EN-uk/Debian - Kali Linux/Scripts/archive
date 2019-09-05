@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# Onglet d'aide.
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+	echo "*******************"
+	echo "..::INFORMATION::.."
+	echo "*******************"
+	echo ""
+	echo "Language:    EN-uk"
+	echo "Script name: Archive"
+	echo "Command:     archive [dossier/fichier] [dossier/fichier] [dossier/fichier] ..."
+	echo "Author:      Kalvez"
+	echo "Location:    /usr/bin/"
+	echo "Version:     0.3.6.20190904-beta"
+	echo ""
+	echo "**************"
+	echo "..::DETAIL::.."
+	echo "**************"
+	echo ""
+	echo "This script, which does not need any root privileges, permits to archive whatever you want in a '.zip' compressed folder.\nIt will ask for an archive name and then it will be saved with this name format : 'archive_name_year-month-day.zip'."
+	echo ""
+	exit 0
+fi
+
+# Déclaration des arguments.
+args=0
+files=$#
+
+# Lecture du nom donné à l'archive.
+read -p "Archive name : " name
+echo ""
+
+# Script permettant d'archiver les fichiers et les dossiers dans une archive '.zip'.
+for args in $*
+do
+	FICDOC=$1
+	echo "Files or folders being archived : ${FICDOC}"
+	echo ""
+	if [ -f "${FICDOC}" ] || [ -d "${FICDOC}" ]
+	then
+		zip -r archive_"${name}"_$(date +%Y-%m-%d).zip "${FICDOC}"
+		echo ""
+	else
+		echo "Le file/folder ${FICDOC} does not exists."
+		exit 1
+	fi
+	shift $(( args = ${args} + 1 )) 2>/dev/null
+done
