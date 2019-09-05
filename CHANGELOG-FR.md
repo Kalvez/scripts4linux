@@ -1,6 +1,6 @@
 ### ..::CHANGELOG - SEP. 05 2019
 ```
--La version Anglaise des scripts est arrivée.
+-La version Anglaise des scripts est enfin arrivée.
 -L'installateur à changé et est maintenant global. C'est "auto-installer".
 -L'organisation des dossiers à complètement changé.
 -Les distributions basées sur Debian/Ubunu ont maintenant leurs dossiers, en fonction de la distribution sur laquelle on se trouve.
