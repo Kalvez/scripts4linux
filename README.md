@@ -1,24 +1,24 @@
-# Scripts4Linux
+# Scripts4Linux - Français
 
 ### ..::TELECHARGEMENT & INSTALLATION::..
 ```
 git clone https://github.com/Kalvez/scripts4linux.git
-cd scripts4linux/Scripts4Linux\ -\ Français/
-sudo chmod +x install-scripts
-sudo ./install-scripts
+cd scripts4linux/FR-fr/
+sudo chmod +x auto-installer
+sudo ./auto-installer
 ```
 
 ### ..::CE PACK CONTIENT::..
 ```
 -archive (bêta) : Permet d'archiver des données.
--backup : Permet de sauvegarder des données des dossiers 'Documents', 'Images' et 'Téléchargements'.
+-backup : Permet de sauvegarder des données des dossiers '/etc/', 'Documents', 'Images' et 'Téléchargements'.
 -disks : Affiche les disques connectés à l'ordinateur.
 -infos : Affiche la version de la distribution, du noyeau Linux et de plein d'autres choses utiles.
--lat : Affiche la latence entre la machine et le site www.google.fr
+-lat : Affiche la latence entre la machine et le DNS de Google.
 -speed : Teste la vitesse de la connexion internet.
 -unlocker : Déverrouille un lecteur verrouillé avec Bitlocker et donne un accès en lecture seule.
--update : Met à jour les paquets et logiciels installés sur Debian.
--upgrade : Met à jour la distribution de debian.
+-update : Met à jour les paquets et logiciels installés sur le PC.
+-upgrade : Met à jour la distribution de Linux.
 ```
 
 ### ..::FIREFOX::..
@@ -28,3 +28,33 @@ sudo ./install-scripts
 -restore-firefox-esr : Restaure Firefox-ESR et supprime Firefox Quantum.
 -update-firefox : Met à jour Firefox-Quantum.
 ```
+
+# Scripts4Linux - English
+
+### ..::DOWNLOAD & INSTALLATION::..
+```
+git clone https://github.com/Kalvez/scripts4linux.git
+cd scripts4linux/EN-uk/
+sudo chmod +x auto-installer
+sudo ./auto-installer
+```
+
+### ..::THIS PACK CONTAINS::..
+```
+-archive (beta) : Archives data.
+-backup : Backups the data of the following folders: '/etc/', 'Documents', 'Pictures' and 'Downloads'.
+-disks : Displays the disks connected to the computer.
+-infos : Displays the distro version, the linux kernel version and a lot of useful stuff.
+-lat : Displays the latency between you and Google's DNS.
+-speed : Tests the speed of your internet connection.
+-unlocker : Unlocks a drive locked with Bitlocker and gives a R/O access.
+-update : Updates the packages and the softwares installed of the computer.
+-upgrade : Updates the Linux distro.
+```
+
+### ..::FIREFOX::..
+```
+-get-firefox : Permits to install and replace Firefox-ESR with Firefox Quantum.
+-remove-firefox-install-package : Deletes the installation package of Firefox.
+-restore-firefox-esr : Restore Firefox-ESR and deletes Firefox Quantum.
+-update-firefox : Updates Firefox Quantum.
