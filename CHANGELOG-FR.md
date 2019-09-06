@@ -1,3 +1,8 @@
+### ..::CHANGELOG - SEP. 06 2019
+```
+-Manjaro/Mandriva sont maintenant supportées, dans la limite du possible : dislocker n'est pas dans les dépôts officiels donc ne sera pas présent dans le pack tant que je n'aurai pas trouvé comment l'intégrer.
+-Le script 'upgrade' n'est pas nécessaire compte-tenu que la commande de MàJ de pacman effectute un 'update', 'upgrade' et 'dist-upgrade'.
+```
 ### ..::CHANGELOG - SEP. 05 2019
 ```
 -La version Anglaise des scripts est enfin arrivée.
@@ -10,7 +15,7 @@
 ```
 ### ..::CHANGELOG - AOU. 31 2019
 ```
--Le script "infos' passe à sa version 3.0 et devient encore plus complet qu'avant. Les données sont en plus grand nombre et sont organisées de manière plus lisible. 
+-Le script "infos' passe à sa version 3.0 et devient encore plus complet qu'avant. Les données sont en plus grand nombre et sont organisées de manière plus lisible.
 ```
 
 ### ..::CHANGELOG - AOU. 27 2019::..
@@ -52,7 +57,7 @@
 ```
 -Le script d'installation des autres scripts à été mis à jour.
 -Maintenant quand Firefox est installé ou mis à jour à travers les scripts 'get-firefox' et 'update-firefox', le nom du raccourcis dans GNOME passe de "Firefox ESR" à "Firefox Quantum".
--Quand Firefox Quantum est désinstallé à travers 'restore-firefox-esr', le nom de "Firefox Quantum" est changé en "Firefox ESR". 
+-Quand Firefox Quantum est désinstallé à travers 'restore-firefox-esr', le nom de "Firefox Quantum" est changé en "Firefox ESR".
 ```
 ### ..::CHANGELOG - MAR. 9 2018::..
 ```

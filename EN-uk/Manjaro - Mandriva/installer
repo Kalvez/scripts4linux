@@ -1,0 +1,230 @@
+#!/bin/sh
+
+# Vérification des privilèges root de l'utilisateur.
+if [ "$(id -u)" != "0" ]
+	then
+	echo "This script must be executed with root permissions." 1>&2
+	echo ""
+	exit 1
+fi
+
+# Mise à zéro des arguments.
+answer=0
+answer0=0
+answer1=0
+answer2=0
+answer3=0
+answer4=0
+answer5=0
+answer6=0
+answer7=0
+
+echo "Do you wish to install all the scripts at once ('y'), or to individually choose the scripts to install ('n') ?"
+echo "/!\ WARNING : This ('y') will also install the necessary dependancies ('dislocker', 'speedtest-cli' and 'zip') ! /!\ "
+read -p "Choice (y or n) : " answer
+echo ""
+
+if [ $answer = "y" ]
+then
+
+	# Test pour savoir si le paquet est installé, sinon l'installer.
+	if [ -z "$(dpkg -s speedtest-cli 2>/dev/null | grep Status)" ]
+	then
+		echo "The 'speectest-cli' package is not present of the disk and will be installed."
+		echo ""
+		pacman -S --noconfirm speedtest-cli
+		echo ""
+	else
+		echo "The 'speectest-cli' package is already installed."
+		echo ""
+	fi
+
+	if [ -z "$(dpkg -s zip 2>/dev/null | grep Status)" ]
+	then
+		echo "The 'zip' package is not present on the disk and will be installed."
+		echo ""
+		pacman -S --noconfirm zip
+		echo ""
+	else
+		echo "The 'zip' package is already installed."
+		echo ""
+	fi
+
+	cd Scripts/
+
+	chmod +x archive backup disks infos lat speed update
+
+	# Vérification et remplacement de 'version' par 'infos' si besoin est.
+	if [ -f /usr/bin/version ]
+	then
+		rm /usr/bin/version
+		cp archive backup disks infos lat speed update /usr/bin/
+	else
+		cp archive backup disks infos lat speed update /usr/bin/
+	fi
+
+elif [ $answer = "n" ]
+then
+
+	read -p "Do you want to install 'archive' (the 'zip' package will be installed if it's not already on the disk.) ? (y or n) : " answer0
+
+	if [ $answer0 = "y" ]
+	then
+		if [ -z "$(dpkg -s zip 2>/dev/null | grep Status)" ]
+		then
+			echo "The 'zip' package is not on the disk and will be installed."
+			echo ""
+			pacman -S --noconfirm zip
+			echo ""
+		else
+			echo "The 'zip' package is already installed."
+			echo ""
+		fi
+		cd Scripts/
+		chmod +x archive
+		cp archive /usr/bin/
+		echo "Installed."
+		echo ""
+		cd ..
+	else [ $answer0 = "n" ]
+		echo "Not-installed."
+		echo ""
+	fi
+
+	read -p "Do you want to installed 'backup' (the 'zip' package will be installed if it's not already on the disk.) ? (y or n) : " answer1
+
+	if [ $answer1 = "y" ]
+	then
+		if [ -z "$(dpkg -s zip 2>/dev/null | grep Status)" ]
+		then
+			echo "The 'zip' package is not on the disk and will be installed."
+			echo ""
+			pacman -S --noconfirm zip
+			echo ""
+		else
+			echo "The 'zip' package is already installed."
+			echo ""
+		fi
+		cd Scripts/
+		chmod +x backup
+		cp backup /usr/bin/
+		echo "Installed."
+		echo ""
+		cd ..
+	else [ $answer1 = "n" ]
+		echo "Not-installed."
+		echo ""
+	fi
+
+	read -p "Do you want to install 'disks' ? (y or n) : " answer2
+
+	if [ $answer2 = "y" ]
+	then
+		cd Scripts/
+		chmod +x disks
+		cp disks /usr/bin/
+		echo "Installed."
+		echo ""
+		cd ..
+	else [ $answer2 = "n" ]
+		echo "Not-installed."
+		echo ""
+	fi
+
+	if [ -f /usr/bin/version ]
+	then
+		read -p "Do you want to replace 'version' with 'infos' ? (y or n) : " answer3
+
+		if [ $answer3 = "y" ]
+		then
+			rm /usr/bin/version
+			cd Scripts/
+			chmod +x infos
+			cp infos /usr/bin/
+			echo "Installed."
+			echo ""
+			cd ..
+		else [ $answer3 = "n" ]
+			echo "Not-installed."
+			echo ""
+		fi
+	else
+		read -p "Do you want to install 'infos' ? (y or n) : " answer4
+
+		if [ $answer4 = "y" ]
+		then
+			cd Scripts/
+			chmod +x infos
+			cp infos /usr/bin/
+			echo "Installed."
+			echo ""
+			cd ..
+		else [ $answer4 = "n" ]
+			echo "Not-installed."
+			echo ""
+		fi
+	fi
+
+	read -p "Do you want to install 'lat' ? (y or n) : " answer5
+
+	if [ $answer5 = "y" ]
+	then
+		cd Scripts/
+		chmod +x lat
+		cp lat /usr/bin/
+		echo "Installed."
+		echo ""
+		cd ..
+	else [ $answer5 = "n" ]
+		echo "Not-installed."
+		echo ""
+	fi
+
+	read -p "Do you want to install 'speed' (the 'speectest-cli' package will be installed if it's not already on the disk.) ? (y or n) : " answer6
+
+	if [ $answer6 = "y" ]
+	then
+		if [ -z "$(dpkg -s speedtest-cli 2>/dev/null | grep Status)" ]
+		then
+			echo "The 'speectest-cli' package is not on the disk and will be installed."
+			echo ""
+			pacman -S --noconfirm speedtest-cli
+			echo ""
+		else
+			echo "The 'speedtest-cli' package is already installed."
+			echo ""
+		fi
+		cd Scripts/
+		chmod +x speed
+		cp speed /usr/bin/
+		echo "Installed."
+		echo ""
+		cd ..
+	else [ $answer6 = "n" ]
+		echo "Not-installed."
+		echo ""
+	fi
+
+	read -p "Do you want to install 'update' ? (y or n) : " answer7
+
+	if [ $answer8 = "y" ]
+	then
+		cd Scripts/
+		chmod +x update
+		cp update /usr/bin/
+		echo "Installed."
+		echo ""
+		cd ..
+	else [ $answer8 = "n" ]
+		echo "Not-installed."
+		echo ""
+	fi
+
+	echo "The installation is over."
+	echo ""
+	exit 0
+else
+	echo "Please type 'y' or 'n'."
+	echo ""
+	./install-scripts
+fi

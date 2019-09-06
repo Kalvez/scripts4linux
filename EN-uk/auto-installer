@@ -48,7 +48,15 @@ then
 			then
 				if [ -z "$(lsb_release -a 2>/dev/null | grep LinuxMint)" ]
 				then
-					echo "Please choose an appropriate Linux distro."
+					if [ -z "$(lsb_release -a 2>/dev/null | grep ManjaroLinux)"]
+					then
+						echo "Please use an appropriate distro."
+					else
+						cd Manjaro\ -\ Mandriva/
+						chmod +x installer
+						./installer
+						exit 0
+					fi
 				else
 					cd Linux\ Mint/
 					chmod +x installer

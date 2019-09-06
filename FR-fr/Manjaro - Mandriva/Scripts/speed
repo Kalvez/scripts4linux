@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Onglet d'aide.
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+	echo "********************"
+	echo "..::INFORMATIONS::.."
+	echo "********************"
+	echo ""
+	echo "Langue:        FR-fr"
+	echo "Nom du script: Speed"
+	echo "Commande:      speed"
+	echo "Créateur:      Kalvez"
+	echo "Emplacement:   /usr/bin/"
+	echo "Version:       1.0.5.20190904"
+	echo ""
+	echo "***************"
+	echo "..::DÉTAILS::.."
+	echo "***************"
+	echo ""
+	echo "Basé sur le programme en ligne de commande 'speedtest-cli', ce programme permet de tester la connexion internet de votre réseau.\nIl dispose d'une connexion sécurisée (--secure) et utilise les MB et non les Mb (--bytes)."
+	echo ""
+	exit 0
+fi
+
+# Commande appelant speedtest-cli et l'argument remplacant les Bits par des Octets et utilisant une connexion HTTPS.
+speedtest --bytes --secure
+echo ""

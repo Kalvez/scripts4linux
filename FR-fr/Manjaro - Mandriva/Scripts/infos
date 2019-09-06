@@ -1,0 +1,129 @@
+#!/bin/sh
+
+# Onglet d'aide.
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+	echo "********************"
+	echo "..::INFORMATIONS::.."
+	echo "********************"
+	echo ""
+	echo "Langue:        FR-fr"
+	echo "Nom du script: Infos"
+	echo "Commande:      infos"
+	echo "Créateur:      Kalvez"
+	echo "Emplacement:   /usr/bin/"
+	echo "Version:       3.0.2.20190904"
+	echo ""
+	echo "***************"
+	echo "..::DÉTAILS::.."
+	echo "***************"
+	echo ""
+	echo "Vous devez exécuter ce script en tant qu'utilisateur root."
+	echo ""
+	echo "Ce script affiche tout un tas d'informations en relation avec le système d'exploitation, mais aussi les spécifications générales de la machine utilisée et quelques autres données pratiques."
+	echo ""
+	exit 0
+fi
+
+# Vérification des privilèges root de l'utilisateur.
+if [ "$(id -u)" != "0" ]
+then
+	echo "Vous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root." 1>&2
+	echo ""
+	exit 1
+fi
+
+# Fonction conversion de la RAM en MiB
+converterMiB()
+{
+	mib=1048.576
+	memory=0
+	memory=$1
+	memory=$(echo "$memory/$mib" |bc)
+	echo "$memory"
+}
+
+# Mise à zéro des arguments.
+os_type=0
+architecture=0
+device_name=0
+users=0
+uptime=0
+kernel_info=0
+system_manufacturer=0
+system_model=0
+device_type=0
+cpu_model=0
+total_ram=0
+available_ram=0
+total_swap=0
+cached_swap=0
+root_part_available=0
+root_part_total=0
+home_part_available=0
+home_part_total=0
+baseboard=0
+baseboard_version=0
+baseboard_serial=0
+bios_version=0
+bios_date=0
+serial=0
+
+# Déclaration des arguments.
+os_type=$(uname -o)
+architecture=$(uname -i)
+device_name=$(uname -n)
+users=$(users)
+uptime=$(uptime)
+kernel_info=$(uname -srv)
+system_manufacturer=$(dmidecode -s system-manufacturer)
+system_model=$(dmidecode -s system-product-name)
+device_type=$(dmidecode -s chassis-type)
+cpu_model=$(dmidecode -s processor-version | uniq)
+total_ram=$(grep -Eom1 '[0-9]{1,9}' /proc/meminfo | tail -1	)
+total_ram=$(converterMiB $total_ram)
+available_ram=$(grep -Eom3 '[0-9]{1,9}' /proc/meminfo | tail -1)
+available_ram=$(converterMiB $available_ram)
+total_swap=$(grep -Eom15 '[0-9]{1,9}' /proc/meminfo | tail -1)
+total_swap=$(converterMiB $total_swap)
+cached_swap=$(grep -Eom6 '[0-9]{1,9}' /proc/meminfo | tail -1)
+cached_swap=$(converterMiB $cached_swap)
+root_part_available=$(df -Ph / | tail -1 | awk '{print $4}')
+root_part_total=$(df -Ph / | tail -1 | awk '{print $2}')
+home_part_available=$(df -Ph . | tail -1 | awk '{print $4}')
+home_part_total=$(df -Ph . | tail -1 | awk '{print $2}')
+baseboard=$(dmidecode -s baseboard-product-name)
+baseboard_version=$(dmidecode -s baseboard-version)
+baseboard_serial=$(dmidecode -s baseboard-serial-number)
+bios_version=$(dmidecode -s bios-version)
+bios_date=$(dmidecode -s bios-release-date)
+serial=$(dmidecode -s system-serial-number)
+
+# Affichage des infos.
+echo "********************************"
+echo "..::INFORMATIONS LOGICIELLES::.."
+echo "********************************"
+lsb_release -a
+echo "Système:        $os_type"
+echo "Architecture:   $architecture"
+echo "Nom du PC:      $device_name"
+echo "Utilisateur(s): $users"
+echo "Tps. de Marche:$uptime"
+echo "Ver. du Kernel: $kernel_info"
+echo ""
+echo "************************************"
+echo "..::INFORMATIONS DU PÉRIPHÉRIQUE::.."
+echo "************************************"
+echo "Fabriquant:     $system_manufacturer"
+echo "Modèle:         $system_model"
+echo "Type de PC:     $device_type"
+echo "Processeur:     $cpu_model"
+echo "Mémoire Libre:  $available_ram MiB / $total_ram MiB"
+echo "Données Swap:   $cached_swap MiB / $total_swap MiB"
+echo "Partition Root: $root_part_available"B" / $root_part_total"B" Disponibles"
+echo "Partition Home: $home_part_available"B" / $home_part_total"B" Disponibles"
+echo "Baseboard:      $baseboard | $baseboard_version"
+echo "Baseboard N/S:  $baseboard_serial"
+echo "Ver. du BIOS:   $bios_version | $bios_date"
+echo "Num. de Série:  $serial"
+echo ""

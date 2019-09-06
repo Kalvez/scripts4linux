@@ -16,12 +16,12 @@ sudo ./auto-installer
 -infos : Affiche la version de la distribution, du noyeau Linux et de plein d'autres choses utiles.
 -lat : Affiche la latence entre la machine et le DNS de Google.
 -speed : Teste la vitesse de la connexion internet.
--unlocker : Déverrouille un lecteur verrouillé avec Bitlocker et donne un accès en lecture seule.
+-unlocker : Déverrouille un lecteur verrouillé avec Bitlocker et donne un accès en lecture seule. (Indisponible sur Manjaro/Mandriva)
 -update : Met à jour les paquets et logiciels installés sur le PC.
--upgrade : Met à jour la distribution de Linux.
+-upgrade : Met à jour la distribution de Linux. (Indisponible sur Manjaro/Mandriva)
 ```
 
-### ..::FIREFOX::..
+### ..::FIREFOX (DEBIAN & KALI SEULEMENT)::..
 ```
 -get-firefox : Permet d'installer Firefox Quantum à la place de Firefox-ESR.
 -remove-firefox-install-package : Supprime le paquet d'installation de Firefox.
@@ -47,12 +47,12 @@ sudo ./auto-installer
 -infos : Displays the distro version, the linux kernel version and a lot of useful stuff.
 -lat : Displays the latency between you and Google's DNS.
 -speed : Tests the speed of your internet connection.
--unlocker : Unlocks a drive locked with Bitlocker and gives a R/O access.
+-unlocker : Unlocks a drive locked with Bitlocker and gives a R/O access. (Unavailable on Majaro/Mandriva)
 -update : Updates the packages and the softwares installed of the computer.
--upgrade : Updates the Linux distro.
+-upgrade : Updates the Linux distro. (Unavailable on Majaro/Mandriva)
 ```
 
-### ..::FIREFOX::..
+### ..::FIREFOX (DEBIAN & KALI ONLY)::..
 ```
 -get-firefox : Permits to install and replace Firefox-ESR with Firefox Quantum.
 -remove-firefox-install-package : Deletes the installation package of Firefox.
