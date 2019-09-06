@@ -48,7 +48,7 @@ then
 			then
 				if [ -z "$(lsb_release -a 2>/dev/null | grep LinuxMint)" ]
 				then
-					if [ -z "$(lsb_release -a 2>/dev/null | grep ManjaroLinux)"]
+					if [ -z "$(lsb_release -a 2>/dev/null | grep ManjaroLinux)" ]
 					then
 						echo "Veuillez utiliser une distribution appropriée."
 					else
