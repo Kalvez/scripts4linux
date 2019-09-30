@@ -1,4 +1,4 @@
-      #!/bin/sh
+#!/bin/sh
 
 # Onglet d'aide.
 if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]

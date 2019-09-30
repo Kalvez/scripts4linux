@@ -1,3 +1,7 @@
+### ..::CHANGELOG - SEP. 30 2019
+```
+-Corrections mineures.
+```
 ### ..::CHANGELOG - SEP. 06 2019
 ```
 -Manjaro/Mandriva sont maintenant supportées, dans la limite du possible : dislocker n'est pas dans les dépôts officiels donc ne sera pas présent dans le pack tant que je n'aurai pas trouvé comment l'intégrer.
