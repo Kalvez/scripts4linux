@@ -12,7 +12,7 @@ then
 	echo "Command:     infos"
 	echo "Author:      Kalvez"
 	echo "Location:    /usr/bin/"
-	echo "Version:     3.0.2.20190904"
+	echo "Version:     3.0.3.20191004"
 	echo ""
 	echo "**************"
 	echo "..::DETAIL::.."
@@ -53,6 +53,7 @@ kernel_info=0
 system_manufacturer=0
 system_model=0
 device_type=0
+screen_resolution=0
 cpu_model=0
 total_ram=0
 available_ram=0
@@ -79,6 +80,7 @@ kernel_info=$(uname -srv)
 system_manufacturer=$(dmidecode -s system-manufacturer)
 system_model=$(dmidecode -s system-product-name)
 device_type=$(dmidecode -s chassis-type)
+screen_resolution=$(xdpyinfo | grep dimensions | awk '{print $2}')
 cpu_model=$(dmidecode -s processor-version | uniq)
 total_ram=$(grep -Eom1 '[0-9]{1,9}' /proc/meminfo | tail -1	)
 total_ram=$(converterMiB $total_ram)
@@ -117,6 +119,7 @@ echo "**************************"
 echo "Manufacturer:   $system_manufacturer"
 echo "Model:          $system_model"
 echo "Device Type:    $device_type"
+echo "Screen Res.:    $screen_resolution"
 echo "Processor:      $cpu_model"
 echo "Free Memory:    $available_ram MiB / $total_ram MiB"
 echo "Cached Swap:    $cached_swap MiB / $total_swap MiB"

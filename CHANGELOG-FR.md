@@ -1,13 +1,17 @@
-### ..::CHANGELOG - SEP. 30 2019
+### ..::CHANGELOG - OCT. 04 2019::..
+```
+-Ajout de la résolution d'écran sur le script "infos" dans les informations matérielles.
+```
+### ..::CHANGELOG - SEP. 30 2019::..
 ```
 -Corrections mineures.
 ```
-### ..::CHANGELOG - SEP. 06 2019
+### ..::CHANGELOG - SEP. 06 2019::..
 ```
 -Manjaro/Mandriva sont maintenant supportées, dans la limite du possible : dislocker n'est pas dans les dépôts officiels donc ne sera pas présent dans le pack tant que je n'aurai pas trouvé comment l'intégrer.
 -Le script 'upgrade' n'est pas nécessaire compte-tenu que la commande de MàJ de pacman effectute un 'update', 'upgrade' et 'dist-upgrade'.
 ```
-### ..::CHANGELOG - SEP. 05 2019
+### ..::CHANGELOG - SEP. 05 2019::..
 ```
 -La version Anglaise des scripts est enfin arrivée.
 -L'installateur à changé et est maintenant global. C'est "auto-installer".
@@ -17,9 +21,9 @@
 -La version et la date du BIOS dans "infos" ont été fusionnées.
 -Pas mal d'erreurs ont été corrigées.
 ```
-### ..::CHANGELOG - AOU. 31 2019
+### ..::CHANGELOG - AOU. 31 2019::..
 ```
--Le script "infos' passe à sa version 3.0 et devient encore plus complet qu'avant. Les données sont en plus grand nombre et sont organisées de manière plus lisible.
+-Le script "infos" passe à sa version 3.0 et devient encore plus complet qu'avant. Les données sont en plus grand nombre et sont organisées de manière plus lisible.
 ```
 
 ### ..::CHANGELOG - AOU. 27 2019::..
