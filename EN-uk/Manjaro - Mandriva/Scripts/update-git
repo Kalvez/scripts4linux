@@ -18,6 +18,8 @@ then
   echo "..::DETAIL::.."
   echo "**************"
   echo ""
+  echo "You must execute the script with root permissions."
+  echo ""
   echo "This script automatically updates the cloned GitHub repo of 'Scripts4Linux'."
   echo ""
   exit 0

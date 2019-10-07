@@ -18,6 +18,8 @@ then
   echo "..::DÉTAILS::.."
   echo "***************"
   echo ""
+  echo "Vous devez exécuter ce script en tant qu'utilisateur root."
+  echo ""
   echo "Ce script met à jour le dépôt local clôné de 'scripts4linux'."
   echo ""
   exit 0

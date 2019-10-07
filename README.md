@@ -8,6 +8,10 @@ sudo chmod +x auto-installer
 sudo ./auto-installer
 ```
 
+### ..::MISE À JOUR::..
+```
+sudo update-git
+```
 ### ..::CE PACK CONTIENT::..
 ```
 -archive (bêta) : Permet d'archiver des données.
