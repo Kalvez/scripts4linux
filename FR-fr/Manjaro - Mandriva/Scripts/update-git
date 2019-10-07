@@ -23,6 +23,14 @@ then
   exit 0
 fi
 
+# Vérification des privilèges root de l'utilisateur.
+if [ "$(id -u)" != "0" ]
+  then
+    echo "Vous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root." 1>&2
+    echo ""
+    exit 1
+fi
+
 # Mise à zéro des arguments.
 name=0
 answer=0
@@ -32,11 +40,9 @@ INSTALLATION()
 {
 	if [ $answer = "y" ] || [ $answer = "Y" ]
 		then
-      cd ~
-      git clone http://github.com/kalvez/scripts4linux.git
-      cd /scripts4linux/FR-fr
+      cd /home/"$name"/scripts4linux/FR-fr/
       chmod +x auto-installer
-      sudo ./auto-installer
+      ./auto-installer
       echo ""
       exit
 	elif [ $answer = "n" ] || [ $answer = "N" ]
@@ -57,18 +63,24 @@ echo ""
 # Vérification de la présence du dossier 'scripts4linux' sur le disque, et suppression s'il existe, puis clonage du repo GitHub.
 if [ -d /home/"$name"/scripts4linux ]
 then
- rm -rf /home/"$name"/scripts4linux
+  rm -rf /home/"$name"/scripts4linux
+  cd /home/"$name"/
+  git clone http://github.com/kalvez/scripts4linux.git
+  echo ""
 else
   cd /home/"$name"/
 	git clone http://github.com/kalvez/scripts4linux.git
+  echo ""
 fi
 
 # Installation des scripts.
-read -p "Voulez-vous mettre les scripts à jour maintenant ? ('y' or 'n')" answer
+read -p "Voulez-vous mettre les scripts à jour maintenant ? ('y' or 'n') : " answer
+echo ""
 
 if [ $answer = "y" ] || [ $answer = "Y" ] || [ $answer = "n" ] || [ $answer = "N" ]
 then
   INSTALLATION
 else
   echo "Une erreur inattendue est survenue pendant l'exécution du script."
+  echo ""
 fi
