@@ -35,7 +35,7 @@ INSTALLATION()
       cd ~
       git clone http://github.com/kalvez/scripts4linux.git
       cd /scripts4linux
-      chmod +x auto-installer
+      chmod +x auto-installer/EN-uk
       sudo ./auto-installer
       echo ""
       exit
