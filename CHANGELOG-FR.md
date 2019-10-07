@@ -1,3 +1,8 @@
+### ..::CHANGELOG - OCT. 07 2019::..
+```
+-ZorinOS fait maintenant partie des distributions supportées par le script.
+-Ajout du script 'update-git' qui permet de mettre à jour automatiquement le dépôt de 'scripts4linux'.
+```
 ### ..::CHANGELOG - OCT. 04 2019::..
 ```
 -Ajout de la résolution d'écran sur le script "infos" dans les informations matérielles.

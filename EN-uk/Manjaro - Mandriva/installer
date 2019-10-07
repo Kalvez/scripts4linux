@@ -18,6 +18,7 @@ answer4=0
 answer5=0
 answer6=0
 answer7=0
+answer8=0
 
 echo "Do you wish to install all the scripts at once ('y'), or to individually choose the scripts to install ('n') ?"
 echo "/!\ WARNING : This ('y') will also install the necessary dependancies ('dislocker', 'speedtest-cli' and 'zip') ! /!\ "
@@ -52,15 +53,15 @@ then
 
 	cd Scripts/
 
-	chmod +x archive backup disks infos lat speed update
+	chmod +x archive backup disks infos lat speed update update-git
 
 	# Vérification et remplacement de 'version' par 'infos' si besoin est.
 	if [ -f /usr/bin/version ]
 	then
 		rm /usr/bin/version
-		cp archive backup disks infos lat speed update /usr/bin/
+		cp archive backup disks infos lat speed update update-git /usr/bin/
 	else
-		cp archive backup disks infos lat speed update /usr/bin/
+		cp archive backup disks infos lat speed update update-git /usr/bin/
 	fi
 
 elif [ $answer = "n" ]
@@ -207,11 +208,26 @@ then
 
 	read -p "Do you want to install 'update' ? (y or n) : " answer7
 
-	if [ $answer8 = "y" ]
+	if [ $answer7 = "y" ]
 	then
 		cd Scripts/
 		chmod +x update
 		cp update /usr/bin/
+		echo "Installed."
+		echo ""
+		cd ..
+	else [ $answer7 = "n" ]
+		echo "Not-installed."
+		echo ""
+	fi
+
+	read -p "Do you want to install 'update-git' ? (y or n) : " answer8
+
+	if [ $answer8 = "y" ]
+	then
+		cd Scripts/
+		chmod +x update-git
+		cp update-git /usr/bin/
 		echo "Installed."
 		echo ""
 		cd ..

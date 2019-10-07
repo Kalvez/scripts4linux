@@ -127,5 +127,5 @@ if [ $answer = "y" ] || [ $answer = "Y" ] || [ $answer = "n" ] || [ $answer = "N
 then
 	CONFIRMATION
 else
-	echo "Une erreur est survenue pendant l'exécution du script."
+	echo "Une erreur inattendue est survenue pendant l'exécution du script."
 fi

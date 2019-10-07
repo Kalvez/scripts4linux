@@ -12,7 +12,7 @@ then
 	echo "Commande:      auto-installer"
 	echo "Créateur:      Kalvez"
 	echo "Emplacement:   scripts4linux/FR-fr/"
-	echo "Version:       2.5.1.20190904"
+	echo "Version:       2.5.2.20191007"
 	echo ""
 	echo "***************"
 	echo "..::DÉTAILS::.."
@@ -50,7 +50,15 @@ then
 				then
 					if [ -z "$(lsb_release -a 2>/dev/null | grep ManjaroLinux)" ]
 					then
-						echo "Veuillez utiliser une distribution appropriée."
+						if [ -z "$(lsb_release -a 2>/dev/null | grep Zorin)" ]
+						then
+							echo "Please use an appropriate distro."
+						else
+							cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS/
+							chmod +x installer
+							./installer
+							exit 0
+						fi
 					else
 						cd Manjaro\ -\ Mandriva/
 						chmod +x installer
@@ -64,13 +72,13 @@ then
 					exit 0
 				fi
 			else
-				cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS/
+				cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS/
 				chmod +x installer
 				./installer
 				exit 0
 			fi
 		else
-			cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS/
+			cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS/
 			chmod +x installer
 			./installer
 			exit 0

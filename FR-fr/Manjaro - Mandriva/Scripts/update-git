@@ -1,0 +1,74 @@
+#!/bin/sh
+
+# Onglet d'aide.
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+  echo "********************"
+  echo "..::INFORMATIONS::.."
+  echo "********************"
+  echo ""
+  echo "Langue:         FR-fr"
+  echo "Nom du script:  Update GIT"
+  echo "Commande:       update-git"
+  echo "Créateur:       Kalvez"
+  echo "Emplacement:    /usr/bin/"
+  echo "Version:        1.0.0.20191007"
+  echo ""
+  echo "***************"
+  echo "..::DÉTAILS::.."
+  echo "***************"
+  echo ""
+  echo "Ce script met à jour le dépôt local clôné de 'scripts4linux'."
+  echo ""
+  exit 0
+fi
+
+# Mise à zéro des arguments.
+name=0
+answer=0
+
+# Déclaration de la fonction 'INSTALLATION'.
+INSTALLATION()
+{
+	if [ $answer = "y" ] || [ $answer = "Y" ]
+		then
+      cd ~
+      git clone http://github.com/kalvez/scripts4linux.git
+      cd /scripts4linux
+      chmod +x auto-installer
+      sudo ./auto-installer
+      echo ""
+      exit
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+		then
+      echo "Les scripts ne seront pas mis à jour."
+      echo ""
+      exit
+	else
+			echo "Veuillez appuyer sur 'y' ou 'n'."
+			echo ""
+	fi
+}
+
+# Saisie et lecture du nom d'utilisateur.
+read -p "Saisissez votre nom d'utilisateur : " name
+echo ""
+
+# Vérification de la présence du dossier 'scripts4linux' sur le disque, et suppression s'il existe, puis clonage du repo GitHub.
+if [ -d /home/"$name"/scripts4linux ]
+then
+ rm -rf /home/"$name"/scripts4linux
+else
+  cd /home/"$name"/
+	git clone http://github.com/kalvez/scripts4linux.git
+fi
+
+# Installation des scripts.
+read -p "Voulez-vous mettre les scripts à jour maintenant ? ('y' or 'n')" answer
+
+if [ $answer = "y" ] || [ $answer = "Y" ] || [ $answer = "n" ] || [ $answer = "N" ]
+then
+  INSTALLATION
+else
+  echo "Une erreur inattendue est survenue pendant l'exécution du script."
+fi

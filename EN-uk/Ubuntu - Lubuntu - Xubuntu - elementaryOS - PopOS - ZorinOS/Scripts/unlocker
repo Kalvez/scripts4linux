@@ -38,6 +38,7 @@ CONFIRMATION()
             echo ""
             umount /media/"$name"/mount && umount /media/"$name"/bitlocker
             echo "The folder and the drive has been unmounted."
+						echo ""
             exit
 	elif [ $answer = "n" ] || [ $answer = "N" ]
 		then
@@ -127,5 +128,5 @@ if [ $answer = "y" ] || [ $answer = "Y" ] || [ $answer = "n" ] || [ $answer = "N
 then
 	CONFIRMATION
 else
-	echo "An unsuspected error occured."
+	echo "An unsuspected error has occured."
 fi
