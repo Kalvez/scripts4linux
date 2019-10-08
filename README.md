@@ -12,6 +12,7 @@ sudo ./auto-installer
 ```
 sudo update-git
 ```
+
 ### ..::CE PACK CONTIENT::..
 ```
 -archive (bêta) : Permet d'archiver des données.
@@ -42,6 +43,11 @@ git clone https://github.com/Kalvez/scripts4linux.git
 cd scripts4linux/EN-uk/
 sudo chmod +x auto-installer
 sudo ./auto-installer
+```
+
+### ..::UPDATE::..
+```
+sudo update-git
 ```
 
 ### ..::THIS PACK CONTAINS::..
