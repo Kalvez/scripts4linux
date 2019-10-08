@@ -12,7 +12,7 @@ then
 	echo "Commande:      archive [dossier/fichier] [dossier/fichier] [dossier/fichier] ..."
 	echo "Créateur:      Kalvez"
 	echo "Emplacement:   /usr/bin/"
-	echo "Version:       0.3.6.20190904-beta"
+	echo "Version:       0.3.7.20191008-beta"
 	echo ""
 	echo "***************"
 	echo "..::DÉTAILS::.."
