@@ -37,7 +37,7 @@ do
 	FICDOC=$1
 	echo "Fichiers ou dossiers en cours de traitement : ${FICDOC}"
 	echo ""
-	if [ -f "${FICDOC}" ] || [ -d "${FICDOC}" ]
+	if [ -f "${FICDOC}" ] || [ -d "${FICDOC}" ] | pv -rbpteW >/dev/null
 	then
 		zip -r archive_"${name}"_$(date +%Y-%m-%d).zip "${FICDOC}"
 		echo ""

@@ -39,7 +39,7 @@ do
 	echo ""
 	if [ -f "${FICDOC}" ] || [ -d "${FICDOC}" ]
 	then
-		zip -r archive_"${name}"_$(date +%Y-%m-%d).zip "${FICDOC}"
+		zip -r archive_"${name}"_$(date +%Y-%m-%d).zip "${FICDOC}" | pv -rbpteW >/dev/null
 		echo ""
 	else
 		echo "Le fichier/dossier ${FICDOC} n'existe pas."

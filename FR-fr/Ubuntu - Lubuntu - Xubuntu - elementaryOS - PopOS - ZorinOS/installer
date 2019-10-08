@@ -23,7 +23,7 @@ answer9=0
 answer10=0
 
 echo "Souhaitez-vous installer tous les scripts d'un coup ('y'), ou choisir individuellement les scripts à installer ('n') ?"
-echo "/!\ ATTENTION : Ceci ('y') entraînera l'installation automatique des paquets nécessaires ('dislocker', 'speedtest-cli' et 'zip') ! /!\ "
+echo "/!\ ATTENTION : Ceci ('y') entraînera l'installation automatique des paquets nécessaires ('pv', 'dislocker', 'speedtest-cli' et 'zip') ! /!\ "
 read -p "Choix (y ou n) : " answer
 echo ""
 
@@ -64,6 +64,17 @@ then
 		echo ""
 	fi
 
+	if [ -z "$(dpkg -s pv 2>/dev/null | grep Status)" ]
+	then
+		echo "Le paquet 'pv' n'est pas présent sur le disque et va être installé."
+		echo ""
+		apt install -y pv
+		echo ""
+	else
+		echo "Le paquet 'pv' est déjà installé."
+		echo ""
+	fi
+
 	cd Scripts/
 
 	chmod +x archive backup disks infos lat speed unlocker update update-git upgrade
@@ -80,7 +91,7 @@ then
 elif [ $answer = "n" ]
 then
 
-	read -p "Voulez-vous installer 'archive' (le paquet 'zip' va être installé s'il ne l'est pas déjà) ? (y ou n) : " answer0
+	read -p "Voulez-vous installer 'archive' (les paquets 'zip' & 'pv' vont être installés s'ils ne le sont pas déjà) ? (y ou n) : " answer0
 
 	if [ $answer0 = "y" ]
 	then
@@ -94,6 +105,18 @@ then
 			echo "Le paquet 'zip' est déjà installé."
 			echo ""
 		fi
+
+		if [ -z "$(dpkg -s pv 2>/dev/null | grep Status)" ]
+		then
+			echo "Le paquet 'pv' n'est pas présent sur le disque et va être installé."
+			echo ""
+			apt install -y pv
+			echo ""
+		else
+			echo "Le paquet 'pv' est déjà installé."
+			echo ""
+		fi
+
 		cd Scripts/
 		chmod +x archive
 		cp archive /usr/bin/
@@ -105,7 +128,7 @@ then
 		echo ""
 	fi
 
-	read -p "Voulez-vous installer 'backup' (le paquet 'zip' va être installé s'il ne l'est pas déjà) ? (y ou n) : " answer1
+	read -p "Voulez-vous installer 'backup' (les paquets 'zip' & 'pv' vont être installés s'ils ne le sont pas déjà) ? (y ou n) : " answer1
 
 	if [ $answer1 = "y" ]
 	then
@@ -119,6 +142,18 @@ then
 			echo "Le paquet 'zip' est déjà installé."
 			echo ""
 		fi
+
+		if [ -z "$(dpkg -s pv 2>/dev/null | grep Status)" ]
+		then
+			echo "Le paquet 'pv' n'est pas présent sur le disque et va être installé."
+			echo ""
+			apt install -y pv
+			echo ""
+		else
+			echo "Le paquet 'pv' est déjà installé."
+			echo ""
+		fi
+
 		cd Scripts/
 		chmod +x backup
 		cp backup /usr/bin/

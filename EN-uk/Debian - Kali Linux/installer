@@ -25,7 +25,7 @@ answer10=0
 answer11=0
 
 echo "Do you wish to install all the scripts at once ('y'), or to individually choose the scripts to install ('n') ?"
-echo "/!\ WARNING : This ('y') will also install the necessary dependancies ('dislocker', 'speedtest-cli' and 'zip') ! /!\ "
+echo "/!\ WARNING : This ('y') will also install the necessary dependancies ('pv', 'dislocker', 'speedtest-cli' and 'zip') ! /!\ "
 read -p "Choice (y or n) : " answer
 echo ""
 
@@ -66,6 +66,17 @@ then
 		echo ""
 	else
 		echo "The 'dislocker' package is already installed."
+		echo ""
+	fi
+
+	if [ -z "$(dpkg -s pv 2>/dev/null | grep Status)" ]
+	then
+		echo "The 'pv' package in not present on the disk and will be installed."
+		echo ""
+		apt install -y pv
+		echo ""
+	else
+		echo "The 'pv' package is already installed."
 		echo ""
 	fi
 
@@ -135,7 +146,7 @@ then
 elif [ $answer = "n" ]
 then
 
-	read -p "Do you want to install 'archive' (the 'zip' package will be installed if it's not already on the disk.) ? (y or n) : " answer0
+	read -p "Do you want to install 'archive' (the 'zip' & 'pv' packages will be installed if they're not already on the disk.) ? (y or n) : " answer0
 
 	if [ $answer0 = "y" ]
 	then
@@ -149,6 +160,18 @@ then
 			echo "The 'zip' package is already installed."
 			echo ""
 		fi
+
+		if [ -z "$(dpkg -s pv 2>/dev/null | grep Status)" ]
+		then
+			echo "The 'pv' package in not present on the disk and will be installed."
+			echo ""
+			apt install -y pv
+			echo ""
+		else
+			echo "The 'pv' package is already installed."
+			echo ""
+		fi
+
 		cd Scripts/
 		chmod +x archive
 		cp archive /usr/bin/
@@ -160,7 +183,7 @@ then
 		echo ""
 	fi
 
-	read -p "Do you want to installed 'backup' (the 'zip' package will be installed if it's not already on the disk.) ? (y or n) : " answer1
+	read -p "Do you want to install 'backup' (the 'zip' & 'pv' packages will be installed if they're not already on the disk.) ? (y or n) : " answer1
 
 	if [ $answer1 = "y" ]
 	then
@@ -174,6 +197,18 @@ then
 			echo "The 'zip' package is already installed."
 			echo ""
 		fi
+
+		if [ -z "$(dpkg -s pv 2>/dev/null | grep Status)" ]
+		then
+			echo "The 'pv' package in not present on the disk and will be installed."
+			echo ""
+			apt install -y pv
+			echo ""
+		else
+			echo "The 'pv' package is already installed."
+			echo ""
+		fi
+
 		cd Scripts/
 		chmod +x backup
 		cp backup /usr/bin/

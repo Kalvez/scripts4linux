@@ -55,7 +55,7 @@ else
 fi
 
 # Création de l'archive
-zip -r backup_$(date +%Y-%m-%d).zip /etc/ /home/"$name"/Documents/ /home/"$name"/Images/ /home/"$name"/Téléchargements/
+zip -r backup_$(date +%Y-%m-%d).zip /etc/ /home/"$name"/Documents/ /home/"$name"/Images/ /home/"$name"/Téléchargements/ | pv -rbpteW >/dev/null
 mv backup_$(date +%Y-%m-%d).zip /home/"$name"/Backups/
 
 echo ""

@@ -1,3 +1,7 @@
+### ..::CHANGELOG - OCT. 08 2019::..
+```
+-Grâce au paquet 'pv', les scripts 'archive' et 'backup' disposent maintenant d'une barre de progression plus "user-friendly" qu'une cascade de texte.
+```
 ### ..::CHANGELOG - OCT. 07 2019::..
 ```
 -ZorinOS fait maintenant partie des distributions supportées par le script.
