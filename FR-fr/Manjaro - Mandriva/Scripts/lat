@@ -23,9 +23,9 @@ then
 	exit 0
 fi
 
-echo "*************"
-echo "*    LAT    *"
-echo "*************"
+echo "\e[32m\e[1m*************\e[0m"
+echo "\e[32m\e[1m*    LAT    *\e[0m"
+echo "\e[32m\e[1m*************\e[0m"
 echo ""
 
 # Commande de ping.
