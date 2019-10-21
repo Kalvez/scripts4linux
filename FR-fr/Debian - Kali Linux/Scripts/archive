@@ -3,20 +3,20 @@
 # Onglet d'aide.
 if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
 then
-	echo "********************"
-	echo "..::INFORMATIONS::.."
-	echo "********************"
+	echo "\e[32m\e[1m**********************\e[0m"
+	echo "\e[32m\e[1m*    INFORMATIONS    *\e[0m"
+	echo "\e[32m\e[1m**********************\e[0m"
 	echo ""
-	echo "Langue:        FR-fr"
-	echo "Nom du script: Archive"
-	echo "Commande:      archive [dossier/fichier] [dossier/fichier] [dossier/fichier] ..."
-	echo "Créateur:      Kalvez"
-	echo "Emplacement:   /usr/bin/"
-	echo "Version:       0.3.7.20191008-beta"
+	echo "\e[32m\e[1mLangue:\e[0m        FR-fr"
+	echo "\e[32m\e[1mNom du script:\e[0m Archive"
+	echo "\e[32m\e[1mCommande:\e[0m      archive [dossier/fichier] [dossier/fichier] [dossier/fichier] ..."
+	echo "\e[32m\e[1mCréateur:\e[0m      Kalvez"
+	echo "\e[32m\e[1mEmplacement:\e[0m   /usr/bin/"
+	echo "\e[32m\e[1mVersion:\e[0m       0.4.0.20191021-beta"
 	echo ""
-	echo "***************"
-	echo "..::DÉTAILS::.."
-	echo "***************"
+	echo "\e[32m\e[1m*****************\e[0m"
+	echo "\e[32m\e[1m*    DÉTAILS    *\e[0m"
+	echo "\e[32m\e[1m*****************\e[0m"
 	echo ""
 	echo "Ce script, qui ne demande aucun privilèges particulier, permet d'archiver dans des fichiers '.zip' ce que vous souhaitez, que ça soit des dossiers ou des fichiers.\nIl vous demandera alors un nom d'archive, alors il enregistrera l'archive au format suivant : 'archive_nom_année-mois-jour.zip'."
 	echo ""
@@ -26,6 +26,12 @@ fi
 # Déclaration des arguments.
 args=0
 files=$#
+
+# Bandeau
+echo "\e[32m\e[1m*****************\e[0m"
+echo "\e[32m\e[1m*    ARCHIVE    *\e[0m"
+echo "\e[32m\e[1m*****************\e[0m"
+echo ""
 
 # Lecture du nom donné à l'archive.
 read -p "Nom de l'archive: " name

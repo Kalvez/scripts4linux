@@ -21,7 +21,7 @@ answer7=0
 answer8=0
 
 echo "Do you wish to install all the scripts at once ('y'), or to individually choose the scripts to install ('n') ?"
-echo "/!\ WARNING : This ('y') will also install the necessary dependancies ('pv', 'speedtest-cli' and 'zip') ! /!\ "
+echo "\e[31m\e[1m/!\ WARNING : This ('y') will also install the necessary dependancies ('pv', 'speedtest-cli' and 'zip') ! /!\ \e[0m"
 read -p "Choice (y or n) : " answer
 echo ""
 

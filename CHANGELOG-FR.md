@@ -1,3 +1,9 @@
+### ..::CHANGELOG - OCT. 22 2019::..
+```
+-Tous les scripts se sont vus dotés d'une refonte graphique. Surtout 'infos'.
+-Le script 'unlocker' supporte maintenant l'accès aux disques chiffrés en lecture/écriture.
+-Toujours plus de couleur.
+```
 ### ..::CHANGELOG - OCT. 08 2019::..
 ```
 -Grâce au paquet 'pv', les scripts 'archive' et 'backup' disposent maintenant d'une barre de progression plus "user-friendly" qu'une cascade de texte.

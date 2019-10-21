@@ -23,7 +23,7 @@ answer9=0
 answer10=0
 
 echo "Do you wish to install all the scripts at once ('y'), or to individually choose the scripts to install ('n') ?"
-echo "/!\ WARNING : This ('y') will also install the necessary dependancies ('pv', 'dislocker', 'speedtest-cli' and 'zip') ! /!\ "
+echo "\e[31m\e[1m/!\ WARNING : This ('y') will also install the necessary dependancies ('pv', 'dislocker', 'speedtest-cli' and 'zip') ! /!\ \e[0m"
 read -p "Choice (y or n) : " answer
 echo ""
 
@@ -116,7 +116,7 @@ then
 			echo "The 'pv' package is already installed."
 			echo ""
 		fi
-		
+
 		cd Scripts/
 		chmod +x archive
 		cp archive /usr/bin/
@@ -153,7 +153,7 @@ then
 			echo "The 'pv' package is already installed."
 			echo ""
 		fi
-		
+
 		cd Scripts/
 		chmod +x backup
 		cp backup /usr/bin/

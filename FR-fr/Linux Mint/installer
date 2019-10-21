@@ -23,7 +23,7 @@ answer9=0
 answer10=0
 
 echo "Souhaitez-vous installer tous les scripts d'un coup ('y'), ou choisir individuellement les scripts à installer ('n') ?"
-echo "/!\ ATTENTION : Ceci ('y') entraînera l'installation automatique des paquets nécessaires ('dislocker', 'speedtest-cli' et 'zip') ! /!\ "
+echo "\e[31m\e[1m/!\ ATTENTION : Ceci ('y') entraînera l'installation automatique des paquets nécessaires ('pv', 'dislocker', 'speedtest-cli' et 'zip') ! /!\  \e[0m"
 read -p "Choix (y ou n) : " answer
 echo ""
 
