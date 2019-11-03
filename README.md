@@ -1,5 +1,13 @@
 # Scripts4Linux - Français
 
+### ..::LISTE DES DISTRIBUTIONS SUPPORTÉES::..
+```
+Debian         |     Manjaro     |     Xubuntu
+Raspbian       |     Mandriva    |     elementaryOS
+Kali Linux     |     Ubuntu      |     Pop!_OS
+Linux Mint     |     Lubuntu     |     ZorinOS
+```
+
 ### ..::TELECHARGEMENT & INSTALLATION::..
 ```
 git clone https://github.com/Kalvez/scripts4linux.git
@@ -27,15 +35,15 @@ sudo update-git
 -upgrade : Met à jour la distribution de Linux. (Indisponible sur Manjaro/Mandriva)
 ```
 
-### ..::FIREFOX (DEBIAN & KALI SEULEMENT)::..
-```
--get-firefox : Permet d'installer Firefox Quantum à la place de Firefox-ESR.
--remove-firefox-install-package : Supprime le paquet d'installation de Firefox.
--restore-firefox-esr : Restaure Firefox-ESR et supprime Firefox Quantum.
--update-firefox : Met à jour Firefox-Quantum.
-```
-
 # Scripts4Linux - English
+
+### ..::LIST OF SUPPORTED DISTROS::..
+```
+Debian         |     Manjaro     |     Xubuntu
+Raspbian       |     Mandriva    |     elementaryOS
+Kali Linux     |     Ubuntu      |     Pop!_OS
+Linux Mint     |     Lubuntu     |     ZorinOS
+```
 
 ### ..::DOWNLOAD & INSTALLATION::..
 ```
@@ -63,10 +71,3 @@ sudo update-git
 -update-git : Updates the 'scripts4linux' repository and the scripts.
 -upgrade : Updates the Linux distro. (Unavailable on Majaro/Mandriva)
 ```
-
-### ..::FIREFOX (DEBIAN & KALI ONLY)::..
-```
--get-firefox : Permits to install and replace Firefox-ESR with Firefox Quantum.
--remove-firefox-install-package : Deletes the installation package of Firefox.
--restore-firefox-esr : Restore Firefox-ESR and deletes Firefox Quantum.
--update-firefox : Updates Firefox Quantum.

@@ -12,7 +12,7 @@ then
 	echo "\e[32m\e[1mCommande:\e[0m      auto-installer"
 	echo "\e[32m\e[1mCréateur:\e[0m      Kalvez"
 	echo "\e[32m\e[1mEmplacement:\e[0m   scripts4linux/FR-fr/"
-	echo "\e[32m\e[1mVersion:\e[0m       2.5.3.20191022"
+	echo "\e[32m\e[1mVersion:\e[0m       2.5.4.20191103"
 	echo ""
 	echo "\e[32m\e[1m*****************\e[0m"
 	echo "\e[32m\e[1m*    DÉTAILS    *\e[0m"
@@ -41,33 +41,41 @@ echo ""
 # Vérification de la version de Linux.
 if [ -z "$(lsb_release -a 2>/dev/null | grep Debian)" ]
 then
-	if [ -z "$(lsb_release -a 2>/dev/null | grep Kali)" ]
+	if [ -z "$(lsb_release -a 2>/dev/null | grep Raspbian)" ]
 	then
-		if [ -z "$(lsb_release -a 2>/dev/null | grep Ubuntu)" ]
+		if [ -z "$(lsb_release -a 2>/dev/null | grep Kali)" ]
 		then
-			if [ -z "$(lsb_release -a 2>/dev/null | grep elementary)" ]
+			if [ -z "$(lsb_release -a 2>/dev/null | grep Ubuntu)" ]
 			then
-				if [ -z "$(lsb_release -a 2>/dev/null | grep LinuxMint)" ]
+				if [ -z "$(lsb_release -a 2>/dev/null | grep elementary)" ]
 				then
-					if [ -z "$(lsb_release -a 2>/dev/null | grep ManjaroLinux)" ]
+					if [ -z "$(lsb_release -a 2>/dev/null | grep LinuxMint)" ]
 					then
-						if [ -z "$(lsb_release -a 2>/dev/null | grep Zorin)" ]
+						if [ -z "$(lsb_release -a 2>/dev/null | grep ManjaroLinux)" ]
 						then
-							echo "Please use an appropriate distro."
+							if [ -z "$(lsb_release -a 2>/dev/null | grep Zorin)" ]
+							then
+								echo "Please use an appropriate distro."
+							else
+								cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS/
+								chmod +x installer
+								./installer
+								exit 0
+							fi
 						else
-							cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS/
+							cd Manjaro\ -\ Mandriva/
 							chmod +x installer
 							./installer
 							exit 0
 						fi
 					else
-						cd Manjaro\ -\ Mandriva/
+						cd Linux\ Mint/
 						chmod +x installer
 						./installer
 						exit 0
 					fi
 				else
-					cd Linux\ Mint/
+					cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS/
 					chmod +x installer
 					./installer
 					exit 0
@@ -79,19 +87,19 @@ then
 				exit 0
 			fi
 		else
-			cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS/
+			cd Debian\ -\ Raspbian\ -\ Kali\ Linux/
 			chmod +x installer
 			./installer
 			exit 0
 		fi
 	else
-		cd Debian\ -\ Kali\ Linux/
+		cd Debian\ -\ Raspbian\ -\ Kali\ Linux/
 		chmod +x installer
 		./installer
 		exit 0
 	fi
 else
-  cd Debian\ -\ Kali\ Linux/
+  cd Debian\ -\ Raspbian\ -\ Kali\ Linux/
   chmod +x installer
   ./installer
   exit 0

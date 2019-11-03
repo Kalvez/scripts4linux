@@ -1,3 +1,8 @@
+### ..::CHANGELOG - NOV. 03 2019::..
+```
+-Raspbian est fait désormais partie des distributions officiellement supportées.
+-Les scripts et les paquets nécessaires à l'installation de Mozilla Firefox Quantum ont été supprimés car ils n'étaient plus mis à jour depuis un petit moment. Il est désormais impossible d'installer Quantum via ce pack de scripts.
+```
 ### ..::CHANGELOG - OCT. 22 2019::..
 ```
 -Tous les scripts se sont vus dotés d'une refonte graphique. Surtout 'infos'.

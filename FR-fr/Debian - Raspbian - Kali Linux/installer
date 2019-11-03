@@ -22,7 +22,6 @@ answer7=0
 answer8=0
 answer9=0
 answer10=0
-answer11=0
 
 echo "Souhaitez-vous installer tous les scripts d'un coup ('y'), ou choisir individuellement les scripts à installer ('n') ?"
 echo "\e[31m\e[1m/!\ ATTENTION : Ceci ('y') entraînera l'installation automatique des paquets nécessaires ('pv', 'dislocker', 'speedtest-cli' et 'zip') ! /!\  \e[0m"
@@ -92,52 +91,6 @@ then
 	else
 		cp archive backup disks infos lat speed unlocker update update-git upgrade /usr/bin/
 	fi
-
-	cd Install\ Firefox/
-
-	if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
-	then
-		echo "Le dossier d'icônes de firefox existe déjà."
-		echo ""
-	else
-		echo "Le dossier d'icônes de firefox n'existe pas et va être créé."
-		echo ""
-		mkdir /home/"$name"/Images/.firefox_quantum_icons/
-
-		if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
-		then
-			echo "Le dossier à bien été créé."
-			echo ""
-		fi
-	fi
-
-	chmod +x get-firefox remove-firefox-install-package restore-firefox-esr update-firefox
-
-	cp Icon\ Pack/firefox-esr-16.png /home/"$name"/Images/.firefox_quantum_icons/
-	cp Icon\ Pack/firefox-esr-symbolic.svg /home/"$name"/Images/.firefox_quantum_icons/
-	cp Icon\ Pack/firefox-esr-32.png /home/"$name"/Images/.firefox_quantum_icons/
-	cp Icon\ Pack/firefox-esr-48.png /home/"$name"/Images/.firefox_quantum_icons/
-	cp Icon\ Pack/firefox-esr-64.png /home/"$name"/Images/.firefox_quantum_icons/
-	cp Icon\ Pack/firefox-esr-128.png /home/"$name"/Images/.firefox_quantum_icons/
-	cp get-firefox remove-firefox-install-package restore-firefox-esr update-firefox /usr/bin/
-
-	cd .. && cd ..
-
-	if [ -d /home/"$name"/Documents/.firefox_name_files ]
-	then
-		echo "OK"
-		echo ""
-	else
-		mkdir /home/"$name"/Documents/.firefox_name_files/
-
-		if [ -d /home/"$name"/Documents/.firefox_name_files ]
-		then
-			echo "OK"
-			echo ""
-		fi
-	fi
-
-	cp Scripts/Install\ Firefox/Name\ File/firefox-esr.desktop /home/"$name"/Documents/.firefox_name_files/
 
 	echo "L'installation des scripts est terminée."
 	echo ""
@@ -378,69 +331,6 @@ then
 		echo "Non-installé."
 		echo ""
 	fi
-
-	read -p "Voulez-vous installer 'get-firefox' et toutes ses dépendances (Vous devez être sous Debian) ? (y ou n) : " answer11
-	echo ""
-
-	if [ $answer11 = "y" ]
-	then
-		# Demande du nom d'utilisateur.
-		read -p "Pour le bon déroulement de l'installation des scripts, veuillez taper votre nom d'utilisateur : " name
-		echo ""
-
-		cd Scripts/Install\ Firefox/
-
-		if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
-		then
-			echo "Le dossier d'icônes de firefox existe déjà."
-			echo ""
-		else
-			echo "Le dossier d'icônes de firefox n'existe pas et va être créé."
-			echo ""
-			mkdir /home/"$name"/Images/.firefox_quantum_icons/
-
-			if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
-			then
-				echo "Le dossier à bien été créé."
-				echo ""
-			fi
-
-			chmod +x get-firefox remove-firefox-install-package restore-firefox-esr update-firefox
-
-			cp Icon\ Pack/firefox-esr-16.png /home/"$name"/Images/.firefox_quantum_icons/
-			cp Icon\ Pack/firefox-esr-symbolic.svg /home/"$name"/Images/.firefox_quantum_icons/
-			cp Icon\ Pack/firefox-esr-32.png /home/"$name"/Images/.firefox_quantum_icons/
-			cp Icon\ Pack/firefox-esr-48.png /home/"$name"/Images/.firefox_quantum_icons/
-			cp Icon\ Pack/firefox-esr-64.png /home/"$name"/Images/.firefox_quantum_icons/
-			cp Icon\ Pack/firefox-esr-128.png /home/"$name"/Images/.firefox_quantum_icons/
-			cp get-firefox remove-firefox-install-package restore-firefox-esr update-firefox /usr/bin/
-
-			cd .. && cd ..
-
-			if [ -d /home/"$name"/Documents/.firefox_name_files ]
-			then
-				echo "OK"
-				echo ""
-			else
-		  	mkdir /home/"$name"/Documents/.firefox_name_files/
-
-		   	if [ -d /home/"$name"/Documents/.firefox_name_files ]
-		  	then
-					echo "OK"
-					echo ""
-				fi
-			fi
-
-			cp Scripts/Install\ Firefox/Name\ File/firefox-esr.desktop /home/"$name"/Documents/.firefox_name_files/
-
-			echo "Installé."
-			echo ""
-		fi
-	else [ $answer11 = "n" ]
-		echo "Non-installé."
-		echo ""
-	fi
-
 	echo "L'installation du/des scipt(s) est terminée."
 	echo ""
 	exit 0

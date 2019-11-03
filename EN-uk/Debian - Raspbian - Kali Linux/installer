@@ -22,7 +22,6 @@ answer7=0
 answer8=0
 answer9=0
 answer10=0
-answer11=0
 
 echo "Do you wish to install all the scripts at once ('y'), or to individually choose the scripts to install ('n') ?"
 echo "\e[31m\e[1m/!\ WARNING : This ('y') will also install the necessary dependancies ('pv', 'dislocker', 'speedtest-cli' and 'zip') ! /!\ \e[0m"
@@ -93,55 +92,9 @@ then
 		cp archive backup disks infos lat speed unlocker update update-git upgrade /usr/bin/
 	fi
 
-	cd Install\ Firefox/
-
-	if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
-	then
-		echo "The 'Firefox' icon folder already exists."
+		echo "The installation is over."
 		echo ""
-	else
-		echo "The 'Firefox' icon folder does not exists and will be created."
-		echo ""
-		mkdir /home/"$name"/Images/.firefox_quantum_icons/
-
-		if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
-		then
-			echo "The folder has been created."
-			echo ""
-		fi
-	fi
-
-	chmod +x get-firefox remove-firefox-install-package restore-firefox-esr update-firefox
-
-	cp Icon\ Pack/firefox-esr-16.png /home/"$name"/Images/.firefox_quantum_icons/
-	cp Icon\ Pack/firefox-esr-symbolic.svg /home/"$name"/Images/.firefox_quantum_icons/
-	cp Icon\ Pack/firefox-esr-32.png /home/"$name"/Images/.firefox_quantum_icons/
-	cp Icon\ Pack/firefox-esr-48.png /home/"$name"/Images/.firefox_quantum_icons/
-	cp Icon\ Pack/firefox-esr-64.png /home/"$name"/Images/.firefox_quantum_icons/
-	cp Icon\ Pack/firefox-esr-128.png /home/"$name"/Images/.firefox_quantum_icons/
-	cp get-firefox remove-firefox-install-package restore-firefox-esr update-firefox /usr/bin/
-
-	cd .. && cd ..
-
-	if [ -d /home/"$name"/Documents/.firefox_name_files ]
-	then
-		echo "OK"
-		echo ""
-	else
-		mkdir /home/"$name"/Documents/.firefox_name_files/
-
-		if [ -d /home/"$name"/Documents/.firefox_name_files ]
-		then
-			echo "OK"
-			echo ""
-		fi
-	fi
-
-	cp Scripts/Install\ Firefox/Name\ File/firefox-esr.desktop /home/"$name"/Documents/.firefox_name_files/
-
-	echo "The installation is over."
-	echo ""
-	exit 0
+		exit 0
 
 elif [ $answer = "n" ]
 then
@@ -378,69 +331,6 @@ then
 		echo "Not-installed."
 		echo ""
 	fi
-
-	read -p "Do you want to install 'get-firefox' and all of its dependancies ? (y or n) : " answer11
-	echo ""
-
-	if [ $answer11 = "y" ]
-	then
-		# Demande du nom d'utilisateur.
-		read -p "For the sake of the installation, please type your username : " name
-		echo ""
-
-		cd Scripts/Install\ Firefox/
-
-		if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
-		then
-			echo "The 'Firefox' icon folder already exists."
-			echo ""
-		else
-			echo "The 'Firefox' icon folder does not exists and will be created."
-			echo ""
-			mkdir /home/"$name"/Images/.firefox_quantum_icons/
-
-			if [ -d /home/"$name"/Images/.firefox_quantum_icons ]
-			then
-				echo "The folder has been created."
-				echo ""
-			fi
-
-			chmod +x get-firefox remove-firefox-install-package restore-firefox-esr update-firefox
-
-			cp Icon\ Pack/firefox-esr-16.png /home/"$name"/Images/.firefox_quantum_icons/
-			cp Icon\ Pack/firefox-esr-symbolic.svg /home/"$name"/Images/.firefox_quantum_icons/
-			cp Icon\ Pack/firefox-esr-32.png /home/"$name"/Images/.firefox_quantum_icons/
-			cp Icon\ Pack/firefox-esr-48.png /home/"$name"/Images/.firefox_quantum_icons/
-			cp Icon\ Pack/firefox-esr-64.png /home/"$name"/Images/.firefox_quantum_icons/
-			cp Icon\ Pack/firefox-esr-128.png /home/"$name"/Images/.firefox_quantum_icons/
-			cp get-firefox remove-firefox-install-package restore-firefox-esr update-firefox /usr/bin/
-
-			cd .. && cd ..
-
-			if [ -d /home/"$name"/Documents/.firefox_name_files ]
-			then
-				echo "OK"
-				echo ""
-			else
-		  	mkdir /home/"$name"/Documents/.firefox_name_files/
-
-		   	if [ -d /home/"$name"/Documents/.firefox_name_files ]
-		  	then
-					echo "OK"
-					echo ""
-				fi
-			fi
-
-			cp Scripts/Install\ Firefox/Name\ File/firefox-esr.desktop /home/"$name"/Documents/.firefox_name_files/
-
-			echo "Installed."
-			echo ""
-		fi
-	else [ $answer11 = "n" ]
-		echo "Non-installed."
-		echo ""
-	fi
-
 	echo "The installation is over."
 	echo ""
 	exit 0
