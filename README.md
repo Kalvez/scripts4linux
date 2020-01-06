@@ -2,10 +2,10 @@
 
 ### ..::LISTE DES DISTRIBUTIONS SUPPORTÉES::..
 ```
-Debian         |     Manjaro     |     Xubuntu
-Raspbian       |     Mandriva    |     elementaryOS
-Kali Linux     |     Ubuntu      |     Pop!_OS
-Linux Mint     |     Lubuntu     |     ZorinOS
+Debian         |     Manjaro     |     Xubuntu         |    Deepin OS
+Raspbian       |     Mandriva    |     elementaryOS    |
+Kali Linux     |     Ubuntu      |     Pop!_OS         |
+Linux Mint     |     Lubuntu     |     ZorinOS         |
 ```
 
 ### ..::TELECHARGEMENT & INSTALLATION::..

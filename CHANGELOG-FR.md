@@ -1,3 +1,7 @@
+### ..::CHANGELOG - JAN. 06 2020::..
+```
+-DeepinOS fait désormais partie des distributions supportées.
+```
 ### ..::CHANGELOG - NOV. 03 2019::..
 ```
 -Raspbian est fait désormais partie des distributions officiellement supportées.

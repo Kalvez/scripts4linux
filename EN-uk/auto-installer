@@ -38,7 +38,7 @@ echo "\e[32m\e[1m*    AUTO INSTALLER    *\e[0m"
 echo "\e[32m\e[1m************************\e[0m"
 echo ""
 
-# Vérification de la version de Linux.
+# Vérification du noyeau Linux.
 if [ -z "$(lsb_release -a 2>/dev/null | grep Debian)" ]
 then
 	if [ -z "$(lsb_release -a 2>/dev/null | grep Raspbian)" ]
@@ -55,9 +55,17 @@ then
 						then
 							if [ -z "$(lsb_release -a 2>/dev/null | grep Zorin)" ]
 							then
-								echo "Please use an appropriate distro."
+								if [ -z "$(lsb_release -a 2>/dev/null | grep Deepin)" ]
+								then
+									echo "Please use an appropriate distro."
+								else
+									cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/
+									chmod +x installer
+									./installer
+									exit 0
+								fi
 							else
-								cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS/
+								cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/
 								chmod +x installer
 								./installer
 								exit 0
@@ -75,13 +83,13 @@ then
 						exit 0
 					fi
 				else
-					cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS/
+					cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/
 					chmod +x installer
 					./installer
 					exit 0
 				fi
 			else
-				cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS/
+				cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/
 				chmod +x installer
 				./installer
 				exit 0
