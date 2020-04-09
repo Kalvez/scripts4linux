@@ -39,10 +39,10 @@ sudo update-git
 
 ### ..::LIST OF SUPPORTED DISTROS::..
 ```
-Debian         |     Manjaro     |     Xubuntu
-Raspbian       |     Mandriva    |     elementaryOS
-Kali Linux     |     Ubuntu      |     Pop!_OS
-Linux Mint     |     Lubuntu     |     ZorinOS
+Debian         |     Manjaro     |     Xubuntu         |    Deepin OS
+Raspbian       |     Mandriva    |     elementaryOS    |
+Kali Linux     |     Ubuntu      |     Pop!_OS         |
+Linux Mint     |     Lubuntu     |     ZorinOS         |
 ```
 
 ### ..::DOWNLOAD & INSTALLATION::..

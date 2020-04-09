@@ -1,3 +1,7 @@
+### ..::CHANGELOG - AVR. 09 2020::..
+```
+-Le script "disks" a été modifié. Maintenant il dispose d'un affichage standard ne nécessitant pas les droits super-utilisateur et d'un affichage avancé les nécessitants.
+```
 ### ..::CHANGELOG - JAN. 06 2020::..
 ```
 -DeepinOS fait désormais partie des distributions supportées.
