@@ -76,6 +76,10 @@ then
 		cp archive backup disks infos lat speed update update-git /usr/bin/
 	fi
 
+	echo "L'installation des scripts est terminée."
+	echo ""
+	exit 0
+
 elif [ $answer = "n" ]
 then
 

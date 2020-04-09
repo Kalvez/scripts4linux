@@ -75,6 +75,10 @@ then
 		cp archive backup disks infos lat speed update update-git /usr/bin/
 	fi
 
+	echo "The installation is over."
+	echo ""
+	exit 0
+
 elif [ $answer = "n" ]
 then
 

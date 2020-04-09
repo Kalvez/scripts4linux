@@ -88,6 +88,10 @@ then
 		cp archive backup disks infos lat speed unlocker update update-git upgrade /usr/bin/
 	fi
 
+	echo "L'installation des scripts est terminée."
+	echo ""
+	exit 0
+
 elif [ $answer = "n" ]
 then
 
