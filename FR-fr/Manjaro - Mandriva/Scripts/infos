@@ -125,7 +125,7 @@ then
 elif [ $gpu_vendor = Advanced ]
 then
   gpu_vendor=0
-  gpu_vendor=$(lspci | grep VGA | awk '(print $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)')
+  gpu_vendor=$(lspci | grep VGA | awk '(print $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19}')
 else
   gpu_vendor=0
   gpu_vendor=Unknown
