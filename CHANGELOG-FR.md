@@ -1,6 +1,12 @@
+### ..::CHANGELOG - MAI  06 2020::..
+```
+-Le script "auto-installer" a été mis à jour pour des raisons de compatibilité avec Pop!_OS 20.04.
+-Une ligne 'Graphiques' a été ajoutée au script 'infos' qui permet désormais d'afficher le processeur graphique de l'ordinateur.
+-Création du changelog Anglais.
+```
 ### ..::CHANGELOG - AVR. 09 2020::..
 ```
--Le script "disks" a été modifié. Maintenant il dispose d'un affichage standard ne nécessitant pas les droits super-utilisateur et d'un affichage avancé les nécessitants.
+-Le script 'disks' a été modifié. Maintenant il dispose d'un affichage standard ne nécessitant pas les droits super-utilisateur et d'un affichage avancé les nécessitants.
 ```
 ### ..::CHANGELOG - JAN. 06 2020::..
 ```
@@ -64,7 +70,7 @@
 ```
 -Les lignes servant à nettoyer les paquets non-utilisés dans les scripts 'update' et 'upgrade' ont été changées de "apt clean" à "apt autoremove".
 ```
-### ..::CHANGELOG - JUL. 10 2019::..
+### ..::CHANGELOG - JUI. 10 2019::..
 ```
 -Le script 'unlocker' a été ajouté à la suite de scripts déjà disponibles. Celui-ci permet de garantir un accès en lecture seule à un lecteur verrouillé via Bitlocker.
 -Le script 'backup' a été mis à jour pour maintenant aussi sauvegarder le dossier '/etc/'.
@@ -75,13 +81,13 @@
 -Des erreurs ont été corrigées quant au datage des changelogs de "Scripts4Linux".
 -La mise en page est désormais de mise dans le changelog.
 ```
-### ..::CHANGELOG - FEB. 15 2019::..
+### ..::CHANGELOG - FEV. 15 2019::..
 ```
 -Mise à jour mineure et amélioration du script "restore-firefox-esr".
 -Ajout sur 'get-firefox' d'un script vérifiant qu'il est bien exécuté sur Debian.
 -Ajout sur 'install-scripts' d'un script vérifiant qu'il est bien exécuté sur Debian au moment de l'installation des scripts nécessaires à l'installation de Firefox Quantum. Ajout de commandes pour ajouter la permission d'exécution de chaque script avant l'installation de ceux-ci dans '/usr/bin'.
 ```
-### ..::CHANGELOG - FEB. 14 2019::..
+### ..::CHANGELOG - FEV. 14 2019::..
 ```
 -Le script d'installation des autres scripts a été mis à jour. Maintenant il est possible d'installer automatiquement les scripts avec leurs dépendances, un disclaimer a donc été rajouté avant l'installation des paquets nécéssaires au bon fonctionnement des scripts.
 -Le script "get-firefox" a été mis à jour. Un disclaimer apparaît maintenant avant l'installation de Firefox Quantum.

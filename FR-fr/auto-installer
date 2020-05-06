@@ -57,7 +57,15 @@ then
 							then
 								if [ -z "$(lsb_release -a 2>/dev/null | grep Deepin)" ]
 								then
-									echo "Please use an appropriate distro."
+									if [ -z "$(lsb_release -a 2>/dev/null | grep Pop)" ]
+									then
+										echo "Veuillez utiliser une disctribuion appropriée s'il-vous-plaît."
+									else
+										cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/
+										chmod +x installer
+										./installer
+										exit 0
+									fi
 								else
 									cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/
 									chmod +x installer
