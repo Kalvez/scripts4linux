@@ -23,7 +23,7 @@ answer9=0
 answer10=0
 
 echo "Do you wish to install all the scripts at once ('y'), or to individually choose the scripts to install ('n') ?"
-echo "\e[31m\e[1m/!\ WARNING : This ('y') will also install the necessary dependancies ('pv', 'dislocker', 'speedtest-cli' and 'zip') ! /!\ \e[0m"
+echo "\e[31m\e[1m/!\ WARNING : This ('y') will also install the necessary dependancies ('pv', 'dislocker', 'speedtest-cli' and 'pigz') ! /!\ \e[0m"
 read -p "Choice (y or n) : " answer
 echo ""
 
@@ -42,14 +42,14 @@ then
 		echo ""
 	fi
 
-	if [ -z "$(dpkg -s zip 2>/dev/null | grep Status)" ]
+	if [ -z "$(dpkg -s pigz 2>/dev/null | grep Status)" ]
 	then
-		echo "The 'zip' package is not present on the disk and will be installed."
+		echo "The 'pigz' package is not present on the disk and will be installed."
 		echo ""
-		apt install -y zip
+		apt install -y pigz
 		echo ""
 	else
-		echo "The 'zip' package is already installed."
+		echo "The 'pigz' package is already installed."
 		echo ""
 	fi
 
@@ -95,18 +95,18 @@ then
 elif [ $answer = "n" ]
 then
 
-	read -p "Do you want to install 'archive' (the 'zip' & 'pv' packages will be installed if they're not already on the disk.) ? (y or n) : " answer0
+	read -p "Do you want to install 'archive' (the 'pigz' & 'pv' packages will be installed if they're not already on the disk.) ? (y or n) : " answer0
 
 	if [ $answer0 = "y" ]
 	then
-		if [ -z "$(dpkg -s zip 2>/dev/null | grep Status)" ]
+		if [ -z "$(dpkg -s pigz 2>/dev/null | grep Status)" ]
 		then
-			echo "The 'zip' package is not on the disk and will be installed."
+			echo "The 'pigz' package is not on the disk and will be installed."
 			echo ""
-			apt install -y zip
+			apt install -y pigz
 			echo ""
 		else
-			echo "The 'zip' package is already installed."
+			echo "The 'pigz' package is already installed."
 			echo ""
 		fi
 
@@ -132,18 +132,18 @@ then
 		echo ""
 	fi
 
-	read -p "Do you want to installed 'backup' (the 'zip' & 'pv' packages will be installed if they're not already on the disk.) ? (y or n) : " answer1
+	read -p "Do you want to installed 'backup' (the 'pigz' & 'pv' packages will be installed if they're not already on the disk.) ? (y or n) : " answer1
 
 	if [ $answer1 = "y" ]
 	then
-		if [ -z "$(dpkg -s zip 2>/dev/null | grep Status)" ]
+		if [ -z "$(dpkg -s pigz 2>/dev/null | grep Status)" ]
 		then
-			echo "The 'zip' package is not on the disk and will be installed."
+			echo "The 'pigz' package is not on the disk and will be installed."
 			echo ""
-			apt install -y zip
+			apt install -y pigz
 			echo ""
 		else
-			echo "The 'zip' package is already installed."
+			echo "The 'pigz' package is already installed."
 			echo ""
 		fi
 

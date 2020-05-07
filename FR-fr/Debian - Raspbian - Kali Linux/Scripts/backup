@@ -12,7 +12,7 @@ then
 	echo "\e[32m\e[1mCommande:\e[0m      backup"
 	echo "\e[32m\e[1mCréateur:\e[0m      Kalvez"
 	echo "\e[32m\e[1mEmplacement:\e[0m   /usr/bin/"
-	echo "\e[32m\e[1mVersion:\e[0m       1.5.0.20191021"
+	echo "\e[32m\e[1mVersion:\e[0m       1.6.0.20200507"
 	echo ""
 	echo "\e[32m\e[1m*****************\e[0m"
 	echo "\e[32m\e[1m*    DÉTAILS    *\e[0m"
@@ -20,25 +20,25 @@ then
 	echo ""
 	echo "Vous devez exécuter ce script en tant qu'utilisateur root."
 	echo ""
-	echo "Ce script permet de sauvegarder les dossiers 'Documents', 'Images' et 'Téléchargements' dans une archive '.zip' automatiquement nommée 'backup' et datée en fonction de la date de la sauvegarde.\nCette archive est ensuite déplacée dans le dossier 'Backups' situé dans votre dossier personnel.\nSi celui-ci n'est pas présent sur le disque, il sera automatiquement créé dans le dossier de l'utilisateur. Dans votre cas, ça sera dans le dossier '/home/$USER/'.\nCe script utilise le format d'archivage '.zip' qui est propriétaire donc non-libre de droits. Si toutefois vous souhaitez modifier les dossiers sauvegardés dans l'archive '.zip', vous pouvez éditer le script à la ligne 58 juste après la commande d'archivage et mettre la localisation des dossiers que vous souhaitez sauvegarder tout en respectant l'interval d'un espace entre chaque dossier voulu."
+	echo "Ce script permet de sauvegarder les dossiers 'Documents', 'Images' et 'Téléchargements' dans une archive '.tar' automatiquement nommée 'backup' et datée en fonction de la date de la sauvegarde.\nCette archive est ensuite déplacée dans le dossier 'Backups' situé dans votre dossier personnel.\nSi celui-ci n'est pas présent sur le disque, il sera automatiquement créé dans le dossier de l'utilisateur. Dans votre cas, ça sera dans le dossier '/home/$USER/'.\nCe script utilise le format d'archivage '.tar' qui est libre de droits. Si toutefois vous souhaitez modifier les dossiers sauvegardés dans l'archive '.tar', vous pouvez éditer le script à la ligne 40 juste après la commande d'archivage et mettre la localisation des dossiers que vous souhaitez sauvegarder tout en respectant l'interval d'un espace entre chaque dossier voulu."
 	echo ""
 	exit 0
 fi
 
 # Vérification des privilèges root de l'utilisateur.
 if [ "$(id -u)" != "0" ]
-	then
-   	echo "\e[31m\e[1mVous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root.\e[0m" 1>&2
-   	echo ""
-   	exit 1
+then
+ 	echo "\e[31m\e[1mVous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root.\e[0m" 1>&2
+ 	echo ""
+ 	exit 1
 fi
 
 # Fonction de compression.
 Backup()
 {
 	# Création de l'archive
-	zip -r backup_$(date +%Y-%m-%d).zip /etc/ /home/"$name"/Documents/ /home/"$name"/Images/ /home/"$name"/Téléchargements/ | pv -rbpteW >/dev/null
-	mv backup_$(date +%Y-%m-%d).zip /home/"$name"/Backups/
+	tar -c --use-compress-program=pigz -vf backup_$(date +%Y-%m-%d).tar /etc/ /home/"$name"/Documents/ /home/"$name"/Images/ /home/"$name"/Téléchargements/ | pv -rbptW >/dev/null
+	mv backup_$(date +%Y-%m-%d).tar /home/"$name"/Backups/
 }
 
 echo "\e[32m\e[1m****************\e[0m"

@@ -1,3 +1,8 @@
+### ..::CHANGELOG - MAI  07 2020::..
+```
+-Les scripts 'backup' et 'archive' n'utilisent plus le format '*.zip' au profit du format d'archivage '*.tar'.
+-Utilisation de 'pigz' pour une optimisation du temps de compression de l'archive.
+```
 ### ..::CHANGELOG - MAI  06 2020::..
 ```
 -Le script "auto-installer" a été mis à jour pour des raisons de compatibilité avec Pop!_OS 20.04.
