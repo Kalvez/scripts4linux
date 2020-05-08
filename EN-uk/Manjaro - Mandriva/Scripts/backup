@@ -37,7 +37,7 @@ fi
 Backup()
 {
 	# Création de l'archive
-	tar -c --use-compress-program=pigz -vf backup_$(date +%Y-%m-%d).tar /etc/ /home/"$name"/Documents/ /home/"$name"/Images/ /home/"$name"/Downloads/ | pv -ptW >/dev/null
+	tar -c --use-compress-program=pigz -vf backup_$(date +%Y-%m-%d).tar /etc/ /home/"$name"/Documents/ /home/"$name"/Pictures/ /home/"$name"/Downloads/ | pv -ptW >/dev/null
 	mv backup_$(date +%Y-%m-%d).tar /home/"$name"/Backups/
 }
 
