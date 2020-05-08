@@ -1,3 +1,7 @@
+### ..::CHANGELOG - MAI  08 2020::..
+```
+-Concernant 'archive' et 'backup' : Moins d'arguments ont été utilisés avec 'pv' parce qu'ils n'étaient pas si pertinents car ils n'affichaient pas d'informations correctes (comme le taux de compression et la taille du fichier compressé).
+```
 ### ..::CHANGELOG - MAI  07 2020::..
 ```
 -Les scripts 'backup' et 'archive' n'utilisent plus le format '*.zip' au profit du format d'archivage '*.tar'.
