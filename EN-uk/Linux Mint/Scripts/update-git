@@ -73,9 +73,11 @@ then
   rm -rf /home/"$name"/scripts4linux
   cd /home/"$name"/
   git clone http://github.com/kalvez/scripts4linux.git
+  echo ""
 else
   cd /home/"$name"/
 	git clone http://github.com/kalvez/scripts4linux.git
+  echo ""
 fi
 
 # Installation des scripts.
