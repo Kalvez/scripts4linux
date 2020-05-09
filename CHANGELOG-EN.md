@@ -1,3 +1,7 @@
+### ..::CHANGELOG - MAY  09 2020::..
+```
+-The '/etc/' folders and subfolders support is dropped in the 'backup' script.
+```
 ### ..::CHANGELOG - MAY  08 2020::..  
 ```
 -Regarding 'archive' & 'backup' : Lesser arguments were used with 'pv' as they weren't that relevant because they did not displayed correct information (such as compression rate and compressed file size).

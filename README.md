@@ -24,7 +24,7 @@ sudo update-git
 ### ..::CE PACK CONTIENT::..
 ```
 -archive (bêta) : Permet d'archiver des données.
--backup : Permet de sauvegarder des données des dossiers '/etc/', 'Documents', 'Images' et 'Téléchargements'.
+-backup : Permet de sauvegarder des données des dossiers suivants: 'Documents', 'Images' et 'Téléchargements'.
 -disks : Affiche les disques connectés à l'ordinateur.
 -infos : Affiche la version de la distribution, du noyeau Linux et de plein d'autres choses utiles.
 -lat : Affiche la latence entre la machine et le DNS de Google.
@@ -61,7 +61,7 @@ sudo update-git
 ### ..::THIS PACK CONTAINS::..
 ```
 -archive (beta) : Archives data.
--backup : Backups the data of the following folders: '/etc/', 'Documents', 'Pictures' and 'Downloads'.
+-backup : Backups the data of the following folders: 'Documents', 'Pictures' and 'Downloads'.
 -disks : Displays the disks connected to the computer.
 -infos : Displays the distro version, the linux kernel version and a lot of useful stuff.
 -lat : Displays the latency between you and Google's DNS.

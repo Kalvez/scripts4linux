@@ -12,7 +12,7 @@ then
 	echo "\e[32m\e[1mCommande:\e[0m      backup"
 	echo "\e[32m\e[1mCréateur:\e[0m      Kalvez"
 	echo "\e[32m\e[1mEmplacement:\e[0m   /usr/bin/"
-	echo "\e[32m\e[1mVersion:\e[0m       1.6.0.20200507"
+	echo "\e[32m\e[1mVersion:\e[0m       1.6.1.20200509"
 	echo ""
 	echo "\e[32m\e[1m*****************\e[0m"
 	echo "\e[32m\e[1m*    DÉTAILS    *\e[0m"
@@ -37,7 +37,7 @@ fi
 Backup()
 {
 	# Création de l'archive
-	tar -c --use-compress-program=pigz -vf backup_$(date +%Y-%m-%d).tar /etc/ /home/"$name"/Documents/ /home/"$name"/Images/ /home/"$name"/Téléchargements/ | pv -ptW >/dev/null
+	tar -c --use-compress-program=pigz -vf backup_$(date +%Y-%m-%d).tar /home/"$name"/Documents/ /home/"$name"/Images/ /home/"$name"/Téléchargements/ | pv -ptW >/dev/null
 	mv backup_$(date +%Y-%m-%d).tar /home/"$name"/Backups/
 }
 

@@ -1,3 +1,7 @@
+### ..::CHANGELOG - MAI  09 2020::..
+```
+-Le support du dossier '/etc/' est abandonné dans le script 'backup'.
+```
 ### ..::CHANGELOG - MAI  08 2020::..
 ```
 -Concernant 'archive' et 'backup' : Moins d'arguments ont été utilisés avec 'pv' parce qu'ils n'étaient pas si pertinents car ils n'affichaient pas d'informations correctes (comme le taux de compression et la taille du fichier compressé).
