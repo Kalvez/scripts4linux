@@ -117,15 +117,15 @@ gpu_vendor=$(lspci | grep VGA | awk '{print $5}' | tail -1)
 if [ $gpu_vendor = NVIDIA ]
 then
   gpu_vendor=0
-  gpu_vendor=$(lspci | grep VGA | awk '{print $5, $7, $8, $9, $10, $11}')
+  gpu_vendor=$(lspci | grep VGA | awk '{print $5, $7, $8, $9, $10, $11}' | tail -1)
 elif [ $gpu_vendor = Intel ]
 then
   gpu_vendor=0
-  gpu_vendor=$(lspci | grep VGA | awk '{print $5, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16}')
+  gpu_vendor=$(lspci | grep VGA | awk '{print $5, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16}' | tail -1)
 elif [ $gpu_vendor = Advanced ]
 then
   gpu_vendor=0
-  gpu_vendor=$(lspci | grep VGA | awk '{print $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19}')
+  gpu_vendor=$(lspci | grep VGA | awk '{print $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19}' | tail -1)
 else
   gpu_vendor=0
   gpu_vendor=Unknown
