@@ -1,3 +1,8 @@
+### ..::CHANGELOG - MAI  23 2020::..
+```
+-Infos: Correction de bug.
+-Backup: Une option 'restaurer' a été ajoutée. Vous avez maintenant le choix de soit sauvegarder, soit restaurer.
+```
 ### ..::CHANGELOG - MAI  09 2020::..
 ```
 -Le support du dossier '/etc/' est abandonné dans le script 'backup'.

@@ -1,3 +1,8 @@
+### ..::CHANGELOG - MAY  23 2020::..
+```
+-Infos: Small bug fix.
+-Backup: A 'restore' option has been added. You now either have the choice to backup or restore.
+```
 ### ..::CHANGELOG - MAY  09 2020::..
 ```
 -The '/etc/' folders and subfolders support is dropped in the 'backup' script.

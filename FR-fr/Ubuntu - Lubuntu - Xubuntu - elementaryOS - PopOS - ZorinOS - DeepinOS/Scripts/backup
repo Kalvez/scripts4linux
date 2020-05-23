@@ -12,7 +12,7 @@ then
 	echo "\e[32m\e[1mCommande:\e[0m      backup"
 	echo "\e[32m\e[1mCréateur:\e[0m      Kalvez"
 	echo "\e[32m\e[1mEmplacement:\e[0m   /usr/bin/"
-	echo "\e[32m\e[1mVersion:\e[0m       1.6.1.20200509"
+	echo "\e[32m\e[1mVersion:\e[0m       1.7.0.20200523"
 	echo ""
 	echo "\e[32m\e[1m*****************\e[0m"
 	echo "\e[32m\e[1m*    DÉTAILS    *\e[0m"
@@ -20,7 +20,7 @@ then
 	echo ""
 	echo "Vous devez exécuter ce script en tant qu'utilisateur root."
 	echo ""
-	echo "Ce script permet de sauvegarder les dossiers 'Documents', 'Images' et 'Téléchargements' dans une archive '.tar' automatiquement nommée 'backup' et datée en fonction de la date de la sauvegarde.\nCette archive est ensuite déplacée dans le dossier 'Backups' situé dans votre dossier personnel.\nSi celui-ci n'est pas présent sur le disque, il sera automatiquement créé dans le dossier de l'utilisateur. Dans votre cas, ça sera dans le dossier '/home/$USER/'.\nCe script utilise le format d'archivage '.tar' qui est libre de droits. Si toutefois vous souhaitez modifier les dossiers sauvegardés dans l'archive '.tar', vous pouvez éditer le script à la ligne 40 juste après la commande d'archivage et mettre la localisation des dossiers que vous souhaitez sauvegarder tout en respectant l'interval d'un espace entre chaque dossier voulu."
+	echo "Ce script permet de sauvegarder et de restaurer les dossiers 'Documents', 'Images' et 'Téléchargements' dans une archive '.tar' automatiquement nommée 'backup' et datée en fonction de la date de la sauvegarde.\nCette archive est ensuite déplacée dans le dossier 'Backups' situé dans votre dossier personnel.\nSi celui-ci n'est pas présent sur le disque, il sera automatiquement créé dans le dossier de l'utilisateur. Dans votre cas, ça sera dans le dossier '/home/$USER/'.\nCe script utilise le format d'archivage '.tar' qui est libre de droits. Si toutefois vous souhaitez modifier les dossiers sauvegardés dans l'archive '.tar', vous pouvez éditer le script à la ligne 41 juste après la commande d'archivage et mettre la localisation des dossiers que vous souhaitez sauvegarder tout en respectant l'interval d'un espace entre chaque dossier.\nPour restaurer une sauvegarde, vous devez créer le dossier 'Backups' dans la racine de votre dossier personnel, s'il n'exste pas déjà, et placer l'archive de sauvegarde dans 'Backups'."
 	echo ""
 	exit 0
 fi
@@ -36,10 +36,35 @@ fi
 # Fonction de compression.
 Backup()
 {
-	# Création de l'archive
+	# Création de l'archive.
+	echo "Sauvegarde en cours..."
 	tar -c --use-compress-program=pigz -vf backup_$(date +%Y-%m-%d).tar /home/"$name"/Documents/ /home/"$name"/Images/ /home/"$name"/Téléchargements/ | pv -ptW >/dev/null
 	mv backup_$(date +%Y-%m-%d).tar /home/"$name"/Backups/
+
+	echo ""
+	echo "Sauvegarde terminée !"
+	echo ""
+	exit 0
 }
+
+# Fonction de décompression.
+Restore()
+{
+	# Saisie et lecture de la date de l'archive.
+	read -p "Saisissez la date de création de l'archive (AAAA-MM-JJ) : " archive_date
+	echo ""
+
+	# Extraction de l'archive.
+	echo "Restauration en cours..."
+	tar -xvzf /home/"$name"/Backups/backup_"$archive_date".tar -C / | pv -ptW >/dev/null
+	sudo chown -R $name: /home/"$name"/
+
+	echo ""
+	echo "Restauration terminée !"
+	echo ""
+	exit 0
+}
+
 
 echo "\e[32m\e[1m****************\e[0m"
 echo "\e[32m\e[1m*    BACKUP    *\e[0m"
@@ -50,15 +75,34 @@ echo ""
 read -p "Saisissez votre nom d'utilisateur : " name
 echo ""
 
-# Vérification de la présence du dossier 'Backups' sur le disque, et création du dossier s'il n'existe pas.
-if [ -d /home/"$name"/Backups ]
-then
-	Backup
-else
-	mkdir /home/"$name"/Backups/
-	Backup
-fi
+echo "Que souhaitez-vous faire ?"
+echo "1 - Sauvegarder"
+echo "2 - Restaurer"
+echo ""
+read -p "Votre réponse : " statement
+echo ""
 
-echo ""
-echo "Sauvegarde terminée !"
-echo ""
+if [ $statement = 1 ]
+then
+	# Vérification de la présence du dossier 'Backups' sur le disque, et création du dossier s'il n'existe pas.
+	if [ -d /home/"$name"/Backups ]
+	then
+		Backup
+	else
+		mkdir /home/"$name"/Backups/
+		Backup
+	fi
+elif [ $statement = 2 ]
+then
+	if [ -d /home/"$name"/Backups ]
+	then
+		Restore
+	else
+		echo "Le dossier 'Backups' n'existe pas sur le disque. Vous devez créer une sauvegarde pour pouvoir la restaurer par la suite."
+		exit 1
+	fi
+else
+	echo "Veuillez sélectionner '1' ou '2'."
+	echo ""
+	sudo backup
+fi

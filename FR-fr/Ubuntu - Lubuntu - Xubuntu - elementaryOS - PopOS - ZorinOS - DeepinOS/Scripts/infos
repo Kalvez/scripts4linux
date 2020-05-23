@@ -12,7 +12,7 @@ then
 	echo "\e[32m\e[1mCommande:\e[0m      infos"
 	echo "\e[32m\e[1mCréateur:\e[0m      Kalvez"
 	echo "\e[32m\e[1mEmplacement:\e[0m   /usr/bin/"
-	echo "\e[32m\e[1mVersion:\e[0m       3.2.0.20200506"
+	echo "\e[32m\e[1mVersion:\e[0m       3.2.1.20200523"
 	echo ""
 	echo "\e[32m\e[1m*****************\e[0m"
 	echo "\e[32m\e[1m*    DÉTAILS    *\e[0m"
@@ -111,7 +111,7 @@ baseboard_serial=$(dmidecode -s baseboard-serial-number)
 bios_version=$(dmidecode -s bios-version)
 bios_date=$(dmidecode -s bios-release-date)
 serial=$(dmidecode -s system-serial-number)
-gpu_vendor=$(lspci | grep VGA | awk '{print $5}')
+gpu_vendor=$(lspci | grep VGA | awk '{print $5}' | tail -1)
 
 # Vérification du modèle de GPU.
 if [ $gpu_vendor = NVIDIA ]
