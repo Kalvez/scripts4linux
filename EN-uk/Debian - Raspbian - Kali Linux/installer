@@ -30,10 +30,6 @@ echo ""
 
 if [ $answer = "y" ]
 then
-	# Demande du nom d'utilisateur.
-	read -p "For the sake of the installation, please type your username : " name
-	echo ""
-
 	# Test pour savoir si le paquet est installé, sinon l'installer.
 	if [ -z "$(dpkg -s speedtest-cli 2>/dev/null | grep Status)" ]
 	then
