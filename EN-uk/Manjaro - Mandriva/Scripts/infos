@@ -68,7 +68,6 @@ gpuVendor()
 }
 
 # Mise à zéro des arguments.
-version=0
 distributor_id=0
 description=0
 release=0
@@ -102,7 +101,6 @@ gpu_vendor0=0
 gpu_vendor1=0
 
 # Déclaration des arguments.
-version=$(lsb_release -ar 2>/dev/null | grep 'LSB Version' | awk '{$1=$2=""; print $0}')
 distributor_id=$(lsb_release -ar 2>/dev/null | grep 'Distributor ID' | awk '{$1=$2=""; print $0}')
 description=$(lsb_release -ar 2>/dev/null | grep Description | awk '{$1=""; print $0}')
 release=$(lsb_release -ar 2>/dev/null | grep Release | awk '{$1=""; print $0}')
@@ -146,7 +144,6 @@ echo "\e[32m\e[1m******************************"
 echo "\e[32m\e[1m*    SOFTWARE INFORMATION    *"
 echo "\e[32m\e[1m******************************"
 # Informations LSB
-echo "\e[32m\e[1mLSB Version:  $version"
 echo "\e[32m\e[1mDistro. ID:   $distributor_id"
 echo "\e[32m\e[1mDescription:   $description"
 echo "\e[32m\e[1mRelease:       $release"

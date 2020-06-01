@@ -1,7 +1,7 @@
 ### ..::CHANGELOG - JUIN 01 2020::..
 ```
 -Installer: Petites corrections | Le paquet 'bc' a été ajouté pendant l'installation des scripts pour Debian, Raspbian & Kali Linux.
--Infos: Suppression de la ligne 'version' pour Debian/Raspbian/Kali Linux. | Suppression du message 'No LSB modules are available' si aucun module LSB n'est installé. | Supporte désormais les configurations bi-GPU. | L'adaptateur vidéo VMware est maintenant supporté.
+-Infos: Suppression de la ligne 'version' pour Debian/Raspbian/Kali Linux & Manjaro. | Suppression du message 'No LSB modules are available' si aucun module LSB n'est installé. | Supporte désormais les configurations bi-GPU. | L'adaptateur vidéo VMware est maintenant supporté.
 -Archive: Petites corrections dans la traduction.
 -Manjaro: Suppression des lignes colorées dans les scripts car elles ne sont pas supportées par l'OS.
 ```
