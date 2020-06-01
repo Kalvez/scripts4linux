@@ -48,16 +48,16 @@ gpuVendor()
 {
 	gpu_vendor=0
 	gpu_vendor=$1
-	if [ $gpu_vendor = "NVIDIA" ]
+	if [ "$gpu_vendor" = "NVIDIA" ]
 	then
 		gpu_vendor=$(lspci | grep VGA | grep NVIDIA | awk '{print $5, $6, $7, $8, $9, $10, $11}')
-	elif [ $gpu_vendor = "Intel" ]
+	elif [ "$gpu_vendor" = "Intel" ]
 	then
 	  gpu_vendor=$(lspci | grep VGA | grep Intel | awk '{print $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16}')
-	elif [ $gpu_vendor = "Advanced" ]
+	elif [ "$gpu_vendor" = "Advanced" ]
 	then
 	  gpu_vendor=$(lspci | grep VGA | grep Advanced | awk '{print $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19}')
-	elif [ $gpu_vendor = "VMware" ]
+	elif [ "$gpu_vendor" = "VMware" ]
 	then
 		gpu_vendor=$(lspci | grep VGA | grep VMware | awk '{print $5, $6, $7, $8}')
 	else
@@ -66,7 +66,6 @@ gpuVendor()
 	fi
 	echo "$gpu_vendor"
 }
-
 
 # Mise à zéro des arguments.
 version=0
