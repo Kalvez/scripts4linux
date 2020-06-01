@@ -134,7 +134,6 @@ echo "\e[32m\e[1m**********************************\e[0m"
 echo "\e[32m\e[1m*    INFORMATIONS LOGICIELLES    *\e[0m"
 echo "\e[32m\e[1m**********************************\e[0m"
 # Informations LSB
-echo "\e[32m\e[1mVersion LSB:\e[0m  $version"
 echo "\e[32m\e[1mID de Distro.:\e[0m$distributor_id"
 echo "\e[32m\e[1mNom de Distro.:\e[0m$description"
 echo "\e[32m\e[1mVersion:\e[0m       $release"
