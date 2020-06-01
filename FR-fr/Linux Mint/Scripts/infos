@@ -62,7 +62,7 @@ gpuVendor()
 		gpu_vendor=$(lspci | grep VGA | grep VMware | awk '{print $5, $6, $7, $8}')
 	else
 		gpu_vendor=0
-		gpu_vendor="None / Unknown"
+		gpu_vendor="Aucun / Inconnu"
 	fi
 	echo "$gpu_vendor"
 }
