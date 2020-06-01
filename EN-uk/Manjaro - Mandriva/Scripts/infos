@@ -3,20 +3,20 @@
 # Onglet d'aide.
 if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
 then
-	echo "\e[32m\e[1m*********************\e[0m"
-	echo "\e[32m\e[1m*    INFORMATION    *\e[0m"
-	echo "\e[32m\e[1m*********************\e[0m"
+	echo "\e[32m\e[1m*********************"
+	echo "\e[32m\e[1m*    INFORMATION    *"
+	echo "\e[32m\e[1m*********************"
 	echo ""
-	echo "\e[32m\e[1mLanguage:\e[0m    EN-uk"
-	echo "\e[32m\e[1mScript name:\e[0m Infos"
-	echo "\e[32m\e[1mCommand:\e[0m     infos"
-	echo "\e[32m\e[1mAuthor:\e[0m      Kalvez"
-	echo "\e[32m\e[1mLocation:\e[0m    /usr/bin/"
-	echo "\e[32m\e[1mVersion:\e[0m     3.2.2.20200601"
+	echo "\e[32m\e[1mLanguage:    EN-uk"
+	echo "\e[32m\e[1mScript name: Infos"
+	echo "\e[32m\e[1mCommand:     infos"
+	echo "\e[32m\e[1mAuthor:      Kalvez"
+	echo "\e[32m\e[1mLocation:    /usr/bin/"
+	echo "\e[32m\e[1mVersion:     3.3.0.20200601"
 	echo ""
-	echo "\e[32m\e[1m****************\e[0m"
-	echo "\e[32m\e[1m*    DETAIL    *\e[0m"
-	echo "\e[32m\e[1m****************\e[0m"
+	echo "\e[32m\e[1m****************"
+	echo "\e[32m\e[1m*    DETAIL    *"
+	echo "\e[32m\e[1m****************"
 	echo ""
 	echo "You must execute the script with root permissions."
 	echo ""
@@ -28,7 +28,7 @@ fi
 # Vérification des privilèges root de l'utilisateur.
 if [ "$(id -u)" != "0" ]
 then
-	echo "\e[31m\e[1mThis script must be executed with root privileges.\e[0m" 1>&2
+	echo "\e[31m\e[1mThis script must be executed with root privileges." 1>&2
 	echo ""
 	exit 1
 fi
@@ -41,6 +41,30 @@ converterMiB()
 	memory=$1
 	memory=$(echo "$memory/$mib" |bc)
 	echo "$memory"
+}
+
+# Fonction récupération fab. GPU.
+gpuVendor()
+{
+	gpu_vendor=0
+	gpu_vendor=$1
+	if [ $gpu_vendor = "NVIDIA" ]
+	then
+		gpu_vendor=$(lspci | grep VGA | grep NVIDIA | awk '{print $5, $6, $7, $8, $9, $10, $11}')
+	elif [ $gpu_vendor = "Intel" ]
+	then
+	  gpu_vendor=$(lspci | grep VGA | grep Intel | awk '{print $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16}')
+	elif [ $gpu_vendor = "Advanced" ]
+	then
+	  gpu_vendor=$(lspci | grep VGA | grep Advanced | awk '{print $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19}')
+	elif [ $gpu_vendor = "VMware" ]
+	then
+		gpu_vendor=$(lspci | grep VGA | grep VMware | awk '{print $5, $6, $7, $8}')
+	else
+		gpu_vendor=0
+		gpu_vendor="None / Unknown"
+	fi
+	echo "$gpu_vendor"
 }
 
 # Mise à zéro des arguments.
@@ -74,7 +98,8 @@ baseboard_serial=0
 bios_version=0
 bios_date=0
 serial=0
-gpu_vendor=0
+gpu_vendor0=0
+gpu_vendor1=0
 
 # Déclaration des arguments.
 version=$(lsb_release -ar 2>/dev/null | grep 'LSB Version' | awk '{$1=$2=""; print $0}')
@@ -111,58 +136,44 @@ baseboard_serial=$(dmidecode -s baseboard-serial-number)
 bios_version=$(dmidecode -s bios-version)
 bios_date=$(dmidecode -s bios-release-date)
 serial=$(dmidecode -s system-serial-number)
-gpu_vendor=$(lspci | grep VGA | awk '{print $5}' | tail -1)
-
-# Vérification du modèle de GPU.
-if [ $gpu_vendor = NVIDIA ]
-then
-  gpu_vendor=0
-  gpu_vendor=$(lspci | grep VGA | awk '{print $5, $7, $8, $9, $10, $11}' | tail -1)
-elif [ $gpu_vendor = Intel ]
-then
-  gpu_vendor=0
-  gpu_vendor=$(lspci | grep VGA | awk '{print $5, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16}' | tail -1)
-elif [ $gpu_vendor = Advanced ]
-then
-  gpu_vendor=0
-  gpu_vendor=$(lspci | grep VGA | awk '{print $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19}' | tail -1)
-else
-  gpu_vendor=0
-  gpu_vendor=Unknown
-fi
+gpu_vendor0=$(lspci | grep 00:02.0 | awk '{print $5}')
+gpu_vendor0=$(gpuVendor $gpu_vendor0)
+gpu_vendor1=$(lspci | grep 01:00.0 | awk '{print $5}')
+gpu_vendor1=$(gpuVendor $gpu_vendor1)
 
 # Affichage des infos.
-echo "\e[32m\e[1m******************************\e[0m"
-echo "\e[32m\e[1m*    SOFTWARE INFORMATION    *\e[0m"
-echo "\e[32m\e[1m******************************\e[0m"
+echo "\e[32m\e[1m******************************"
+echo "\e[32m\e[1m*    SOFTWARE INFORMATION    *"
+echo "\e[32m\e[1m******************************"
 # Informations LSB
-echo "\e[32m\e[1mLSB Version:\e[0m  $version"
-echo "\e[32m\e[1mDistro. ID:\e[0m   $distributor_id"
-echo "\e[32m\e[1mDescription:\e[0m   $description"
-echo "\e[32m\e[1mRelease:\e[0m       $release"
-echo "\e[32m\e[1mCodename:\e[0m      $codename"
-echo "\e[32m\e[1mOS Type:\e[0m        $os_type"
-echo "\e[32m\e[1mArchitecture:\e[0m   $architecture"
-echo "\e[32m\e[1mDevice Name:\e[0m    $device_name"
-echo "\e[32m\e[1mUser(s):\e[0m        $users"
-echo "\e[32m\e[1mUptime:\e[0m        $uptime"
-echo "\e[32m\e[1mKernel Version:\e[0m	$kernel_info"
+echo "\e[32m\e[1mLSB Version:  $version"
+echo "\e[32m\e[1mDistro. ID:   $distributor_id"
+echo "\e[32m\e[1mDescription:   $description"
+echo "\e[32m\e[1mRelease:       $release"
+echo "\e[32m\e[1mCodename:      $codename"
+echo "\e[32m\e[1mOS Type:        $os_type"
+echo "\e[32m\e[1mArchitecture:   $architecture"
+echo "\e[32m\e[1mDevice Name:    $device_name"
+echo "\e[32m\e[1mUser(s):        $users"
+echo "\e[32m\e[1mUptime:        $uptime"
+echo "\e[32m\e[1mKernel Version:	$kernel_info"
 echo ""
-echo "\e[32m\e[1m****************************\e[0m"
-echo "\e[32m\e[1m*    DEVICE INFORMATION    *\e[0m"
-echo "\e[32m\e[1m****************************\e[0m"
-echo "\e[32m\e[1mManufacturer:\e[0m   $system_manufacturer"
-echo "\e[32m\e[1mModel:\e[0m          $system_model"
-echo "\e[32m\e[1mDevice Type:\e[0m    $device_type"
-echo "\e[32m\e[1mScreen Res.:\e[0m    $screen_resolution"
-echo "\e[32m\e[1mProcessor:\e[0m      $cpu_model"
-echo "\e[32m\e[1mGraphics:\e[0m       $gpu_vendor"
-echo "\e[32m\e[1mFree Memory:\e[0m    $available_ram MiB / $total_ram MiB"
-echo "\e[32m\e[1mCached Swap:\e[0m    $cached_swap MiB / $total_swap MiB"
-echo "\e[32m\e[1mRoot Partition:\e[0m $root_part_available"B" / $root_part_total"B" Available"
-echo "\e[32m\e[1mHome Partition:\e[0m $home_part_available"B" / $home_part_total"B" Available"
-echo "\e[32m\e[1mBaseboard:\e[0m      $baseboard | $baseboard_version"
-echo "\e[32m\e[1mBaseboard S/N:\e[0m  $baseboard_serial"
-echo "\e[32m\e[1mBIOS Version:\e[0m   $bios_version | $bios_date"
-echo "\e[32m\e[1mDevice S/N:\e[0m     $serial"
+echo "\e[32m\e[1m****************************"
+echo "\e[32m\e[1m*    DEVICE INFORMATION    *"
+echo "\e[32m\e[1m****************************"
+echo "\e[32m\e[1mManufacturer:   $system_manufacturer"
+echo "\e[32m\e[1mModel:          $system_model"
+echo "\e[32m\e[1mDevice Type:    $device_type"
+echo "\e[32m\e[1mScreen Res.:    $screen_resolution"
+echo "\e[32m\e[1mProcessor:      $cpu_model"
+echo "\e[32m\e[1mGraphics 0:     $gpu_vendor0"
+echo "\e[32m\e[1mGraphics 1:     $gpu_vendor1"
+echo "\e[32m\e[1mFree Memory:    $available_ram MiB / $total_ram MiB"
+echo "\e[32m\e[1mCached Swap:    $cached_swap MiB / $total_swap MiB"
+echo "\e[32m\e[1mRoot Partition: $root_part_available"B" / $root_part_total"B" Available"
+echo "\e[32m\e[1mHome Partition: $home_part_available"B" / $home_part_total"B" Available"
+echo "\e[32m\e[1mBaseboard:      $baseboard | $baseboard_version"
+echo "\e[32m\e[1mBaseboard S/N:  $baseboard_serial"
+echo "\e[32m\e[1mBIOS Version:   $bios_version | $bios_date"
+echo "\e[32m\e[1mDevice S/N:     $serial"
 echo ""

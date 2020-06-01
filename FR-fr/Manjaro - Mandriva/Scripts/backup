@@ -3,20 +3,20 @@
 # Onglet d'aide.
 if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
 then
-	echo "\e[32m\e[1m**********************\e[0m"
-	echo "\e[32m\e[1m*    INFORMATIONS    *\e[0m"
-	echo "\e[32m\e[1m**********************\e[0m"
+	echo "**********************"
+	echo "*    INFORMATIONS    *"
+	echo "**********************"
 	echo ""
-	echo "\e[32m\e[1mLangue:\e[0m        FR-fr"
-	echo "\e[32m\e[1mNom du script:\e[0m Backup"
-	echo "\e[32m\e[1mCommande:\e[0m      backup"
-	echo "\e[32m\e[1mCréateur:\e[0m      Kalvez"
-	echo "\e[32m\e[1mEmplacement:\e[0m   /usr/bin/"
-	echo "\e[32m\e[1mVersion:\e[0m       1.7.0.20200523"
+	echo "Langue:        FR-fr"
+	echo "Nom du script: Backup"
+	echo "Commande:      backup"
+	echo "Créateur:      Kalvez"
+	echo "Emplacement:   /usr/bin/"
+	echo "Version:       1.7.0.20200523"
 	echo ""
-	echo "\e[32m\e[1m*****************\e[0m"
-	echo "\e[32m\e[1m*    DÉTAILS    *\e[0m"
-	echo "\e[32m\e[1m*****************\e[0m"
+	echo "*****************"
+	echo "*    DÉTAILS    *"
+	echo "*****************"
 	echo ""
 	echo "Vous devez exécuter ce script en tant qu'utilisateur root."
 	echo ""
@@ -28,7 +28,7 @@ fi
 # Vérification des privilèges root de l'utilisateur.
 if [ "$(id -u)" != "0" ]
 then
- 	echo "\e[31m\e[1mVous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root.\e[0m" 1>&2
+ 	echo "\e[31m\e[1mVous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root." 1>&2
  	echo ""
  	exit 1
 fi
@@ -66,9 +66,9 @@ Restore()
 }
 
 
-echo "\e[32m\e[1m****************\e[0m"
-echo "\e[32m\e[1m*    BACKUP    *\e[0m"
-echo "\e[32m\e[1m****************\e[0m"
+echo "****************"
+echo "*    BACKUP    *"
+echo "****************"
 echo ""
 
 # Saisie et lecture du nom d'utilisateur.
