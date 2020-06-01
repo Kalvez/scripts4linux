@@ -1,3 +1,9 @@
+### ..::CHANGELOG - JUIN 01 2020::..
+```
+-Installer: Petites corrections | Le paquet 'bc' a été ajouté pendant l'installation des scripts pour Debian, Raspbian & Kali Linux.
+-Infos: Suppression de la ligne 'version' pour Debian/Raspbian/Kali Linux. | Suppression du message 'No LSB modules are available' si aucun module LSB n'est installé.
+-Archive: Petites corrections dans la traduction.
+```
 ### ..::CHANGELOG - MAI  23 2020::..
 ```
 -Infos: Correction de bug.

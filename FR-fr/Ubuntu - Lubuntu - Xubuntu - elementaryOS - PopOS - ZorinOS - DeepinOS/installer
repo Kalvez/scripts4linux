@@ -33,7 +33,7 @@ then
 	# Test pour savoir si le paquet est installé, sinon l'installer.
 	if [ -z "$(dpkg -s speedtest-cli 2>/dev/null | grep Status)" ]
 	then
-		echo "Le paquet 'speectest-cli' n'est pas présent sur le disque et va être installé."
+		echo "Le paquet 'speedtest-cli' n'est pas présent sur le disque et va être installé."
 		echo ""
 		apt install -y speedtest-cli
 		echo ""
@@ -233,13 +233,13 @@ then
 		echo ""
 	fi
 
-	read -p "Voulez-vous installer 'speed' (le paquet 'speectest-cli' va être installé s'il ne l'est pas déjà) ? (y ou n) : " answer6
+	read -p "Voulez-vous installer 'speed' (le paquet 'speedtest-cli' va être installé s'il ne l'est pas déjà) ? (y ou n) : " answer6
 
 	if [ $answer6 = "y" ]
 	then
 		if [ -z "$(dpkg -s speedtest-cli 2>/dev/null | grep Status)" ]
 		then
-			echo "Le paquet 'speectest-cli' n'est pas présent sur le disque et va être installé."
+			echo "Le paquet 'speedtest-cli' n'est pas présent sur le disque et va être installé."
 			echo ""
 			apt install -y speedtest-cli
 			echo ""

@@ -31,12 +31,12 @@ then
 	# Test pour savoir si le paquet est installé, sinon l'installer.
 	if [ -z "$(dpkg -s speedtest-cli 2>/dev/null | grep Status)" ]
 	then
-		echo "The 'speectest-cli' package is not present of the disk and will be installed."
+		echo "The 'speedtest-cli' package is not present of the disk and will be installed."
 		echo ""
 		pacman -S --noconfirm speedtest-cli
 		echo ""
 	else
-		echo "The 'speectest-cli' package is already installed."
+		echo "The 'speedtest-cli' package is already installed."
 		echo ""
 	fi
 
@@ -220,13 +220,13 @@ then
 		echo ""
 	fi
 
-	read -p "Do you want to install 'speed' (the 'speectest-cli' package will be installed if it's not already on the disk.) ? (y or n) : " answer6
+	read -p "Do you want to install 'speed' (the 'speedtest-cli' package will be installed if it's not already on the disk.) ? (y or n) : " answer6
 
 	if [ $answer6 = "y" ]
 	then
 		if [ -z "$(dpkg -s speedtest-cli 2>/dev/null | grep Status)" ]
 		then
-			echo "The 'speectest-cli' package is not on the disk and will be installed."
+			echo "The 'speedtest-cli' package is not on the disk and will be installed."
 			echo ""
 			pacman -S --noconfirm speedtest-cli
 			echo ""

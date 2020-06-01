@@ -24,7 +24,7 @@ answer9=0
 answer10=0
 
 echo "Souhaitez-vous installer tous les scripts d'un coup ('y'), ou choisir individuellement les scripts à installer ('n') ?"
-echo "\e[31m\e[1m/!\ ATTENTION : Ceci ('y') entraînera l'installation automatique des paquets nécessaires ('pv', 'dislocker', 'speedtest-cli' et 'pigz') ! /!\  \e[0m"
+echo "\e[31m\e[1m/!\ ATTENTION : Ceci ('y') entraînera l'installation automatique des paquets nécessaires ('bc', 'pv', 'dislocker', 'speedtest-cli' et 'pigz') ! /!\  \e[0m"
 read -p "Choix (y ou n) : " answer
 echo ""
 
@@ -37,7 +37,7 @@ then
 	# Test pour savoir si le paquet est installé, sinon l'installer.
 	if [ -z "$(dpkg -s speedtest-cli 2>/dev/null | grep Status)" ]
 	then
-		echo "Le paquet 'speectest-cli' n'est pas présent sur le disque et va être installé."
+		echo "Le paquet 'speedtest-cli' n'est pas présent sur le disque et va être installé."
 		echo ""
 		apt install -y speedtest-cli
 		echo ""
@@ -76,6 +76,17 @@ then
 		echo ""
 	else
 		echo "Le paquet 'pv' est déjà installé."
+		echo ""
+	fi
+
+	if [ -z "$(dpkg -s bc 2>/dev/null | grep Status)" ]
+	then
+		echo "Le paquet 'bc' n'est pas présent sur le disque et va être installé."
+		echo ""
+		apt install -y bc
+		echo ""
+	else
+		echo "Le paquet 'bc' est déjà installé."
 		echo ""
 	fi
 
@@ -190,10 +201,21 @@ then
 
 	if [ -f /usr/bin/version ]
 	then
-		read -p "Voulez-vous remplacer 'version' par 'infos' ? (y ou n) : " answer3
+		read -p "Voulez-vous remplacer 'version' par 'infos' (Le paquet 'bc' va être installé s'il ne l'est pas déjà) ? (y ou n) : " answer3
 
 		if [ $answer3 = "y" ]
 		then
+			if [ -z "$(dpkg -s bc 2>/dev/null | grep Status)" ]
+			then
+				echo "Le paquet 'bc' n'est pas présent sur le disque et va être installé."
+				echo ""
+				apt install -y bc
+				echo ""
+			else
+				echo "Le paquet 'bc' est déjà installé."
+				echo ""
+			fi
+
 			rm /usr/bin/version
 			cd Scripts/
 			chmod +x infos
@@ -206,10 +228,21 @@ then
 			echo ""
 		fi
 	else
-		read -p "Voulez-vous installer 'infos' ? (y ou n) : " answer4
+		read -p "Voulez-vous installer 'infos' (Le paquet 'bc' va être installé s'il ne l'est pas déjà) ? (y ou n) : " answer4
 
 		if [ $answer4 = "y" ]
 		then
+			if [ -z "$(dpkg -s bc 2>/dev/null | grep Status)" ]
+			then
+				echo "Le paquet 'bc' n'est pas présent sur le disque et va être installé."
+				echo ""
+				apt install -y bc
+				echo ""
+			else
+				echo "Le paquet 'bc' est déjà installé."
+				echo ""
+			fi
+
 			cd Scripts/
 			chmod +x infos
 			cp infos /usr/bin/
@@ -237,13 +270,13 @@ then
 		echo ""
 	fi
 
-	read -p "Voulez-vous installer 'speed' (le paquet 'speectest-cli' va être installé s'il ne l'est pas déjà) ? (y ou n) : " answer6
+	read -p "Voulez-vous installer 'speed' (le paquet 'speedtest-cli' va être installé s'il ne l'est pas déjà) ? (y ou n) : " answer6
 
 	if [ $answer6 = "y" ]
 	then
 		if [ -z "$(dpkg -s speedtest-cli 2>/dev/null | grep Status)" ]
 		then
-			echo "Le paquet 'speectest-cli' n'est pas présent sur le disque et va être installé."
+			echo "Le paquet 'speedtest-cli' n'est pas présent sur le disque et va être installé."
 			echo ""
 			apt install -y speedtest-cli
 			echo ""
