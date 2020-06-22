@@ -1,3 +1,8 @@
+### ..::CHANGELOG - JUN. 22 2020::..
+```
+-Global: A 'Raspbian' has been created. It no longer depends on 'Debian' and 'Kali'.
+-Infos: The script has been modified to be fully compatible with Raspbian.
+```
 ### ..::CHANGELOG - JUN. 01 2020::..
 ```
 -Installer: Small fixes | The 'bc' packages was added during the script installation for Debian, Raspbian & Kali Linux.

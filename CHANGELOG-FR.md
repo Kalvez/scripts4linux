@@ -1,3 +1,8 @@
+### ..::CHANGELOG - JUIN 22 2020::..
+```
+-Global: Un dossier 'Raspbian' a été créé. Il ne dépend plus de 'Debian' et 'Kali'.
+-Infos: Le script a été modifié pour être complètement compatible avec Raspbian.
+```
 ### ..::CHANGELOG - JUIN 01 2020::..
 ```
 -Installer: Petites corrections | Le paquet 'bc' a été ajouté pendant l'installation des scripts pour Debian, Raspbian & Kali Linux.

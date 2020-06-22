@@ -12,7 +12,7 @@ then
 	echo "\e[32m\e[1mCommande:\e[0m      auto-installer"
 	echo "\e[32m\e[1mCréateur:\e[0m      Kalvez"
 	echo "\e[32m\e[1mEmplacement:\e[0m   scripts4linux/FR-fr/"
-	echo "\e[32m\e[1mVersion:\e[0m       2.5.4.20191103"
+	echo "\e[32m\e[1mVersion:\e[0m       2.5.5.20200622"
 	echo ""
 	echo "\e[32m\e[1m*****************\e[0m"
 	echo "\e[32m\e[1m*    DÉTAILS    *\e[0m"
@@ -59,7 +59,7 @@ then
 								then
 									if [ -z "$(lsb_release -a 2>/dev/null | grep Pop)" ]
 									then
-										echo "Veuillez utiliser une disctribuion appropriée s'il-vous-plaît."
+										echo "Please use an appropriate distro."
 									else
 										cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/
 										chmod +x installer
@@ -103,19 +103,19 @@ then
 				exit 0
 			fi
 		else
-			cd Debian\ -\ Raspbian\ -\ Kali\ Linux/
+			cd Debian\ -\ Kali\ Linux/
 			chmod +x installer
 			./installer
 			exit 0
 		fi
 	else
-		cd Debian\ -\ Raspbian\ -\ Kali\ Linux/
+		cd Raspbian\
 		chmod +x installer
 		./installer
 		exit 0
 	fi
 else
-  cd Debian\ -\ Raspbian\ -\ Kali\ Linux/
+  cd Debian\ -\ Kali\ Linux/
   chmod +x installer
   ./installer
   exit 0

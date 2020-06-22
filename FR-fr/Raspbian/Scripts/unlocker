@@ -1,0 +1,140 @@
+#!/bin/sh
+
+# Onglet d'aide.
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+	echo "\e[32m\e[1m**********************\e[0m"
+	echo "\e[32m\e[1m*    INFORMATIONS    *\e[0m"
+	echo "\e[32m\e[1m**********************\e[0m"
+	echo ""
+	echo "\e[32m\e[1mLangue:\e[0m        FR-fr"
+	echo "\e[32m\e[1mNom du script:\e[0m Unlocker"
+	echo "\e[32m\e[1mCommande:\e[0m      unlocker"
+	echo "\e[32m\e[1mCréateur:\e[0m      Kalvez"
+	echo "\e[32m\e[1mEmplacement:\e[0m   /usr/bin/"
+	echo "\e[32m\e[1mVersion:\e[0m       1.2.0.20191021"
+	echo ""
+	echo "\e[32m\e[1m*****************\e[0m"
+	echo "\e[32m\e[1m*    DÉTAILS    *e[0m"
+	echo "\e[32m\e[1m*****************\e[0m"
+	echo ""
+	echo "Vous devez exécuter ce script en tant qu'utilisateur root."
+	echo ""
+	echo "Ce script permet de déverrouiller des lecteurs chiffrés avec Bitlocker en utilisant le paquet 'Disclocker'.\nCe script donnera un accès en lecture seule au lecteur déverrouillé."
+	echo ""
+	exit 0
+fi
+
+# Vérification des privilèges root de l'utilisateur.
+if [ "$(id -u)" != "0" ]
+then
+	echo "\e[31m\e[1mVous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root.\e[0m" 1>&2
+	echo ""
+	exit 1
+fi
+
+# Déclaration de la variable 'answer' à zéro.
+answer="0"
+
+# Déclaration de la fonction 'CONFIRMATION'.
+CONFIRMATION()
+{
+	if [ $answer = "y" ] || [ $answer = "Y" ]
+		then
+            echo "/!\ Le lecteur déchiffré va être démonté. Veuillez sauvegarder vos activités et fermer vos fichiers ouverts sur ce dernier. /!\ "
+						echo ""
+						read -p "Appuyez sur une touche pour continuer..." push1
+            echo ""
+            umount /media/"$name"/mount && umount /media/"$name"/bitlocker
+            echo "Le dossier et le lecteur ont été démontés."
+						echo ""
+            exit
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+		then
+            echo "Le lecteur et le dossier restent montés."
+            echo "Pour les démonter veuillez taper le groupe de commandes suivant : 'sudo umount /media/"$name"/mount && sudo umount /media/"$name"/bitlocker'"
+            echo ""
+            exit
+	else
+			echo "Veuillez appuyer sur 'y' ou 'n'."
+			echo ""
+	fi
+}
+
+# Déclaration de la fonction 'UNLOCK'.
+UNLOCK()
+{
+	# Déclaration du chemin du disque à débloquer.
+	read -p "Entrez le chemin du disque à débloquer : " path
+
+	# Utilisation de Dislocker pour déverrouiller le disque.
+	dislocker -r -V "$path" -u -- /media/"$name"/bitlocker
+
+	# Montage du disque dans le dossier mount.
+	mount -r -o loop /media/"$name"/bitlocker/dislocker-file /media/"$name"/mount
+}
+
+echo "\e[32m\e[1m******************\e[0m"
+echo "\e[32m\e[1m*    UNLOCKER    *\e[0m"
+echo "\e[32m\e[1m******************\e[0m"
+echo ""
+
+# Saisie et lecture du nom d'utilisateur.
+echo ""
+read -p "Saisissez votre nom d'utilisateur : " name
+echo ""
+
+# Vérification de l'existence des dossier 'bitlocker' et 'mount'. S'ils n'existent pas, les créer.
+if [ -d /media/"$name"/bitlocker ]
+then
+	if [ -d /media/"$name"/mount ]
+	then
+		UNLOCK
+		echo ""
+	else
+		echo "Le dossier 'mount' n'existe pas et va être créé."
+		echo ""
+		mkdir /media/"$name"/mount
+		UNLOCK
+		echo ""
+	fi
+else
+	echo "Le dossier 'Bitlocker' n'existe pas et va être créé."
+	echo ""
+	mkdir /media/"$name"/bitlocker
+	if [ -d /media/"$name"/mount ]
+	then
+		UNLOCK
+		echo ""
+	else
+		echo "Le dossier 'mount' n'existe pas et va être créé."
+		echo ""
+		mkdir /media/"$name"/mount
+		UNLOCK
+		echo ""
+	fi
+fi
+
+# Pause.
+echo ""
+read -p "Appuyez sur une touche pour continuer..." push0
+echo ""
+
+# Demande de confirmation pour démonter le lecteur et le dossier bitlocker.
+while [ $answer != "y" ] || [ $answer != "Y" ] || [ $answer != "n" ] || [ $answer != "N" ] || [ -z $answer ]
+do
+	read -p "La suite de ce script va démonter le lecteur et le dossier 'bitlocker', voulez-vous continuer ? (y ou n) : " answer
+	echo ""
+	if [ $answer = 'y' ] || [ $answer = 'n' ]
+	then
+		break
+	fi
+done
+
+# Si oui, exécution de CONFIRMATION.
+if [ $answer = "y" ] || [ $answer = "Y" ] || [ $answer = "n" ] || [ $answer = "N" ]
+then
+	CONFIRMATION
+else
+	echo "Une erreur inattendue est survenue."
+fi

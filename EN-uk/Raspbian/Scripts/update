@@ -1,0 +1,52 @@
+#!/bin/sh
+
+# Onglet d'aide.
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+  echo "\e[32m\e[1m*********************\e[0m"
+  echo "\e[32m\e[1m*    INFORMATION    *\e[0m"
+  echo "\e[32m\e[1m*********************\e[0m"
+  echo ""
+  echo "\e[32m\e[1mLanguage:\e[0m    EN-uk"
+  echo "\e[32m\e[1mScript name:\e[0m Update"
+  echo "\e[32m\e[1mCommand:\e[0m     update"
+  echo "\e[32m\e[1mAuthor:\e[0m      Kalvez"
+  echo "\e[32m\e[1mLocation:\e[0m    /usr/bin/"
+  echo "\e[32m\e[1mVersion:\e[0m     1.5.5.20191022"
+  echo ""
+  echo "\e[32m\e[1m****************\e[0m"
+  echo "\e[32m\e[1m*    DETAIL    *\e[0m"
+  echo "\e[32m\e[1m****************\e[0m"
+  echo ""
+  echo "You must execute the script with root permissions."
+  echo ""
+  echo "This script update the repositories and the installed softwares' packages.\nIt also cleans the update cache and remove the unused packages."
+  echo ""
+  exit 0
+fi
+
+# Vérification des privilèges root de l'utilisateur.
+if [ "$(id -u)" != "0" ]
+        then
+        echo "\e[31m\e[1mThis script must be executed with root privileges.\e[0m" 1>&2
+        echo ""
+        exit 1
+fi
+
+echo "\e[32m\e[1m****************\e[0m"
+echo "\e[32m\e[1m*    UPDATE    *\e[0m"
+echo "\e[32m\e[1m****************\e[0m"
+echo ""
+
+# Mise à jour et confirmation automatique.
+apt -y update
+
+# Mise à jour des autres paquets et confirmation automatique.
+apt -y full-upgrade
+
+# Nettoyage des paquets inutilisés.
+apt clean
+apt -y autoremove
+echo ""
+echo "Update successful."
+echo ""
