@@ -111,7 +111,7 @@ then
 	else
 		cd Raspbian\
 		chmod +x installer
-		./installer
+		sudo ./installer
 		exit 0
 	fi
 else
