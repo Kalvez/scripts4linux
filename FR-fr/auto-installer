@@ -110,7 +110,7 @@ then
 		fi
 	else
 		cd Raspbian\
-		chmod +x installer
+		sudo chmod +x installer
 		sudo ./installer
 		exit 0
 	fi
