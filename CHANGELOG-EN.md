@@ -1,3 +1,7 @@
+### ..::CHANGELOG - JUL. 08 2020::..
+```
+-Infos: Small tweaks & bug fixes.
+```
 ### ..::CHANGELOG - JUN. 22 2020::..
 ```
 -Global: A 'Raspbian' has been created. It no longer depends on 'Debian' and 'Kali'.

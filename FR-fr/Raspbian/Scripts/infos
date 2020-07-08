@@ -12,7 +12,7 @@ then
 	echo "\e[32m\e[1mCommande:\e[0m      infos"
 	echo "\e[32m\e[1mCréateur:\e[0m      Kalvez"
 	echo "\e[32m\e[1mEmplacement:\e[0m   /usr/bin/"
-	echo "\e[32m\e[1mVersion:\e[0m       3.3.0.20200601"
+	echo "\e[32m\e[1mVersion:\e[0m       3.3.1.20200708"
 	echo ""
 	echo "\e[32m\e[1m*****************\e[0m"
 	echo "\e[32m\e[1m*    DÉTAILS    *\e[0m"
@@ -50,16 +50,16 @@ gpuVendor()
 	gpu_vendor=$1
 	if [ "$gpu_vendor" = "NVIDIA" ]
 	then
-		gpu_vendor=$(lspci | grep VGA | grep NVIDIA | awk '{print $5, $6, $7, $8, $9, $10, $11}')
+		gpu_vendor=$(lspci | grep VGA | grep NVIDIA | awk '{print $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20}')
 	elif [ "$gpu_vendor" = "Intel" ]
 	then
-	  gpu_vendor=$(lspci | grep VGA | grep Intel | awk '{print $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16}')
+	  gpu_vendor=$(lspci | grep VGA | grep Intel | awk '{print $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20}')
 	elif [ "$gpu_vendor" = "Advanced" ]
 	then
-	  gpu_vendor=$(lspci | grep VGA | grep Advanced | awk '{print $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19}')
+	  gpu_vendor=$(lspci | grep VGA | grep Advanced | awk '{print $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20}')
 	elif [ "$gpu_vendor" = "VMware" ]
 	then
-		gpu_vendor=$(lspci | grep VGA | grep VMware | awk '{print $5, $6, $7, $8}')
+		gpu_vendor=$(lspci | grep VGA | grep VMware | awk '{print $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20}')
 	else
 		gpu_vendor=0
 		gpu_vendor="Aucun / Inconnu"
@@ -108,7 +108,7 @@ uptime=$(uptime)
 kernel_info=$(uname -srv)
 system_model=$(cat /proc/cpuinfo | grep "Model" | awk '{print $3, $4, $5, $6, $7, $8, $9}')
 screen_resolution=$(xdpyinfo | grep dimensions | awk '{print $2}')
-cpu_model=$(cat /proc/cpuinfo | grep "model name" | uniq | awk '{print $4, $5, $6, $7, $8}')
+cpu_model=$(cat /proc/cpuinfo | grep "model name" | uniq | awk '{print $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20}')
 total_ram=$(grep -Eom1 '[0-9]{1,9}' /proc/meminfo | tail -1	)
 total_ram=$(converterMiB $total_ram)
 available_ram=$(grep -Eom3 '[0-9]{1,9}' /proc/meminfo | tail -1)

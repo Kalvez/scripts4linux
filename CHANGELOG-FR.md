@@ -1,3 +1,7 @@
+### ..::CHANGELOG - JUI. 08 2020::..
+```
+-Infos: Quelques ajustements & corrections de bugs.
+```
 ### ..::CHANGELOG - JUIN 22 2020::..
 ```
 -Global: Un dossier 'Raspbian' a été créé. Il ne dépend plus de 'Debian' et 'Kali'.
