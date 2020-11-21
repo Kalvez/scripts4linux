@@ -27,6 +27,8 @@ autoInstall()
 	packageInstall
 	name=pv
 	packageInstall
+	name=bc
+	packageInstall
 	name=speedtest-cli
 	packageInstall
 	name=dislocker
@@ -146,6 +148,8 @@ Infos()
 		if [ $answer = "o" ] || [ $answer = "O" ]
 		then
 			answer=0
+			name=bc
+			packageInstall
 			chmod +x Scripts/infos
 			cp Scripts/infos /usr/bin/
 			echo "Installé.\n"
@@ -162,6 +166,8 @@ Infos()
 		if [ $answer = "o" ] || [ $answer = "O" ]
 		then
 			answer=0
+			name=bc
+			packageInstall
 			chmod +x Scripts/infos
 			cp Scripts/infos /usr/bin/
 			echo "Installé.\n"
@@ -309,7 +315,7 @@ then
 	echo "Vous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root.\n" 1>&2
 	exit 1
 else
-	echo "Souhaitez-vous installer tous les scripts d'un coup ('y'), ou choisir individuellement les scripts à installer ('n') ?"
-	echo "\e[31m\e[1m/!\ ATTENTION : Ceci ('y') entraînera l'installation automatique des paquets nécessaires ('adb', 'bc', 'pv', 'dislocker', 'pigz' et 'speedtest-cli') ! /!\  \e[0m"
+	echo "Souhaitez-vous installer tous les scripts d'un coup ('o'), ou choisir individuellement les scripts à installer ('n') ?"
+	echo "\e[31m\e[1m/!\ ATTENTION : Ceci ('o') entraînera l'installation automatique des paquets nécessaires ('adb', 'bc', 'pv', 'dislocker', 'pigz' et 'speedtest-cli') ! /!\  \e[0m"
 	Choice
 fi
