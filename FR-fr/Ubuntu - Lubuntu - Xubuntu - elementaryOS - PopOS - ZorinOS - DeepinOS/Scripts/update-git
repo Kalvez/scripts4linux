@@ -36,10 +36,10 @@ Update()
 
 Installation()
 {
-  if [ $answer = "y" ] || [ $answer = "Y" ]
+  if [ $answer = "o" ] || [ $answer = "O" ]
 		then
-      chmod +x /home/"$name"/scripts4linux/EN-uk/auto-installer
-      cd /home/"$name"/scripts4linux/EN-uk && ./auto-installer
+      chmod +x /home/"$name"/scripts4linux/FR-fr/auto-installer
+      cd /home/"$name"/scripts4linux/FR-fr && ./auto-installer
       echo ""
       exit 0
 	elif [ $answer = "n" ] || [ $answer = "N" ]
@@ -71,7 +71,7 @@ if [ "$(id -u)" != "0" ]
     read -p "Saisissez votre nom d'utilisateur : " name
     echo ""
     Update
-    read -p "Voulez-vous mettre les scripts à jour maintenant ? ('y' or 'n') : " answer
+    read -p "Voulez-vous mettre les scripts à jour maintenant ? ('o' ou 'n') : " answer
     echo ""
     if [ $answer = "o" ] || [ $answer = "O" ] || [ $answer = "n" ] || [ $answer = "N" ]
     then
