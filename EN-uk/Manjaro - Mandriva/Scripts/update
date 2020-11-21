@@ -1,51 +1,45 @@
 #!/bin/sh
 
-# Onglet d'aide.
+Help()
+{
+  echo "\e[32m\e[1m=====================\e[0m"
+  echo "\e[32m\e[1m=    Information    =\e[0m"
+  echo "\e[32m\e[1m=====================\e[0m\n"
+  echo "\e[32m\e[1mLanguage:\e[0m    EN-uk"
+  echo "\e[32m\e[1mScript name:\e[0m Update"
+  echo "\e[32m\e[1mCommand:\e[0m     update"
+  echo "\e[32m\e[1mAuthor:\e[0m      Kalvez"
+  echo "\e[32m\e[1mLocation:\e[0m    /usr/bin/"
+  echo "\e[32m\e[1mVersion:\e[0m     1.6.0.20201119\n"
+  echo "\e[32m\e[1m================\e[0m"
+  echo "\e[32m\e[1m=    Detail    =\e[0m"
+  echo "\e[32m\e[1m================\e[0m\n"
+  echo "You must execute the script with root permissions.\n"
+  echo "This script update the repositories and the installed softwares' packages.\nIt also cleans the update cache and remove the unused packages.\n"
+  exit 0
+}
+
+Update()
+{
+  pacman -Syu --noconfirm
+  pacman -Sc --noconfirm && pacman -Scc --noconfirm
+  pacman -Qdtq --noconfirm
+  echo "\nUpdate successful.\n"
+}
+
+echo "\e[31m\e[1m****************\e[0m"
+echo "\e[31m\e[1m*    UPDATE    *\e[0m"
+echo "\e[31m\e[1m****************\e[0m\n"
+
 if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
 then
-  echo "*********************"
-  echo "*    INFORMATION    *"
-  echo "*********************"
-  echo ""
-  echo "Language:    EN-uk"
-  echo "Script name: Update"
-  echo "Command:     update"
-  echo "Author:      Kalvez"
-  echo "Location:    /usr/bin/"
-  echo "Version:     1.5.5.20191022"
-  echo ""
-  echo "****************"
-  echo "*    DETAIL    *"
-  echo "****************"
-  echo ""
-  echo "You must execute the script with root permissions."
-  echo ""
-  echo "This script update the repositories and the installed softwares' packages.\nIt also cleans the update cache and remove the unused packages."
-  echo ""
-  exit 0
+	Help
+else
+	if [ "$(id -u)" != "0" ]
+		then
+	   	echo "\e[31m\e[1mThis script must be executed with root privileges.\e[0m\n" 1>&2
+	   	exit 1
+		else
+			Update
+	fi
 fi
-
-# Vérification des privilèges root de l'utilisateur.
-if [ "$(id -u)" != "0" ]
-        then
-        echo "\e[31m\e[1mThis script must be executed with root privileges." 1>&2
-        echo ""
-        exit 1
-fi
-
-echo "****************"
-echo "*    UPDATE    *"
-echo "****************"
-echo ""
-
-# Mise à jour et confirmation automatique.
-pacman -Syu --noconfirm
-
-# Nettoyage des paquets inutilisés.
-pacman -Sc --noconfirm && pacman -Scc --noconfirm
-
-# Nettoyage des dépendaces inutilisées
-pacman -Qdtq --noconfirm
-echo ""
-echo "Update successful."
-echo ""

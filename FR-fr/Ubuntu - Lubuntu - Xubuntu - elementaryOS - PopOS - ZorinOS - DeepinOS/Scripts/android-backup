@@ -1,0 +1,108 @@
+#!/bin/sh
+
+Help()
+{
+	echo "\e[32m\e[1m======================\e[0m"
+	echo "\e[32m\e[1m=    Informations    =\e[0m"
+	echo "\e[32m\e[1m======================\e[0m\n"
+	echo "\e[32m\e[1mLangue:\e[0m        FR-fr"
+	echo "\e[32m\e[1mNom du script:\e[0m Android Backup"
+	echo "\e[32m\e[1mCommande:\e[0m      android-backup"
+	echo "\e[32m\e[1mCréateur:\e[0m      Kalvez"
+	echo "\e[32m\e[1mEmplacement:\e[0m   /usr/bin/"
+	echo "\e[32m\e[1mVersion:\e[0m       1.0.0.20201120\n"
+	echo "\e[32m\e[1m=================\e[0m"
+	echo "\e[32m\e[1m=    Détails    =\e[0m"
+	echo "\e[32m\e[1m=================\e[0m\n"
+	echo "Vous devez exécuter ce script en tant qu'utilisateur root.\n"
+	echo "Ce script permet de sauvegarder et de restaurer les données et applications d'un appareil Android.\nIl faut que les Options de développeur soient activées sur votre appareil, l'ADB d'activé et votre PC autorisé.\n"
+	exit 0
+}
+
+Choice()
+{
+	echo "\n\e[1m======================\e[0m"
+	echo "\e[1mQue voulez-vou faire ?\e[0m"
+	echo "\e[1m======================\e[0m\n"
+	echo "1 - Sauvegarder"
+	echo "2 - Restaurer\n"
+	echo "3 - Quitter\n"
+	read -p "Votre réponse : " statement
+
+	if [ $statement = "1" ]
+	then
+		if [ -d /home/"$name"/Backups/Android ]
+		then
+			Backup
+		else
+			mkdir /home/"$name"/Backups/Android
+			Backup
+		fi
+	elif [ $statement = "2" ]
+	then
+		if [ -d /home/"$name"/Backups/Android ]
+		then
+			Restore
+		else
+			echo "Le dossier 'Android' n'existe pas sur le disque. Vous devez créer une sauvegarde pour pouvoir la restaurer par la suite.\n"
+			exit 1
+		fi
+	elif [ $statement = "3" ]
+	then
+		echo "\nQuitter...\n"
+		exit 0
+	else
+		echo "\nVeuillez sélectionner '1', '2' ou '3'.\n"
+    Choice
+	fi
+}
+
+Backup()
+{
+	echo "\n\e[1m===========\e[0m"
+	echo "\e[1mSauvegarder\e[0m"
+	echo "\e[1m===========\e[0m\n"
+
+	echo "Sauvegarde en cours...\n"
+	adb backup -f -apk -all android-backup_$(date +%Y-%m-%d).ab  | pv -ptW >/dev/null
+	mv android-backup_$(date +%Y-%m-%d).ab /home/"$name"/Backups/Android/
+
+	echo "\nSauvegarde terminée !\n"
+	exit 0
+}
+
+Restore()
+{
+	echo "\n\e[1m=========\e[0m"
+	echo "\e[1mRestaurer\e[0m"
+	echo "\e[1m=========\e[0m\n"
+
+	read -p "Saisissez la date de création de l'archive (AAAA-MM-JJ) : " archive_date
+
+	echo "\nRestauration en cours...\n"
+	adb restore /home/"$name"/Backups/Android/android-backup_"$archive_date".ab | pv -ptW >/dev/null
+
+	echo "\nRestauration terminée !\n"
+	exit 0
+}
+
+name=0
+statement=0
+
+echo "\e[31m\e[1m************************\e[0m"
+echo "\e[31m\e[1m*    ANDROID-BACKUP    *\e[0m"
+echo "\e[31m\e[1m************************\e[0m\n"
+
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+	Help
+else
+	if [ "$(id -u)" != "0" ]
+	then
+		echo "\e[31m\e[1mVous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root.\e[0m\n" 1>&2
+		exit 1
+	else
+		read -p "Veuillez taper votre nom d'utilisateur : " name
+		Choice
+	fi
+fi

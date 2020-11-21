@@ -1,0 +1,321 @@
+#!/bin/sh
+
+Choice()
+{
+	name=0
+	answer=0
+
+	read -p "Choice (y or n) : " answer
+
+	if [ $answer = "y" ] || [ $answer = "Y" ]
+	then
+		autoInstall
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		manualInstall
+	else
+		echo "Please type 'y' or 'n'.\n"
+		Choice
+	fi
+}
+
+autoInstall()
+{
+	name=adb
+	packageInstall
+	name=pigz
+	packageInstall
+	name=pv
+	packageInstall
+	name=bc
+	packageInstall
+	name=speedtest-cli
+	packageInstall
+	name=dislocker
+	packageInstall
+
+	chmod +x Scripts/*
+
+	if [ -f /usr/bin/version ]
+	then
+		rm /usr/bin/version && cp -r Scripts/ /usr/bin/
+	else
+		cp -r Scripts/* /usr/bin/
+	fi
+
+	echo "The installation is over.\n"
+	exit 0
+}
+
+manualInstall()
+{
+	androidBackup
+	Backup
+	Disks
+	Infos
+	Lat
+	Speed
+	Unlocker
+	Update
+	updateGit
+	Upgrade
+
+	echo "The installation is over.\n"
+	exit 0
+}
+
+packageInstall()
+{
+	if [ -z "$(dpkg -s "$name" 2>/dev/null | grep Status)" ]
+	then
+		apt-get install -y "$name"
+	fi
+	name=0
+}
+
+androidBackup()
+{
+	echo ""
+	read -p "Do you want to install 'Android Backup' (the 'adb' package will be installed if it's not already on the disk.) ? (y or n) : " answer
+	if [ $answer = "y" ] || [ $answer = "Y" ]
+	then
+		answer=0
+		name=adb
+		packageInstall
+		chmod +x Scripts/android-backup
+		cp Scripts/archive /usr/bin/
+		echo "Installed.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Not-installed.\n"
+	else
+		echo "Please type 'y' or 'n'.\n"
+		androidBackup
+	fi
+}
+
+Backup()
+{
+	echo ""
+	read -p "Do you want to install 'Backup' (the 'pigz' & 'pv' packages will be installed if they're not already on the disk.) ? (y or n) : " answer
+	if [ $answer = "y" ] || [ $answer = "Y" ]
+	then
+		answer=0
+		name=pigz
+		packageInstall
+		name=pv
+		packageInstall
+		chmod +x Scripts/backup
+		cp Scripts/backup /usr/bin/
+		echo "Installed.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Not-installed.\n"
+	else
+		echo "Please type 'y' or 'n'.\n"
+		Backup
+	fi
+}
+
+Disks()
+{
+	echo ""
+	read -p "Do you want to install 'Disks' ? (y or n) : " answer
+	if [ $answer = "y" ] || [ $answer = "Y" ]
+	then
+		answer=0
+		chmod +x Scripts/disks
+		cp Scripts/disks /usr/bin/
+		echo "Installed.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Not-installed.\n"
+	else
+		echo "Please type 'y' or 'n'.\n"
+		Disks
+	fi
+}
+
+Infos()
+{
+	echo ""
+	if [ -f /usr/bin/version ]
+	then
+		read -p "Do you want to replace 'Version' with 'Infos' (The 'bc' package will be installed if it's not already present on the disk) ? (y or n) : " answer
+		if [ $answer = "y" ] || [ $answer = "Y" ]
+		then
+			answer=0
+			name=bc
+			packageInstall
+			chmod +x Scripts/infos
+			cp Scripts/infos /usr/bin/
+			echo "Installed.\n"
+		elif [ $answer = "n" ] || [ $answer = "N" ]
+		then
+			answer=0
+			echo "Not-installed.\n"
+		else
+			echo "Please type 'y' or 'n'.\n"
+			Infos
+		fi
+	else
+		read -p "Do you want to install 'Infos' (The 'bc' package will be installed if it's not already present on the disk) ? (y or n) : " answer
+		if [ $answer = "y" ] || [ $answer = "Y" ]
+		then
+			answer=0
+			name=bc
+			packageInstall
+			chmod +x Scripts/infos
+			cp Scripts/infos /usr/bin/
+			echo "Installed.\n"
+		elif [ $answer = "n" ] || [ $answer = "N" ]
+		then
+			answer=0
+			echo "Not-installed.\n"
+		else
+			echo "Please type 'y' or 'n'.\n"
+			Infos
+		fi
+	fi
+}
+
+Lat()
+{
+	echo ""
+	read -p "Do you want to install 'Lat' (Latency) ? (y or n) : " answer
+	if [ $answer = "y" ] || [ $answer = "Y" ]
+	then
+		answer=0
+		chmod +x Scripts/lat
+		cp Scripts/lat /usr/bin/
+		echo "Installed.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Not-installed.\n"
+	else
+		echo "Please type 'y' or 'n'.\n"
+		Lat
+	fi
+}
+
+Speed()
+{
+	echo ""
+	read -p "Do you want to install 'Speed' (Speedtest) (the 'speedtest-cli' package will be installed if it's not already on the disk.) ? (y or n) : " answer
+	if [ $answer = "y" ] || [ $answer = "Y" ]
+	then
+		answer=0
+		name=speedtest-cli
+		packageInstall
+		chmod +x Scripts/speed
+		cp Scripts/speed /usr/bin/
+		echo "Installed.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Not-installed.\n"
+	else
+		echo "Please type 'y' or 'n'.\n"
+		Speed
+	fi
+}
+
+Unlocker()
+{
+	echo ""
+	read -p "Do you want to install 'Unlocker' (the 'dislocker' package will be installed if it's not already on the disk.) ? (y or n) : " answer
+	if [ $answer = "y" ] || [ $answer = "Y" ]
+	then
+		answer=0
+		name=dislocker
+		packageInstall
+		chmod +x Scripts/unlocker
+		cp Scripts/unlocker /usr/bin/
+		echo "Installed.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Not-installed.\n"
+	else
+		echo "Please type 'y' or 'n'.\n"7
+		Unlocker
+	fi
+}
+
+Update()
+{
+	echo ""
+	read -p "Do you want to install 'update' ? (y or n) : " answer
+	if [ $answer = "y" ] || [ $answer = "Y"]
+	then
+		answer=0
+		chmod +x Scripts/update
+		cp Scripts/update /usr/bin/
+		echo "Installed.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Not-installed.\n"
+	else
+		echo "Please type 'y' or 'n'.\n"
+		Update
+	fi
+}
+
+updateGit()
+{
+	echo ""
+	read -p "Do you want to install 'Update Git' ? (y or n) : " answer
+	if [ $answer = "y" ] || [ $answer = "Y" ]
+	then
+		answer=0
+		chmod +x Scripts/update-git
+		cp Scripts/update-git /usr/bin/
+		echo "Installed.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Not-installed.\n"
+	else
+		echo "Please type 'y' or 'n'.\n"
+		updateGit
+	fi
+}
+
+Upgrade()
+{
+	echo ""
+	read -p "Do you want to install 'Upgrade' ? (y or n) : " answer
+	if [ $answer = "y" ] || [ $answer = "Y" ]
+	then
+		answer=0
+		chmod +x Scripts/upgrade
+		cp Scripts/upgrade /usr/bin/
+		echo "Installed.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Not-installed.\n"
+	else
+		echo "Please type 'y' or 'n'.\n"
+		Upgrade
+	fi
+}
+
+echo "\e[31m\e[1m*****************************\e[0m"
+echo "\e[31m\e[1m*    DEBIAN - KALI LINUX    *\e[0m"
+echo "\e[31m\e[1m*****************************\e[0m\n"
+
+if [ "$(id -u)" != "0" ]
+then
+	echo "This script must be executed with root permissions.\n" 1>&2
+	exit 1
+else
+	echo "Do you wish to install all the scripts at once ('y'), or to individually choose the scripts to install ('n') ?"
+	echo "\e[31m\e[1m/!\ WARNING : This ('y') will also install the necessary dependancies ('adb', 'bc', 'pv', 'dislocker', 'pigz' and 'speedtest-cli') ! /!\ \e[0m\n"
+	Choice
+fi

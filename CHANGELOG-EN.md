@@ -1,3 +1,10 @@
+### ..::CHANGELOG - NOV. 21 2020::..
+```
+-Archive: Its support has been dropped, it has been removed and won't be updated anymore. If you want to uninstall it, just type 'sudo rm /usr/bin/archive'.
+-Android Backup: Say hello to the new boi in town! This script uses 'adb' to make backups.
+-All: Over all, every script was optimized, bugs were fixed and the CLI design was changed.
+-Raspbian: The Raspbian branch was merged with the Debian & Kali Linux one.
+```
 ### ..::CHANGELOG - JUL. 08 2020::..
 ```
 -Infos: Small tweaks & bug fixes.

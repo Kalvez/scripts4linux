@@ -1,122 +1,73 @@
 #!/bin/sh
 
-# Onglet d'aide.
-if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
-then
-	echo "\e[32m\e[1m**********************\e[0m"
-	echo "\e[32m\e[1m*    INFORMATIONS    *\e[0m"
-	echo "\e[32m\e[1m**********************\e[0m"
-	echo ""
+Help()
+{
+	echo "\e[32m\e[1m======================\e[0m"
+	echo "\e[32m\e[1m=    Informations    =\e[0m"
+	echo "\e[32m\e[1m======================\e[0m\n"
 	echo "\e[32m\e[1mLangue:\e[0m        FR-fr"
 	echo "\e[32m\e[1mNom du script:\e[0m Installeur automatique de scripts pour Debian / Kali Linux."
 	echo "\e[32m\e[1mCommande:\e[0m      auto-installer"
 	echo "\e[32m\e[1mCréateur:\e[0m      Kalvez"
 	echo "\e[32m\e[1mEmplacement:\e[0m   scripts4linux/FR-fr/"
-	echo "\e[32m\e[1mVersion:\e[0m       2.5.5.20200622"
-	echo ""
-	echo "\e[32m\e[1m*****************\e[0m"
-	echo "\e[32m\e[1m*    DÉTAILS    *\e[0m"
-	echo "\e[32m\e[1m*****************\e[0m"
-	echo ""
-	echo "/!\ Ce script doit être exécuté en tant qu'utilisateur root. /!\ "
-	echo ""
-	echo "Ce script permet de détecter la distribution de linux sur laquelle il est lancé et donc de choisir en conséquence le bon pack de scripts à installer."
-	echo ""
+	echo "\e[32m\e[1mVersion:\e[0m       2.6.0.20201121\n"
+	echo "\e[32m\e[1m=================\e[0m"
+	echo "\e[32m\e[1m=    Détails    =\e[0m"
+	echo "\e[32m\e[1m=================\e[0m\n"
+	echo "/!\ Ce script doit être exécuté en tant qu'utilisateur root. /!\ \n"
+	echo "Ce script permet de détecter la distribution de linux sur laquelle il est lancé et donc de choisir en conséquence le bon pack de scripts à installer.\n"
 	exit 0
-fi
+}
 
-# Vérification des privilèges root de l'utilisateur.
-if [ "$(id -u)" != "0" ]
+fetchDistro()
+{
+	distributor_id=$(lsb_release -ar 2>/dev/null | grep 'Distributor ID' | awk '{$1=$2=""; print $0}')
+	Verification
+}
+
+Verification()
+{
+	if [ $distributor_id = "Debian" ] || [ $distributor_id = "Raspbian" ] || [ $distributor_id = "Kali" ]
 	then
-	echo "\e[31m\e[1mVous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root.\e[0m" 1>&2
-	echo ""
-	exit 1
-fi
-
-echo "\e[32m\e[1m************************\e[0m"
-echo "\e[32m\e[1m*    AUTO-INSTALLER    *\e[0m"
-echo "\e[32m\e[1m************************\e[0m"
-echo ""
-
-# Vérification de la version de Linux.
-if [ -z "$(lsb_release -a 2>/dev/null | grep Debian)" ]
-then
-	if [ -z "$(lsb_release -a 2>/dev/null | grep Raspbian)" ]
+	  chmod +x Debian\ -\ Kali\ Linux\ -\ Raspbian/installer
+	  cd Debian\ -\ Kali\ Linux/Raspbian/ && ./installer
+	  exit 0
+	elif [ $distributor_id = "Ubuntu" ] || [ $distributor_id = "elementary" ] || [ $distributor_id = "Zorin" ] || [ $distributor_id = "Deepin" ] || [ $distributor_id = "Pop" ]
 	then
-		if [ -z "$(lsb_release -a 2>/dev/null | grep Kali)" ]
-		then
-			if [ -z "$(lsb_release -a 2>/dev/null | grep Ubuntu)" ]
-			then
-				if [ -z "$(lsb_release -a 2>/dev/null | grep elementary)" ]
-				then
-					if [ -z "$(lsb_release -a 2>/dev/null | grep LinuxMint)" ]
-					then
-						if [ -z "$(lsb_release -a 2>/dev/null | grep ManjaroLinux)" ]
-						then
-							if [ -z "$(lsb_release -a 2>/dev/null | grep Zorin)" ]
-							then
-								if [ -z "$(lsb_release -a 2>/dev/null | grep Deepin)" ]
-								then
-									if [ -z "$(lsb_release -a 2>/dev/null | grep Pop)" ]
-									then
-										echo "Please use an appropriate distro."
-									else
-										cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/
-										chmod +x installer
-										./installer
-										exit 0
-									fi
-								else
-									cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/
-									chmod +x installer
-									./installer
-									exit 0
-								fi
-							else
-								cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/
-								chmod +x installer
-								./installer
-								exit 0
-							fi
-						else
-							cd Manjaro\ -\ Mandriva/
-							chmod +x installer
-							./installer
-							exit 0
-						fi
-					else
-						cd Linux\ Mint/
-						chmod +x installer
-						./installer
-						exit 0
-					fi
-				else
-					cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/
-					chmod +x installer
-					./installer
-					exit 0
-				fi
-			else
-				cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/
-				chmod +x installer
-				./installer
-				exit 0
-			fi
-		else
-			cd Debian\ -\ Kali\ Linux/
-			chmod +x installer
-			./installer
-			exit 0
-		fi
-	else
-		cd Raspbian/
-		chmod +x installer
-		./installer
+		chmod +x Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/installer
+		cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/ && ./installer
 		exit 0
+	elif [ $distributor_id = "LinuxMint" ]
+	then
+		chmod +x Linux\ Mint/installer
+		cd Linux\ Mint/ && ./installer
+		exit 0
+	elif [ $distributor_id = "ManjaroLinux" ]
+	then
+		chmod +x Manjaro\ -\ Mandriva/installer
+		cd Manjaro\ -\ Mandriva/ && ./installer
+		exit 0
+	else
+		echo "Cette distribution n'est pas supportée.\n"
+		exit 1
 	fi
+}
+
+distributor_id=0
+
+echo "\e[31m\e[1m************************\e[0m"
+echo "\e[31m\e[1m*    AUTO INSTALLER    *\e[0m"
+echo "\e[31m\e[1m************************\e[0m\n"
+
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+	Help
 else
-  cd Debian\ -\ Kali\ Linux/
-  chmod +x installer
-  ./installer
-  exit 0
+	if [ "$(id -u)" != "0" ]
+	then
+		echo "\e[31m\e[1mVous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root.\e[0m\n" 1>&2
+		exit 1
+	else
+		fetchDistro
+	fi
 fi

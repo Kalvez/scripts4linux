@@ -1,93 +1,83 @@
 #!/bin/sh
 
-# Onglet d'aide.
-if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
-then
-  echo "\e[32m\e[1m**********************\e[0m"
-  echo "\e[32m\e[1m*    INFORMATIONS    *\e[0m"
-  echo "\e[32m\e[1m**********************\e[0m"
-  echo ""
+Help()
+{
+  echo "\e[32m\e[1m======================\e[0m"
+  echo "\e[32m\e[1m=    Informations    =\e[0m"
+  echo "\e[32m\e[1m======================\e[0m\n"
   echo "\e[32m\e[1mLangue:\e[0m         FR-fr"
   echo "\e[32m\e[1mNom du script:\e[0m  Update GIT"
   echo "\e[32m\e[1mCommande:\e[0m       update-git"
   echo "\e[32m\e[1mCréateur:\e[0m       Kalvez"
   echo "\e[32m\e[1mEmplacement:\e[0m    /usr/bin/"
-  echo "\e[32m\e[1mVersion:\e[0m        1.0.1.20191021"
-  echo ""
-  echo "\e[32m\e[1m*****************\e[0m"
-  echo "\e[32m\e[1m*    DÉTAILS    *\e[0m"
-  echo "\e[32m\e[1m*****************\e[0m"
-  echo ""
-  echo "Vous devez exécuter ce script en tant qu'utilisateur root."
-  echo ""
-  echo "Ce script met à jour le dépôt local clôné de 'scripts4linux'."
-  echo ""
+  echo "\e[32m\e[1mVersion:\e[0m        1.1.0.20201120\n"
+  echo "\e[32m\e[1m=================\e[0m"
+  echo "\e[32m\e[1m=    Détails    =\e[0m"
+  echo "\e[32m\e[1m=================\e[0m\n"
+  echo "Vous devez exécuter ce script en tant qu'utilisateur root.\n"
+  echo "Ce script met à jour le dépôt local clôné de 'scripts4linux'.\n"
   exit 0
-fi
+}
 
-# Vérification des privilèges root de l'utilisateur.
-if [ "$(id -u)" != "0" ]
-  then
-    echo "\e[31m\e[1mVous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root.\e[0m" 1>&2
-    echo ""
-    exit 1
-fi
-
-echo "\e[32m\e[1m********************\e[0m"
-echo "\e[32m\e[1m*    UPDATE GIT    *\e[0m"
-echo "\e[32m\e[1m********************\e[0m"
-echo ""
-
-# Mise à zéro des arguments.
-name=0
-answer=0
-
-# Déclaration de la fonction 'INSTALLATION'.
-INSTALLATION()
+Update()
 {
-	if [ $answer = "y" ] || [ $answer = "Y" ]
+  if [ -d /home/"$name"/scripts4linux ]
+  then
+    rm -rf /home/"$name"/scripts4linux
+    cd /home/"$name"/
+    git clone http://github.com/kalvez/scripts4linux.git
+    echo ""
+  else
+    cd /home/"$name"/
+  	git clone http://github.com/kalvez/scripts4linux.git
+    echo ""
+  fi
+}
+
+Installation()
+{
+  if [ $answer = "y" ] || [ $answer = "Y" ]
 		then
-      cd /home/"$name"/scripts4linux/FR-fr/
-      chmod +x auto-installer
-      ./auto-installer
+      chmod +x /home/"$name"/scripts4linux/EN-uk/auto-installer
+      cd /home/"$name"/scripts4linux/EN-uk && ./auto-installer
       echo ""
-      exit
+      exit 0
 	elif [ $answer = "n" ] || [ $answer = "N" ]
 		then
-      echo "Les scripts ne seront pas mis à jour."
-      echo ""
-      exit
+      echo "Les scripts ne seront pas mis à jour.\n"
+      exit 0
 	else
-			echo "Veuillez appuyer sur 'y' ou 'n'."
-			echo ""
+			echo "Veuillez appuyer sur 'o' ou 'n'.\n"
 	fi
 }
 
-# Saisie et lecture du nom d'utilisateur.
-read -p "Saisissez votre nom d'utilisateur : " name
-echo ""
+name=0
+answer=0
 
-# Vérification de la présence du dossier 'scripts4linux' sur le disque, et suppression s'il existe, puis clonage du repo GitHub.
-if [ -d /home/"$name"/scripts4linux ]
+echo "\e[31m\e[1m********************\e[0m"
+echo "\e[31m\e[1m*    UPDATE GIT    *\e[0m"
+echo "\e[31m\e[1m********************\e[0m\n"
+
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
 then
-  rm -rf /home/"$name"/scripts4linux
-  cd /home/"$name"/
-  git clone http://github.com/kalvez/scripts4linux.git
-  echo ""
-else
-  cd /home/"$name"/
-	git clone http://github.com/kalvez/scripts4linux.git
-  echo ""
+  Help
 fi
 
-# Installation des scripts.
-read -p "Voulez-vous mettre les scripts à jour maintenant ? ('y' or 'n') : " answer
-echo ""
-
-if [ $answer = "y" ] || [ $answer = "Y" ] || [ $answer = "n" ] || [ $answer = "N" ]
-then
-  INSTALLATION
-else
-  echo "Une erreur inattendue est survenue."
-  echo ""
+if [ "$(id -u)" != "0" ]
+  then
+    echo "\e[31m\e[1mVous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root.\e[0m\n" 1>&2
+    exit 1
+  else
+    read -p "Saisissez votre nom d'utilisateur : " name
+    echo ""
+    Update
+    read -p "Voulez-vous mettre les scripts à jour maintenant ? ('y' or 'n') : " answer
+    echo ""
+    if [ $answer = "o" ] || [ $answer = "O" ] || [ $answer = "n" ] || [ $answer = "N" ]
+    then
+      Installation
+      echo ""
+    else
+      echo "Une erreur inattendue est survenue.\n"
+    fi
 fi

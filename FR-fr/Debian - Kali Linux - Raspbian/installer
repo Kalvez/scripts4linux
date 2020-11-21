@@ -1,0 +1,315 @@
+#!/bin/sh
+
+Choice()
+{
+	name=0
+	answer=0
+
+	read -p "Choix (o ou n) : " answer
+
+	if [ $answer = "o" ] || [ $answer = "O" ]
+	then
+		autoInstall
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		manualInstall
+	else
+		echo "Veuillez taper 'o' ou 'n'.\n"
+		Choice
+	fi
+}
+
+autoInstall()
+{
+	name=adb
+	packageInstall
+	name=pigz
+	packageInstall
+	name=pv
+	packageInstall
+	name=speedtest-cli
+	packageInstall
+	name=dislocker
+	packageInstall
+
+	chmod +x Scripts/*
+
+	if [ -f /usr/bin/version ]
+	then
+		rm /usr/bin/version && cp -r Scripts/ /usr/bin/
+	else
+		cp -r Scripts/* /usr/bin/
+	fi
+
+	echo "L'installation est terminée.\n"
+	exit 0
+}
+
+manualInstall()
+{
+	androidBackup
+	Backup
+	Disks
+	Infos
+	Lat
+	Speed
+	Unlocker
+	Update
+	updateGit
+	Upgrade
+
+	echo "L'installation est terminée.\n"
+	exit 0
+}
+
+packageInstall()
+{
+	if [ -z "$(dpkg -s "$name" 2>/dev/null | grep Status)" ]
+	then
+		apt-get install -y "$name"
+	fi
+	name=0
+}
+
+androidBackup()
+{
+	echo ""
+	read -p "Voulez-vous installer 'Android Backup' (le paquet 'adb' sera installé s'il ne l'est pas déjà.) ? (o ou n) : " answer
+	if [ $answer = "o" ] || [ $answer = "O" ]
+	then
+		answer=0
+		name=adb
+		packageInstall
+		chmod +x Scripts/android-backup
+		cp Scripts/archive /usr/bin/
+		echo "Installé.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Non-installé.\n"
+	else
+		echo "Veuillez taper 'o' ou 'n'.\n"
+		androidBackup
+	fi
+}
+
+Backup()
+{
+	echo ""
+	read -p "Voulez-vous installer 'Backup' (les paquets 'pigz' & 'pv' seront installés s'ils ne le sont pas déjà.) ? (o ou n) : " answer
+	if [ $answer = "o" ] || [ $answer = "O" ]
+	then
+		answer=0
+		name=pigz
+		packageInstall
+		name=pv
+		packageInstall
+		chmod +x Scripts/backup
+		cp Scripts/backup /usr/bin/
+		echo "Installé.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Non-installé.\n"
+	else
+		echo "Veuillez taper 'o' ou 'n'.\n"
+		Backup
+	fi
+}
+
+Disks()
+{
+	echo ""
+	read -p "Voulez-vous installer 'Disks' ? (o or n) : " answer
+	if [ $answer = "o" ] || [ $answer = "O" ]
+	then
+		answer=0
+		chmod +x Scripts/disks
+		cp Scripts/disks /usr/bin/
+		echo "Installé.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Non-installé.\n"
+	else
+		echo "Veuillez-taper 'o' ou 'n'.\n"
+		Disks
+	fi
+}
+
+Infos()
+{
+	echo ""
+	if [ -f /usr/bin/version ]
+	then
+		read -p "Voulez-vous remplacer 'Version' par 'Infos' (Le paquet 'bc' sera installé s'il ne l'est pas déjà) ? (o ou n) : " answer
+		if [ $answer = "o" ] || [ $answer = "O" ]
+		then
+			answer=0
+			chmod +x Scripts/infos
+			cp Scripts/infos /usr/bin/
+			echo "Installé.\n"
+		elif [ $answer = "n" ] || [ $answer = "N" ]
+		then
+			answer=0
+			echo "Non-installé.\n"
+		else
+			echo "Veuillez taper 'o' ou 'n'.\n"
+			Infos
+		fi
+	else
+		read -p "Voulez-vous installer 'Infos' (Le paquet 'bc' sera installé s'il ne l'est pas déjà) ? (o ou n) : " answer
+		if [ $answer = "o" ] || [ $answer = "O" ]
+		then
+			answer=0
+			chmod +x Scripts/infos
+			cp Scripts/infos /usr/bin/
+			echo "Installé.\n"
+		elif [ $answer = "n" ] || [ $answer = "N" ]
+		then
+			answer=0
+			echo "Non-installé.\n"
+		else
+			echo "Veuillez taper 'o' ou 'n'.\n"
+			Infos
+		fi
+	fi
+}
+
+Lat()
+{
+	echo ""
+	read -p "Voulez-vous installer 'Lat' (Latence) ? (o ou n) : " answer
+	if [ $answer = "o" ] || [ $answer = "O" ]
+	then
+		answer=0
+		chmod +x Scripts/lat
+		cp Scripts/lat /usr/bin/
+		echo "Installé.\n"
+	elif [ $answer = "n" ]
+	then
+		answer=0
+		echo "Non-installé.\n"
+	else
+		echo "Veuillez-taper 'o' ou 'n'.\n"
+		Lat
+	fi
+}
+
+Speed()
+{
+	echo ""
+	read -p "Voulez-vous installer 'Speed' (Speedtest) (le paquet 'speedtest-cli' sera installé s'il ne l'est pas déjà.) ? (o ou n) : " answer
+	if [ $answer = "o" ] || [ $answer = "O" ]
+	then
+		answer=0
+		name=speedtest-cli
+		packageInstall
+		chmod +x Scripts/speed
+		cp Scripts/speed /usr/bin/
+		echo "Installé.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Non-installé.\n"
+	else
+		echo "Veuillez taper 'o' ou 'n'.\n"
+		Speed
+	fi
+}
+
+Unlocker()
+{
+	echo ""
+	read -p "Voulez-vous installer 'Unlocker' (le paquet 'dislocker' sera installé s'il ne l'est pas déjà) ? (o ou n) : " answer
+	if [ $answer = "o" ] || [ $answer = "O" ]
+	then
+		answer=0
+		name=dislocker
+		packageInstall
+		chmod +x Scripts/unlocker
+		cp Scripts/unlocker /usr/bin/
+		echo "Installé.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Non-installé.\n"
+	else
+		echo "Veuillez taper 'o' ou 'n'.\n"7
+		Unlocker
+	fi
+}
+
+Update()
+{
+	echo ""
+	read -p "Voulez-vous installer 'Update' ? (o ou n) : " answer
+	if [ $answer = "o" ] || [ $answer = "O" ]
+	then
+		answer=0
+		chmod +x Scripts/update
+		cp Scripts/update /usr/bin/
+		echo "Installé.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Non-installé.\n"
+	else
+		echo "Veuillez taper 'o' ou 'n'.\n"
+		Update
+	fi
+}
+
+updateGit()
+{
+	echo ""
+	read -p "Voulez-vous installer 'Update Git' ? (o ou n) : " answer
+	if [ $answer = "o" ] || [ $answer = "O" ]
+	then
+		answer=0
+		chmod +x Scripts/update-git
+		cp Scripts/update-git /usr/bin/
+		echo "Installé.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Non-installé.\n"
+	else
+		echo "Veuillez taper 'o' ou 'n'.\n"
+		updateGit
+	fi
+}
+
+Upgrade()
+{
+	echo ""
+	read -p "Voulez-vous installer 'Upgrade' ? (o ou n) : " answer
+	if [ $answer = "o" ] || [ $answer = "O" ]
+	then
+		answer=0
+		chmod +x Scripts/upgrade
+		cp Scripts/upgrade /usr/bin/
+		echo "Installé.\n"
+	elif [ $answer = "n" ] || [ $answer = "N" ]
+	then
+		answer=0
+		echo "Non-installé.\n"
+	else
+		echo "Veuillez taper 'o' ou 'n'.\n"
+		Upgrade
+	fi
+}
+
+echo "\e[31m\e[1m*****************************\e[0m"
+echo "\e[31m\e[1m*    DEBIAN - KALI LINUX    *\e[0m"
+echo "\e[31m\e[1m*****************************\e[0m\n"
+
+if [ "$(id -u)" != "0" ]
+then
+	echo "Vous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root.\n" 1>&2
+	exit 1
+else
+	echo "Souhaitez-vous installer tous les scripts d'un coup ('y'), ou choisir individuellement les scripts à installer ('n') ?"
+	echo "\e[31m\e[1m/!\ ATTENTION : Ceci ('y') entraînera l'installation automatique des paquets nécessaires ('adb', 'bc', 'pv', 'dislocker', 'pigz' et 'speedtest-cli') ! /!\  \e[0m"
+	Choice
+fi

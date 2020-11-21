@@ -1,39 +1,24 @@
 #!/bin/sh
 
-# Onglet d'aide.
-if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
-then
-	echo "\e[32m\e[1m**********************\e[0m"
-	echo "\e[32m\e[1m*    INFORMATIONS    *\e[0m"
-	echo "\e[32m\e[1m**********************\e[0m"
-	echo ""
+Help()
+{
+	echo "\e[32m\e[1m======================\e[0m"
+	echo "\e[32m\e[1m=    Informations    =\e[0m"
+	echo "\e[32m\e[1m======================\e[0m\n"
 	echo "\e[32m\e[1mLangue:\e[0m        FR-fr"
 	echo "\e[32m\e[1mNom du script:\e[0m Infos"
 	echo "\e[32m\e[1mCommande:\e[0m      infos"
 	echo "\e[32m\e[1mCréateur:\e[0m      Kalvez"
 	echo "\e[32m\e[1mEmplacement:\e[0m   /usr/bin/"
-	echo "\e[32m\e[1mVersion:\e[0m       3.3.1.20200708"
-	echo ""
-	echo "\e[32m\e[1m*****************\e[0m"
-	echo "\e[32m\e[1m*    DÉTAILS    *\e[0m"
-	echo "\e[32m\e[1m*****************\e[0m"
-	echo ""
-	echo "Vous devez exécuter ce script en tant qu'utilisateur root."
-	echo ""
-	echo "Ce script affiche tout un tas d'informations en relation avec le système d'exploitation, mais aussi les spécifications générales de la machine utilisée et quelques autres données pratiques."
-	echo ""
+	echo "\e[32m\e[1mVersion:\e[0m       3.4.0.20200824\n"
+	echo "\e[32m\e[1m=================\e[0m"
+	echo "\e[32m\e[1m=    Détails    =\e[0m"
+	echo "\e[32m\e[1m=================\e[0m\n"
+	echo "Vous devez exécuter ce script en tant qu'utilisateur root.\n"
+	echo "Ce script affiche tout un tas d'informations en relation avec le système d'exploitation, mais aussi les spécifications générales de la machine utilisée et quelques autres données pratiques.\n"
 	exit 0
-fi
+}
 
-# Vérification des privilèges root de l'utilisateur.
-if [ "$(id -u)" != "0" ]
-then
-	echo "\e[31m\e[1mVous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root.\e[0m" 1>&2
-	echo ""
-	exit 1
-fi
-
-# Fonction conversion de la RAM en MiB
 converterMiB()
 {
 	mib=1048.576
@@ -43,7 +28,6 @@ converterMiB()
 	echo "$memory"
 }
 
-# Fonction récupération fab. GPU.
 gpuVendor()
 {
 	gpu_vendor=0
@@ -67,8 +51,84 @@ gpuVendor()
 	echo "$gpu_vendor"
 }
 
-# Mise à zéro des arguments.
-version=0
+displayInfo()
+{
+	echo "\e[32m\e[1m==================================\e[0m"
+	echo "\e[32m\e[1m=    Informations logicielles    =\e[0m"
+	echo "\e[32m\e[1m==================================\e[0m\n"
+	echo "\e[32m\e[1mID de Distro.:\e[0m$distributor_id"
+	echo "\e[32m\e[1mNom de Distro.:\e[0m$description"
+	echo "\e[32m\e[1mVersion:\e[0m       $release"
+	echo "\e[32m\e[1mNom de Code:\e[0m   $codename"
+	echo "\e[32m\e[1mSystème:\e[0m        $os_type"
+	echo "\e[32m\e[1mArchitecture:\e[0m   $architecture"
+	echo "\e[32m\e[1mNom du PC:\e[0m      $device_name"
+	echo "\e[32m\e[1mUtilisateur(s):\e[0m $users"
+	echo "\e[32m\e[1mTps. de Marche:\e[0m$uptime"
+	echo "\e[32m\e[1mVer. du Kernel:\e[0m $kernel_info\n"
+	echo "\e[32m\e[1m======================================\e[0m"
+	echo "\e[32m\e[1m=    Informations du périphérique    =\e[0m"
+	echo "\e[32m\e[1m======================================\e[0m\n"
+	echo "\e[32m\e[1mFabriquant:\e[0m     $system_manufacturer"
+	echo "\e[32m\e[1mModèle:\e[0m         $system_model"
+	echo "\e[32m\e[1mType de PC:\e[0m     $device_type"
+	echo "\e[32m\e[1mRés. Écran:\e[0m     $screen_resolution"
+	echo "\e[32m\e[1mProcesseur:\e[0m     $cpu_model"
+	echo "\e[32m\e[1mGraphiques 0:\e[0m   $gpu_vendor0"
+	echo "\e[32m\e[1mGraphiques 1:\e[0m   $gpu_vendor1"
+	echo "\e[32m\e[1mMémoire Libre:\e[0m  $available_ram MiB / $total_ram MiB"
+	echo "\e[32m\e[1mDonnées Swap:\e[0m   $cached_swap MiB / $total_swap MiB"
+	echo "\e[32m\e[1mPartition Root:\e[0m $root_part_available"B" / $root_part_total"B" Disponibles"
+	echo "\e[32m\e[1mPartition Home:\e[0m $home_part_available"B" / $home_part_total"B" Disponibles"
+	echo "\e[32m\e[1mBaseboard:\e[0m      $baseboard | $baseboard_version"
+	echo "\e[32m\e[1mBaseboard N/S:\e[0m  $baseboard_serial"
+	echo "\e[32m\e[1mVer. du BIOS:\e[0m   $bios_version | $bios_date"
+	echo "\e[32m\e[1mNum. de Série:\e[0m  $serial\n"
+}
+
+fetchInfo()
+{
+	distributor_id=$(lsb_release -ar 2>/dev/null | grep 'Distributor ID' | awk '{$1=$2=""; print $0}')
+	description=$(lsb_release -ar 2>/dev/null | grep Description | awk '{$1=""; print $0}')
+	release=$(lsb_release -ar 2>/dev/null | grep Release | awk '{$1=""; print $0}')
+	codename=$(lsb_release -ar 2>/dev/null | grep Codename | awk '{$1=""; print $0}')
+	os_type=$(uname -o)
+	architecture=$(uname -i)
+	device_name=$(uname -n)
+	users=$(users)
+	uptime=$(uptime)
+	kernel_info=$(uname -srv)
+	system_manufacturer=$(dmidecode -s system-manufacturer)
+	system_model=$(dmidecode -s system-product-name)
+	device_type=$(dmidecode -s chassis-type)
+	screen_resolution=$(xdpyinfo | grep dimensions | awk '{print $2}')
+	cpu_model=$(cat /proc/cpuinfo | grep "model name" | uniq | awk '{print $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20}')
+	total_ram=$(grep -Eom1 '[0-9]{1,9}' /proc/meminfo | tail -1	)
+	total_ram=$(converterMiB $total_ram)
+	available_ram=$(grep -Eom3 '[0-9]{1,9}' /proc/meminfo | tail -1)
+	available_ram=$(converterMiB $available_ram)
+	total_swap=$(grep -Eom15 '[0-9]{1,9}' /proc/meminfo | tail -1)
+	total_swap=$(converterMiB $total_swap)
+	cached_swap=$(grep -Eom6 '[0-9]{1,9}' /proc/meminfo | tail -1)
+	cached_swap=$(converterMiB $cached_swap)
+	root_part_available=$(df -Ph / | tail -1 | awk '{print $4}')
+	root_part_total=$(df -Ph / | tail -1 | awk '{print $2}')
+	home_part_available=$(df -Ph . | tail -1 | awk '{print $4}')
+	home_part_total=$(df -Ph . | tail -1 | awk '{print $2}')
+	baseboard=$(dmidecode -s baseboard-product-name)
+	baseboard_version=$(dmidecode -s baseboard-version)
+	baseboard_serial=$(dmidecode -s baseboard-serial-number)
+	bios_version=$(dmidecode -s bios-version)
+	bios_date=$(dmidecode -s bios-release-date)
+	serial=$(dmidecode -s system-serial-number)
+	gpu_vendor0=$(lspci | grep 00:02.0 | awk '{print $5}')
+	gpu_vendor0=$(gpuVendor $gpu_vendor0)
+	gpu_vendor1=$(lspci | grep 01:00.0 | awk '{print $5}')
+	gpu_vendor1=$(gpuVendor $gpu_vendor1)
+
+	displayInfo
+}
+
 distributor_id=0
 description=0
 release=0
@@ -101,79 +161,19 @@ serial=0
 gpu_vendor0=0
 gpu_vendor1=0
 
-# Déclaration des arguments.
-version=$(lsb_release -ar 2>/dev/null | grep 'LSB Version' | awk '{$1=$2=""; print $0}')
-distributor_id=$(lsb_release -ar 2>/dev/null | grep 'Distributor ID' | awk '{$1=$2=""; print $0}')
-description=$(lsb_release -ar 2>/dev/null | grep Description | awk '{$1=""; print $0}')
-release=$(lsb_release -ar 2>/dev/null | grep Release | awk '{$1=""; print $0}')
-codename=$(lsb_release -ar 2>/dev/null | grep Codename | awk '{$1=""; print $0}')
-os_type=$(uname -o)
-architecture=$(uname -i)
-device_name=$(uname -n)
-users=$(users)
-uptime=$(uptime)
-kernel_info=$(uname -srv)
-system_manufacturer=$(dmidecode -s system-manufacturer)
-system_model=$(dmidecode -s system-product-name)
-device_type=$(dmidecode -s chassis-type)
-screen_resolution=$(xdpyinfo | grep dimensions | awk '{print $2}')
-cpu_model=$(cat /proc/cpuinfo | grep "model name" | uniq | awk '{print $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20}')
-total_ram=$(grep -Eom1 '[0-9]{1,9}' /proc/meminfo | tail -1	)
-total_ram=$(converterMiB $total_ram)
-available_ram=$(grep -Eom3 '[0-9]{1,9}' /proc/meminfo | tail -1)
-available_ram=$(converterMiB $available_ram)
-total_swap=$(grep -Eom15 '[0-9]{1,9}' /proc/meminfo | tail -1)
-total_swap=$(converterMiB $total_swap)
-cached_swap=$(grep -Eom6 '[0-9]{1,9}' /proc/meminfo | tail -1)
-cached_swap=$(converterMiB $cached_swap)
-root_part_available=$(df -Ph / | tail -1 | awk '{print $4}')
-root_part_total=$(df -Ph / | tail -1 | awk '{print $2}')
-home_part_available=$(df -Ph . | tail -1 | awk '{print $4}')
-home_part_total=$(df -Ph . | tail -1 | awk '{print $2}')
-baseboard=$(dmidecode -s baseboard-product-name)
-baseboard_version=$(dmidecode -s baseboard-version)
-baseboard_serial=$(dmidecode -s baseboard-serial-number)
-bios_version=$(dmidecode -s bios-version)
-bios_date=$(dmidecode -s bios-release-date)
-serial=$(dmidecode -s system-serial-number)
-gpu_vendor0=$(lspci | grep 00:02.0 | awk '{print $5}')
-gpu_vendor0=$(gpuVendor $gpu_vendor0)
-gpu_vendor1=$(lspci | grep 01:00.0 | awk '{print $5}')
-gpu_vendor1=$(gpuVendor $gpu_vendor1)
+echo "\e[31m\e[1m***************\e[0m"
+echo "\e[31m\e[1m*    INFOS    *\e[0m"
+echo "\e[31m\e[1m***************\e[0m\n"
 
-# Affichage des infos.
-echo "\e[32m\e[1m**********************************\e[0m"
-echo "\e[32m\e[1m*    INFORMATIONS LOGICIELLES    *\e[0m"
-echo "\e[32m\e[1m**********************************\e[0m"
-# Informations LSB
-echo "\e[32m\e[1mVersion LSB:\e[0m  $version"
-echo "\e[32m\e[1mID de Distro.:\e[0m$distributor_id"
-echo "\e[32m\e[1mNom de Distro.:\e[0m$description"
-echo "\e[32m\e[1mVersion:\e[0m       $release"
-echo "\e[32m\e[1mNom de Code:\e[0m   $codename"
-echo "\e[32m\e[1mSystème:\e[0m        $os_type"
-echo "\e[32m\e[1mArchitecture:\e[0m   $architecture"
-echo "\e[32m\e[1mNom du PC:\e[0m      $device_name"
-echo "\e[32m\e[1mUtilisateur(s):\e[0m $users"
-echo "\e[32m\e[1mTps. de Marche:\e[0m$uptime"
-echo "\e[32m\e[1mVer. du Kernel:\e[0m $kernel_info"
-echo ""
-echo "\e[32m\e[1m**************************************\e[0m"
-echo "\e[32m\e[1m*    INFORMATIONS DU PÉRIPHÉRIQUE    *\e[0m"
-echo "\e[32m\e[1m**************************************\e[0m"
-echo "\e[32m\e[1mFabriquant:\e[0m     $system_manufacturer"
-echo "\e[32m\e[1mModèle:\e[0m         $system_model"
-echo "\e[32m\e[1mType de PC:\e[0m     $device_type"
-echo "\e[32m\e[1mRés. Écran:\e[0m     $screen_resolution"
-echo "\e[32m\e[1mProcesseur:\e[0m     $cpu_model"
-echo "\e[32m\e[1mGraphiques 0:\e[0m   $gpu_vendor0"
-echo "\e[32m\e[1mGraphiques 1:\e[0m   $gpu_vendor1"
-echo "\e[32m\e[1mMémoire Libre:\e[0m  $available_ram MiB / $total_ram MiB"
-echo "\e[32m\e[1mDonnées Swap:\e[0m   $cached_swap MiB / $total_swap MiB"
-echo "\e[32m\e[1mPartition Root:\e[0m $root_part_available"B" / $root_part_total"B" Disponibles"
-echo "\e[32m\e[1mPartition Home:\e[0m $home_part_available"B" / $home_part_total"B" Disponibles"
-echo "\e[32m\e[1mBaseboard:\e[0m      $baseboard | $baseboard_version"
-echo "\e[32m\e[1mBaseboard N/S:\e[0m  $baseboard_serial"
-echo "\e[32m\e[1mVer. du BIOS:\e[0m   $bios_version | $bios_date"
-echo "\e[32m\e[1mNum. de Série:\e[0m  $serial"
-echo ""
+if [ $1 = "-h" 2>/dev/null ] || [ $1 = "--help" 2>/dev/null ]
+then
+	Help
+else
+	if [ "$(id -u)" != "0" ]
+	then
+		echo "\e[31m\e[1mVous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root.\e[0m\n" 1>&2
+		exit 1
+	else
+		fetchInfo
+	fi
+fi
