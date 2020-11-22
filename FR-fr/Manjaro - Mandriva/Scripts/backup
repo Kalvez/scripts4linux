@@ -10,7 +10,7 @@ Help()
 	echo "\e[32m\e[1mCommande:\e[0m      backup"
 	echo "\e[32m\e[1mCréateur:\e[0m      Kalvez"
 	echo "\e[32m\e[1mEmplacement:\e[0m   /usr/bin/"
-	echo "\e[32m\e[1mVersion:\e[0m       1.8.0.20200731\n"
+	echo "\e[32m\e[1mVersion:\e[0m       1.8.1.20201122\n"
 	echo "\e[32m\e[1m=================\e[0m"
 	echo "\e[32m\e[1m=    Détails    =\e[0m"
 	echo "\e[32m\e[1m=================\e[0m\n"
@@ -26,7 +26,8 @@ Choice()
 	echo "\e[1m======================\e[0m\n"
 	echo "1 - Sauvegarder"
 	echo "2 - Restaurer\n"
-	echo "3 - Quitter\n"
+	echo "3 - Afficher les sauvegardes\n"
+	echo "4 - Quitter\n"
 	read -p "Votre réponse : " statement
 
 	if [ $statement = "1" ]
@@ -49,11 +50,14 @@ Choice()
 		fi
 	elif [ $statement = "3" ]
 	then
+		ls -lsa /home/"$name"/Backups
+		Choice
+	elif [ $statement = "4" ]
+	then
 		echo "\nQuitter...\n"
 		exit 0
 	else
-		echo "\nVeuillez sélectionner '1', '2' ou '3'.\n"
-
+		echo "\nVeuillez sélectionner '1', '2', '3' ou '4'.\n"
 		Choice
 	fi
 }
@@ -63,11 +67,9 @@ Backup()
 	echo "\n\e[1m===========\e[0m"
 	echo "\e[1mSauvegarder\e[0m"
 	echo "\e[1m===========\e[0m\n"
-
 	echo "Sauvegarde en cours...\n"
 	tar -c --use-compress-program=pigz -vf backup_$(date +%Y-%m-%d).tar /home/"$name"/Documents/ /home/"$name"/Images/ /home/"$name"/Téléchargements/ | pv -ptW >/dev/null
 	mv backup_$(date +%Y-%m-%d).tar /home/"$name"/Backups/
-
 	echo "\nSauvegarde terminée !\n"
 	exit 0
 }
@@ -77,13 +79,10 @@ Restore()
 	echo "\n\e[1m=========\e[0m"
 	echo "\e[1mRestaurer\e[0m"
 	echo "\e[1m=========\e[0m\n"
-
 	read -p "Saisissez la date de création de l'archive (AAAA-MM-JJ) : " archive_date
-
 	echo "\nRestauration en cours...\n"
 	tar -xvzf /home/"$name"/Backups/backup_"$archive_date".tar -C / | pv -ptW >/dev/null
 	sudo chown -R $name: /home/"$name"/
-
 	echo "\nRestauration terminée !\n"
 	exit 0
 }

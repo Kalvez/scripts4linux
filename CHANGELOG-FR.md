@@ -1,3 +1,7 @@
+### ..::CHANGELOG - NOV. 22 2020::..
+```
+-Android Backup & Backup: Ajout d'une option permettant d'afficher les sauvegardes existantes sur le disque.
+```
 ### ..::CHANGELOG - NOV. 21 2020::..
 ```
 -Archive: Son support a été arrêté, il a été supprimé et ne sera plus mis à jour. Si vous voulez le désinstaller, tapez 'sudo rm /usr/bin/archive'.
