@@ -37,7 +37,7 @@ Verification()
 		chmod +x Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/installer
 		cd Ubuntu\ -\ Lubuntu\ -\ Xubuntu\ -\ elementaryOS\ -\ PopOS\ -\ ZorinOS\ -\ DeepinOS/ && ./installer
 		exit 0
-	elif [ $distributor_id = "LinuxMint" ]
+	elif [ $distributor_id = "LinuxMint" ] || [ $distributor_id = "Linuxmint" ]
 	then
 		chmod +x Linux\ Mint/installer
 		cd Linux\ Mint/ && ./installer
@@ -48,7 +48,7 @@ Verification()
 		cd Manjaro\ -\ Mandriva/ && ./installer
 		exit 0
 	else
-		echo "This distro is not supported.\n"
+		echo "This distro is not supported.\nPlease refer to the 'README' to check the list of supported distros.\n"
 		exit 1
 	fi
 }
