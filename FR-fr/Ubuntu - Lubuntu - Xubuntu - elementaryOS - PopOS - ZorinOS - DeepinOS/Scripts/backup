@@ -25,7 +25,7 @@ Choice()
 	echo "\e[1mQue voulez-vou faire ?\e[0m"
 	echo "\e[1m======================\e[0m\n"
 	echo "1 - Sauvegarder"
-	echo "2 - Restaurer\n"
+	echo "2 - Restaurer"
 	echo "3 - Afficher les sauvegardes\n"
 	echo "4 - Quitter\n"
 	read -p "Votre réponse : " statement
@@ -50,8 +50,7 @@ Choice()
 		fi
 	elif [ $statement = "3" ]
 	then
-		ls -lsa /home/"$name"/Backups
-		Choice
+		displaySaves
 	elif [ $statement = "4" ]
 	then
 		echo "\nQuitter...\n"
@@ -60,6 +59,15 @@ Choice()
 		echo "\nVeuillez sélectionner '1', '2', '3' ou '4'.\n"
 		Choice
 	fi
+}
+
+displaySaves()
+{
+	echo "\n\e[1m====================================\e[0m"
+	echo "\e[1mQSauvegardes existantes sur le disque\e[0m"
+	echo "\e[1m=====================================\e[0m\n"
+	ls -lsa /home/"$name"/Backups
+	Choice
 }
 
 Backup()
