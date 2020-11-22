@@ -64,8 +64,8 @@ Choice()
 displaySaves()
 {
 	echo "\n\e[1m====================================\e[0m"
-	echo "\e[1mQSauvegardes existantes sur le disque\e[0m"
-	echo "\e[1m=====================================\e[0m\n"
+	echo "\e[1mSauvegardes existantes sur le disque\e[0m"
+	echo "\e[1m====================================\e[0m\n"
 	ls -lsa /home/"$name"/Backups
 	Choice
 }
