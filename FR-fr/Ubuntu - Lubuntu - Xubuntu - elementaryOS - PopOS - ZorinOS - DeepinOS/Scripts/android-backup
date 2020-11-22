@@ -27,7 +27,7 @@ Choice()
 	echo "1 - Sauvegarder"
 	echo "2 - Restaurer"
 	echo "3 - Afficher les sauvegardes\n"
-	echo "3 - Quitter\n"
+	echo "4 - Quitter\n"
 	read -p "Votre réponse : " statement
 
 	if [ $statement = "1" ]
