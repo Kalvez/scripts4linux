@@ -66,7 +66,7 @@ displaySaves()
 	echo "\n\e[32m\e[1m==========================\e[0m"
 	echo "\e[32m\e[1mExisting saves on the disk\e[0m"
 	echo "\e[32m\e[1m==========================\e[0m\n"
-	ls -lsa /home/"$name"/backups
+	ls -lsa /home/"$name"/Backups/Android
 	Choice
 }
 
