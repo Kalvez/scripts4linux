@@ -30,8 +30,12 @@ Update()
   elif [ "$(dpkg -s flatpak 2>/dev/null | grep Status)" ]
   then
     flatpak update
+  else
+    echo "\nMise à jour réussie.\n"
+    exit 0
   fi
   echo "\nMise à jour réussie.\n"
+  exit 0
 }
 
 echo "\e[31m\e[1m****************\e[0m"
