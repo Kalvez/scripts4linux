@@ -309,7 +309,7 @@ then
 	echo "Vous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root.\n" 1>&2
 	exit 1
 else
-	echo "Souhaitez-vous installer tous les scripts d'un coup ('o'), ou choisir individuellement les scripts à installer ('n') ?\n"
+	echo "Souhaitez-vous installer tous les scripts d'un coup ('o'), ou choisir individuellement les scripts à installer ('n') ?"
 	echo "\e[31m\e[1m/!\ ATTENTION : Ceci ('o') entraînera l'installation automatique des paquets nécessaires ('adb', 'pv', 'dislocker', 'pigz' et 'speedtest-cli') ! /!\  \e[0m\n"
 	Choice
 fi
