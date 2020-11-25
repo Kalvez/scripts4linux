@@ -10,7 +10,7 @@ Help()
   echo "\e[32m\e[1mCommand:\e[0m     update"
   echo "\e[32m\e[1mAuthor:\e[0m      Kalvez"
   echo "\e[32m\e[1mLocation:\e[0m    /usr/bin/"
-  echo "\e[32m\e[1mVersion:\e[0m     1.6.0.20201119\n"
+  echo "\e[32m\e[1mVersion:\e[0m     1.6.1.20201125\n"
   echo "\e[32m\e[1m================\e[0m"
   echo "\e[32m\e[1m=    Detail    =\e[0m"
   echo "\e[32m\e[1m================\e[0m\n"
@@ -26,6 +26,10 @@ Update()
   apt-get clean
   apt-get -y autoremove
   snap refresh
+  if [ "$(dpkg -s flatpak 2>/dev/null | grep Status)" ]
+  then
+    flatpak update
+  fi
   echo "\nUpdate successful.\n"
 }
 

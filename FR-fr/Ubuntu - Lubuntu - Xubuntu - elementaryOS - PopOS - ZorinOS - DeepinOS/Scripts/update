@@ -2,20 +2,20 @@
 
 Help()
 {
-  echo "\e[32m\e[1m======================\e[0m"
-  echo "\e[32m\e[1m=    Informations    =\e[0m"
-  echo "\e[32m\e[1m======================\e[0m\n"
-  echo "\e[32m\e[1mLangue:\e[0m         FR-fr"
-  echo "\e[32m\e[1mNom du script:\e[0m  Update"
-  echo "\e[32m\e[1mCommande:\e[0m       update"
-  echo "\e[32m\e[1mCréateur:\e[0m       Kalvez"
-  echo "\e[32m\e[1mEmplacement:\e[0m    /usr/bin/"
-  echo "\e[32m\e[1mVersion:\e[0m        1.6.0.20201119"
-  echo "\e[32m\e[1m=================\e[0m"
-  echo "\e[32m\e[1m=    Détails    =\e[0m"
-  echo "\e[32m\e[1m=================\e[0m\n"
-  echo "Vous devez exécuter ce script en tant qu'utilisateur root.\n"
-  echo "Ce script permet de mettre à jour les dépôts et les paquets des logiciels installés.\nIl nettoie aussi le cache des mises à jour et les paquets inutilisés.\n"
+  echo "\e[32m\e[1m=====================\e[0m"
+  echo "\e[32m\e[1m=    Information    =\e[0m"
+  echo "\e[32m\e[1m=====================\e[0m\n"
+  echo "\e[32m\e[1mLanguage:\e[0m    EN-uk"
+  echo "\e[32m\e[1mScript name:\e[0m Update"
+  echo "\e[32m\e[1mCommand:\e[0m     update"
+  echo "\e[32m\e[1mAuthor:\e[0m      Kalvez"
+  echo "\e[32m\e[1mLocation:\e[0m    /usr/bin/"
+  echo "\e[32m\e[1mVersion:\e[0m     1.6.1.20201125\n"
+  echo "\e[32m\e[1m================\e[0m"
+  echo "\e[32m\e[1m=    Detail    =\e[0m"
+  echo "\e[32m\e[1m================\e[0m\n"
+  echo "You must execute the script with root permissions.\n"
+  echo "This script update the repositories and the installed softwares' packages.\nIt also cleans the update cache and remove the unused packages.\n"
   exit 0
 }
 
@@ -26,7 +26,11 @@ Update()
   apt-get clean
   apt-get -y autoremove
   snap refresh
-  echo "\nMise à jour réussie.\n"
+  if [ "$(dpkg -s flatpak 2>/dev/null | grep Status)" ]
+  then
+    flatpak update
+  fi
+  echo "\nUpdate successful.\n"
 }
 
 echo "\e[31m\e[1m****************\e[0m"
@@ -39,7 +43,7 @@ then
 else
 	if [ "$(id -u)" != "0" ]
 		then
-	   	echo "\e[31m\e[1mVous n'avez pas les privilèges requis, ce script doit être exécuté en tant qu'utilisateur root.\e[0m\n" 1>&2
+	   	echo "\e[31m\e[1mThis script must be executed with root privileges.\e[0m\n" 1>&2
 	   	exit 1
 		else
 			Update

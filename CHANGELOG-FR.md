@@ -1,3 +1,8 @@
+### ..::CHANGELOG - NOV. 25 2020::..
+```
+Update: Vérifie si snapd & flatpak sont installés.
+Installer: Correction de bugs et de mise en page.
+```
 ### ..::CHANGELOG - NOV. 22 2020::..
 ```
 -Android Backup & Backup: Ajout d'une option permettant d'afficher les sauvegardes existantes sur le disque.

@@ -5,7 +5,7 @@ Choice()
 	name=0
 	answer=0
 
-	read -p "Choice (y or n) : " answer
+	read -p "Choice ('y' or 'n') : " answer
 
 	if [ $answer = "y" ] || [ $answer = "Y" ]
 	then

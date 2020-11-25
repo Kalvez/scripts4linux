@@ -25,6 +25,13 @@ Update()
   apt-get -y full-upgrade
   apt-get clean
   apt-get -y autoremove
+  if [ "$(dpkg -s snapd 2>/dev/null | grep Status)" ]
+  then
+    snap refresh
+  elif [ "$(dpkg -s flatpak 2>/dev/null | grep Status)" ]
+  then
+    flatpak update
+  fi
   echo "\nUpdate successful.\n"
 }
 
