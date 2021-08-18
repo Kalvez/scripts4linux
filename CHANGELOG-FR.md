@@ -1,3 +1,8 @@
+### ..::CHANGELOG - AOÛT 18 2021::..
+```
+Backup: Correction d'une faute de frappe dans la version FR.
+Unlocker: Correction de la syntaxe du script lui causant un crash lors du revérrouillage du disque. 
+```
 ### ..::CHANGELOG - NOV. 25 2020::..
 ```
 Update: Vérifie si snapd & flatpak sont installés.

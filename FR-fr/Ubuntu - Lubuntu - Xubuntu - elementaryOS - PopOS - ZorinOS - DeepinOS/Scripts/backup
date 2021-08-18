@@ -21,9 +21,9 @@ Help()
 
 Choice()
 {
-	echo "\n\e[1m======================\e[0m"
-	echo "\e[1mQue voulez-vou faire ?\e[0m"
-	echo "\e[1m======================\e[0m\n"
+	echo "\n\e[1m=======================\e[0m"
+	echo "\e[1mQue voulez-vous faire ?\e[0m"
+	echo "\e[1m=======================\e[0m\n"
 	echo "1 - Sauvegarder"
 	echo "2 - Restaurer"
 	echo "3 - Afficher les sauvegardes\n"

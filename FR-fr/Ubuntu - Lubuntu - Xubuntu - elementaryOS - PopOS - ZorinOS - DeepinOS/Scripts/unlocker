@@ -75,17 +75,17 @@ Relock()
 	read -p "Appuyez sur une touche pour continuer..." push0
 	echo ""
 
-	while [ $answer != "y" ] || [ $answer != "Y" ] || [ $answer != "n" ] || [ $answer != "N" ] || [ -z $answer ]
+	while [ $answer != "o" ] || [ $answer != "O" ] || [ $answer != "n" ] || [ $answer != "N" ] || [ -z $answer ]
 	do
-		read -p "Le script va maintenant démonter le périphérique et le dossier 'Bitlocker', voulez-vous continuer ? (y ou n) : " answer
+		read -p "Le script va maintenant démonter le périphérique et le dossier 'Bitlocker', voulez-vous continuer ? ('o' ou 'n') : " answer
 		echo ""
-		if [ $answer = 'y' ] || [ $answer = 'n' ]
+		if [ $answer = "o" ] || [ $answer = "n" ]
 		then
 			break
 		fi
 	done
 
-	if [ $answer = "y" ] || [ $answer = "Y" ] || [ $answer = "n" ] || [ $answer = "N" ]
+	if [ $answer = "o" ] || [ $answer = "O" ] || [ $answer = "n" ] || [ $answer = "N" ]
 	then
 		Confirmation
 	else

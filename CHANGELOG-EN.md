@@ -1,3 +1,7 @@
+### ..::CHANGELOG - AUG. 12 2021::..
+```
+Unlocker: Fixed spelling.
+```
 ### ..::CHANGELOG - NOV. 25 2020::..
 ```
 Update: Checks if snapd & flatpak are installed.

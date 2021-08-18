@@ -77,7 +77,7 @@ Relock()
 
 	while [ $answer != "y" ] || [ $answer != "Y" ] || [ $answer != "n" ] || [ $answer != "N" ] || [ -z $answer ]
 	do
-		read -p "The script will now unmount the drive and the 'Bitlocker' folder, do you wish to continue ? (y or n) : " answer
+		read -p "The script will now unmount the drive and the 'Bitlocker' folder, do you wish to continue ? ('y' or 'n') : " answer
 		echo ""
 		if [ $answer = 'y' ] || [ $answer = 'n' ]
 		then
