@@ -1,3 +1,7 @@
+### ..::CHANGELOG - FEV. 17 2023::..
+```
+Backup: Le dossier "Backups" est maintenant automatiquement créé.
+```
 ### ..::CHANGELOG - AOÛT 18 2021::..
 ```
 Backup: Correction d'une faute de frappe dans la version FR.

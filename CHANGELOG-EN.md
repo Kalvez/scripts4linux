@@ -1,3 +1,7 @@
+### ..::CHANGELOG - FEB. 17 2023::..
+```
+Backup: The "Backups" folder is now automatically created.
+```
 ### ..::CHANGELOG - AUG. 12 2021::..
 ```
 Unlocker: Fixed spelling.

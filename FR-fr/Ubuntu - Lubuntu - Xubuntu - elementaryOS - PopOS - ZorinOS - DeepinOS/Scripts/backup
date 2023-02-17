@@ -10,7 +10,7 @@ Help()
 	echo "\e[32m\e[1mCommande:\e[0m      backup"
 	echo "\e[32m\e[1mCréateur:\e[0m      Kalvez"
 	echo "\e[32m\e[1mEmplacement:\e[0m   /usr/bin/"
-	echo "\e[32m\e[1mVersion:\e[0m       1.8.1.20201122\n"
+	echo "\e[32m\e[1mVersion:\e[0m       1.9.0.20230217\n"
 	echo "\e[32m\e[1m=================\e[0m"
 	echo "\e[32m\e[1m=    Détails    =\e[0m"
 	echo "\e[32m\e[1m=================\e[0m\n"
@@ -18,6 +18,18 @@ Help()
 	echo "Ce script permet de sauvegarder et de restaurer les dossiers 'Documents', 'Images' et 'Téléchargements' dans une archive '.tar' automatiquement nommée 'backup' et datée en fonction de la date de la sauvegarde.\nCette archive est ensuite déplacée dans le dossier 'Backups' situé dans votre dossier personnel.\nSi celui-ci n'est pas présent sur le disque, il sera automatiquement créé dans le dossier de l'utilisateur. Dans votre cas, ça sera dans le dossier '/home/$USER/'.\nCe script utilise le format d'archivage '.tar' qui est libre de droits. Si toutefois vous souhaitez modifier les dossiers sauvegardés dans l'archive '.tar', vous pouvez éditer le script à la ligne 41 juste après la commande d'archivage et mettre la localisation des dossiers que vous souhaitez sauvegarder tout en respectant l'interval d'un espace entre chaque dossier.\nPour restaurer une sauvegarde, vous devez créer le dossier 'Backups' dans la racine de votre dossier personnel, s'il n'exste pas déjà, et placer l'archive de sauvegarde dans ce dossier.\n"
 	exit 0
 }
+
+createFolder()
+{
+	if [ -d /home/"$name"/Backups ]
+	then
+		Choice
+	else
+		mkdir /home/"$name"/Backups/
+		Choice
+	fi
+}
+
 
 Choice()
 {
@@ -112,6 +124,6 @@ else
 		exit 1
 	else
 		read -p "Veuillez taper votre nom d'utilisateur : " name
-		Choice
+		createFolder
 	fi
 fi
