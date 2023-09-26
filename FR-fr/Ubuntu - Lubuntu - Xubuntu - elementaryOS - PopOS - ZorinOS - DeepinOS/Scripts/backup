@@ -26,6 +26,7 @@ createFolder()
 		Choice
 	else
 		mkdir /home/"$name"/Backups/
+		chown $name /home/"$name"/Backups/
 		Choice
 	fi
 }

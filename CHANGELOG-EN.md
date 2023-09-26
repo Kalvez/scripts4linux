@@ -1,3 +1,7 @@
+### ..::CHANGELOG - SEP. 26 2023::..
+```
+Backup: Ownership of the "Backups" folder is now automatically granted to the current user.
+```
 ### ..::CHANGELOG - FEB. 17 2023::..
 ```
 Backup: The "Backups" folder is now automatically created.

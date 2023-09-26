@@ -1,3 +1,7 @@
+### ..::CHANGELOG - SEP. 26 2023::..
+```
+Backup: La propriété du dossier "Backups" est maintenant automatiquement attribuée à l'utilisateur courant.
+```
 ### ..::CHANGELOG - FEV. 17 2023::..
 ```
 Backup: Le dossier "Backups" est maintenant automatiquement créé.
