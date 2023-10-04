@@ -10,7 +10,7 @@ Help()
   echo "\e[32m\e[1mCommande:\e[0m       update-git"
   echo "\e[32m\e[1mCréateur:\e[0m       Kalvez"
   echo "\e[32m\e[1mEmplacement:\e[0m    /usr/bin/"
-  echo "\e[32m\e[1mVersion:\e[0m        2.0.0.20231004\n"
+  echo "\e[32m\e[1mVersion:\e[0m        1.1.0.20201120\n"
   echo "\e[32m\e[1m=================\e[0m"
   echo "\e[32m\e[1m=    Détails    =\e[0m"
   echo "\e[32m\e[1m=================\e[0m\n"
@@ -23,7 +23,9 @@ Update()
 {
   if [ -d /home/"$name"/scripts4linux ]
   then
-    git -C /home/"$name"/scripts4linux/ pull --rebase https://github.com/kalvez/scripts4linux.git
+    rm -rf /home/"$name"/scripts4linux
+    cd /home/"$name"/
+    git clone http://github.com/kalvez/scripts4linux.git
     echo ""
   else
     cd /home/"$name"/

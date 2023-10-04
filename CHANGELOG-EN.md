@@ -1,8 +1,3 @@
-### ..::CHANGELOG - OCT. 04 2023::..
-```
-Backup: Changed the version of the script after the last commit (i forgor).
-Update GIT: Changed the way of updating the scripts. It now only downloads the changed scripts instead of removing and downloading the whole package.
-```
 ### ..::CHANGELOG - SEP. 26 2023::..
 ```
 Backup: Ownership of the "Backups" folder is now automatically granted to the current user.
