@@ -1,3 +1,8 @@
+### ..::CHANGELOG - OCT. 04 2023::..
+```
+Backup: La version a été changée depuis le dernier commit (jai oublie).
+Update GIT: La manière de mettre à jour les scripts a été changée. Maintenant, au lieu de supprimer et de re-télécharger le pack complet, le script ne met à jour que les scripts modifiés.
+```
 ### ..::CHANGELOG - SEP. 26 2023::..
 ```
 Backup: La propriété du dossier "Backups" est maintenant automatiquement attribuée à l'utilisateur courant.
