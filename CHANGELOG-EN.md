@@ -1,3 +1,7 @@
+### ..::CHANGELOG - OCT. 05 2025::..
+```
+Auto Installer: Added support for KDE Neon.
+```
 ### ..::CHANGELOG - OCT. 04 2023::..
 ```
 Backup: Changed the version of the script after the last commit (i forgor).

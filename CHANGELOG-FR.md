@@ -1,3 +1,7 @@
+### ..::CHANGELOG - OCT. 05 2025::..
+```
+Auto Installer: Ajout du support pour KDE Neon.
+```
 ### ..::CHANGELOG - OCT. 04 2023::..
 ```
 Backup: La version a été changée depuis le dernier commit (jai oublie).
